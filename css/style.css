@@ -1,0 +1,135 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.main h1{
+  text-align:center;
+}
+.header{
+  background-color:#21283f;
+  height:50px;
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+  padding:50px;
+}
+.header h3{
+  margin:0;
+}
+.header nav ul{
+  list-style: none;
+  display:flex;
+  align-items:center;
+  margin:0;
+}
+.header nav ul li{
+  padding:15px;
+  color:white;
+}
+.header nav ul li a{
+  color:white;
+  font-weight:bold;
+}
+.header > a{
+  color:white;
+  padding:15px;
+}
+.header input{
+  background-color:white;
+  width:30%;
+  border-radius: 5px;
+  padding:5px;
+}
+.header .recherche {
+  width:60%;
+}
+.header .recherche form input{
+  width:100%;
+}
+.avatarmenu{
+  width:80px;
+  border-radius:55px;
+}
+/* Page accueil */
+.accueil{
+  height:100%;
+  width:100%;
+  display:flex;
+}
+.accueil h1{
+  text-align:center;
+}
+.accueil_gauche{
+  max-width:100%;
+}
+.accueil_gauche p{
+  font-size:20px;
+}
+.accueil_gauche img{
+  width:100%;
+  max-width:50vw;
+}
+.accueil form input{
+  background-color:white;
+  padding:5px;
+  margin:5px;
+  border-radius:10px;
+  width:90%;
+}
+.accueil form{
+  width:60%;
+  text-align: center;
+}
+#input_prenom, #input_nom{
+  width:43%;
+}
+
+/* Page profil */
+.formprofil input{
+  background-color:white;
+}
+.photoprofil{
+  text-align:center;
+}
+.infosprofil .photoprofil form input[type="submit"]{
+  width:50%;
+  float:none;
+  margin-top:15px;
+}
+.avatar{
+  width:150px;
+  border-radius:150px;
+}
+.infosprofil{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.infosprofil .avatar{
+  margin:20px;
+}
+.infosprofil form{
+  margin:20px;
+}
+.infosprofil form input{
+  float:right;
+  margin-left:20px;
+}
+.infosprofil form input[type="submit"]{
+  width:100%;
+}
+
+
+
+
+/* Footer */
+footer{
+  height:50px;
+  background-color:#21283f;
+  position:absolute;
+  bottom:0;
+  width:100%;
+  text-align:center;
+  color:white;
+}
