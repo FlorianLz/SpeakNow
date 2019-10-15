@@ -29,7 +29,7 @@ if (!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['password
         $_SESSION['email'] = $line['email'];
         $_SESSION['nom'] = $line['nom'];
         $_SESSION['prenom'] = $line['prenom'];
-        header('Location: index.php');
+        header('Location: index.php?action=profil');
         //header('Location: index.php?action=login');
       } catch (Exception $e) {
         echo 'Cette adresse mail est déjà utilisée ! Essayez de vous <a href="index.php?action=accueil">connecter</>';

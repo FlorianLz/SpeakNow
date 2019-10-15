@@ -1,5 +1,5 @@
 <?php if (isset($_SESSION['id'])){
-  header('Location: index.php?action=profil');
+  header('Location: index.php?action=mur');
 }
 ?>
 <h1>Bienvenue sur le mini facebook !</h1>

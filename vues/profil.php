@@ -14,6 +14,7 @@
   $mdp=$line['mdp'];
   $avatar=$line['avatar'];
 ?>
+<h1>Modification du profil de : <?php echo $_SESSION['prenom'].' '.$_SESSION['nom'] ?></h1>
 <div class="infosprofil">
   <div class="photoprofil">
     <img class="avatar" src="avatars/<?php echo $avatar ?>">
@@ -23,7 +24,6 @@
     </form>
   </div>
     <form class="formprofil" action="index.php?action=modification" method="post">
-      <h1>Modification du profil de : <?php echo '<p contenteditable="true">'.$_SESSION['nom'].'</p>' ?></h1>
         <label for="prenom">Prénom : </label><input type="text" name="prenom" value="<?php echo $prenom; ?>"><br>
         <label for="prenom">Nom : </label><input type="text" name="nom" value="<?php echo $nom; ?>"><br>
         <label for="prenom">Email : </label><input type="text" name="email" value="<?php echo $email; ?>"><br>

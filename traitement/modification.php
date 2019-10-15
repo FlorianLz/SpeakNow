@@ -20,7 +20,7 @@ if (!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['password
         $query->execute(array($nom,$prenom,$mdp,$email,$id));
         // Etape 3 : ici le login est unique, donc on sait que l'on peut avoir zero ou une  seule ligne.
 
-        $_SESSION['nom'] = $prenom;
+        $_SESSION['nom'] = $nom;
         $_SESSION['prenom'] = $prenom;
 
         header('Location: index.php?action=profil');

@@ -120,6 +120,51 @@
   width:100%;
 }
 
+/* Mur */
+.postmur{
+  border:2px solid black;
+  width:30%;
+  margin-top:20px;
+  padding:15px;
+}
+.conteneurposts{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction:column;
+}
+.imgpost{
+  width:8%;
+}
+.titrepost{
+  text-align:center;
+  font-size:23px;
+  margin:0;
+}
+.auteur{
+  display:flex;
+  align-items: center;
+}
+.poster{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+.auteur p{
+  padding-left:10px;
+  margin:0;
+}
+.formposter input{
+  width:100%;
+  margin-bottom:5px;
+}
+.formposter textarea{
+  width:100%;
+  resize:none;
+  height:150px;
+}
+
+
 
 
 
@@ -127,7 +172,7 @@
 footer{
   height:50px;
   background-color:#21283f;
-  position:absolute;
+  position:relative;
   bottom:0;
   width:100%;
   text-align:center;
