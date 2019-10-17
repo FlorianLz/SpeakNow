@@ -24,6 +24,7 @@ ob_start(); // Je démarre le buffer de sortie : les données à afficher sont s
     
     <!-- Ma feuille de style à moi -->
     <link href="./css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 </head>
@@ -31,12 +32,12 @@ ob_start(); // Je démarre le buffer de sortie : les données à afficher sont s
 <body>
     <!-- Si jamais un message info est stocké dans une variable de session, on l'affiche -->
     <?php
-    if (isset($_SESSION['info'])) {
+    if (isset($_SESSION['erreur'])) {
         echo "<div class='alert alert-info alert-dismissible' role='alert'>
             <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
             <span aria-hidden='true'>&times;</span></button>
-            <strong>Information : </strong> " . $_SESSION['info'] . "</div>";
-        unset($_SESSION['info']);
+            <strong>Information : </strong> " . $_SESSION['erreur'] . "</div>";
+        unset($_SESSION['erreur']);
     }
     ?>
     <!-- Définition du header, commun à toutes les pages-->
@@ -53,14 +54,16 @@ ob_start(); // Je démarre le buffer de sortie : les données à afficher sont s
             echo "<div class='imageprofil'><a href='index.php?action=mur'><img class='avatarmenu' src='avatars/$avatar'></a></div>";
             echo "<div class='prenomprofil'><a href='index.php?action=mur'><p>$prenom</p></a></div>";
             echo "<div class='parametres'><a href='index.php?action=profil'><p>Paramètres</p></a></div>";
-            echo "<div class='deconnexion'><a href='index.php?action=deconnexion'>Déconnexion</a></div></header>";
+            echo "<div class='deconnexion'><a href='index.php?action=deconnexion'>Déconnexion</a></div>";
+            
+            echo '</header>';
         }
     ?>
 
-<div class="container-fluid">
+<!--<div class="container-fluid">
     <div class="row">
-        <!--<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">-->
-        <div class="col-md-12 main">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="main">-->
             <?php
             // Quelle est l'action à faire ?
             if (isset($_GET["action"])) {
@@ -79,10 +82,9 @@ ob_start(); // Je démarre le buffer de sortie : les données à afficher sont s
             ob_end_flush(); // Je ferme le buffer, je vide la mémoire et affiche tout ce qui doit l'être
             ?>
 
-
-        </div>
+        <!--</div>
     </div>
-</div>
-<footer></footer>
+</div>-->
+<!-- <footer></footer>-->
 </body>
 </html>

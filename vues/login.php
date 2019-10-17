@@ -3,9 +3,16 @@
     header('Location: index.php?action=profil');
   }
 ?>
-
-<form class="" action="index.php?action=connexion" method="post">
-  <input type="text" name="email">
-  <input type="password" name="password">
-  <input type="submit" name="valider" value="Connexion">
-</form>
+<div>
+  <form class="" action="index.php?action=connexion" method="post">
+    <input type="text" name="email" placeholder="Email...">
+    <input type="password" name="password" placeholder="Mot de passe...">
+    <input type="submit" name="valider" value="Connexion">
+    <?php 
+      if (isset($_SESSION['erreurlogin'])){
+        echo '<p>'.$_SESSION['erreurlogin'].'</p>';
+        unset ($_SESSION['erreurlogin']);
+      } 
+    ?>
+  </form>
+</div>

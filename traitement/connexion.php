@@ -13,15 +13,15 @@ $line = $query->fetch();
 
 // Si $line est faux le couple login mdp est mauvais, on retourne au formulaire
 if($line == false){
-  echo 'Identifiant ou mdp invalide !';
-  include('vues/login.php');
+  $_SESSION['erreurlogin'] = 'Identifiant ou mdp invalide !';
+  header('Location: index.php?action=accueil');
 }else{
   $_SESSION['id'] = $line['id'];
   $_SESSION['nom'] = $line['nom'];
   $_SESSION['prenom'] = $line['prenom'];
   $_SESSION['email'] = $line['email'];
   $_SESSION['avatar'] = $line['avatar'];
-  header('Location: index.php');
+  header('Location: index.php?action=mur');
 }
 
 // sinon on crée les variables de session $_SESSION['id'] et $_SESSION['login'] et on va à la page d'accueil

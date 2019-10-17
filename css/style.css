@@ -2,12 +2,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-.main h1{
-  text-align:center;
+    font-family: 'Roboto';
 }
 header{
-  position:relative;
+  position:fixed;
+  width:100%;
   background-color:#21283f;
   height:45px;
   display:flex;
@@ -15,6 +14,7 @@ header{
   justify-content: space-between;
   padding:10px;
   color:white;
+  border-bottom: 2px solid #00acee;
 }
 .headerconnecte{
   justify-content: center;
@@ -31,14 +31,19 @@ header{
   height:100%;
 }
 header form{
-  text-align:right;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 header input{
   background-color:white;
-  width:30%;
+  width:25%;
   border-radius: 0px;
   padding:5px;
   border:0px;
+}
+header form p{
+  font-size:0.6rem;
 }
 header .recherche {
   width:40%;
@@ -67,6 +72,7 @@ header .recherche form input[type="submit"]{
   background-repeat:no-repeat;
   background-size:100% 20px;
   position:absolute;
+  right:0;
 }
 header .recherche form input[type="submit"]:hover{
   background-color:#D5DBE1;
@@ -102,29 +108,81 @@ header .recherche form input[type="submit"]:hover{
 
 
 /* Page accueil */
+.contenuaccueil{
+  height:100vh;
+  width:100%;
+  background-color:#21283f;
+  display:flex;
+  flex-direction:column;
+  text-align:center;
+  color:white;
+}
+.contenuaccueil h1{
+  padding-top:60px;
+  padding-bottom:20px;
+}
 .accueil{
   height:100%;
-  width:100%;
   display:flex;
+  justify-content: center;
+  align-items: center;
 }
-.accueil h1{
-  text-align:center;
+.accueil .gauche{
+  width:50vw;
+  height:60%;
+  border-right:2px solid #00acee;
+  display:flex;
+  flex-direction:column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.accueil .formulaireinscription{
+  width:50vw;
+  height:60%;
+  padding-top:5%;
+}
+.accueil .formulaireinscription p{
+  padding-top:10px;
+  color:red;
 }
 .accueil form input{
   background-color:white;
-  padding:5px;
-  margin:5px;
-  border-radius:10px;
-  width:90%;
+  padding:15px;
+  margin-top:5px;
+  margin-bottom:5px;
+  border-radius:0;
+  border:0;
+  width:100%;
 }
 .accueil form{
-  width:60%;
+  width:80%;
   text-align: center;
+  margin:auto;
 }
-#input_prenom, #input_nom{
-  width:43%;
+#input_prenom{
+  float:left;
+  width:49%;
+}
+#input_nom{
+  width:49%;
+  float:right;
+}
+.accueil form input[type='submit']{
+  border:1px solid #00acee;
+  background-color:transparent;
+  border-radius:5px;
+  color:white;
+}
+.titreaccueil{
+  padding-top:50px;
 }
 
+.accueil .gauche img{
+  width:50%;
+}
+.accueil .gauche img{
+  width:30%;
+}
 
 
 
@@ -134,11 +192,20 @@ header .recherche form input[type="submit"]:hover{
 
 
 /* Page profil */
+.contenuprofil{
+  height:auto;
+  min-height:100vh;
+  padding-top:50px;
+  text-align:center;
+  background-color:#21283f;
+  color:white;
+}
 .formprofil input{
   background-color:white;
 }
 .photoprofil{
   text-align:center;
+  padding:10px;
 }
 .infosprofil .photoprofil form input[type="submit"]{
   width:50%;
@@ -147,6 +214,7 @@ header .recherche form input[type="submit"]:hover{
 }
 .avatar{
   width:150px;
+  height:150px;
   border-radius:150px;
 }
 .infosprofil{
@@ -158,19 +226,34 @@ header .recherche form input[type="submit"]:hover{
   margin:20px;
 }
 .infosprofil form{
-  margin:20px;
+  padding:20px;
 }
 .infosprofil form input{
   float:right;
-  margin-left:20px;
+  padding:10px;
+}
+.infosprofil form input[type="file"]{
+  padding:10px;
+  float:none;
 }
 .infosprofil form input[type="submit"]{
   width:100%;
+  border:1px solid #00acee;
+  background-color:transparent;
+  color:white;
 }
 
 /* Mur */
+.contenumur{
+  height:auto;
+  min-height:100vh;
+  padding-top:45px;
+  background-color:#21283f;
+  color:white;
+  text-align:center;
+}
 .postmur{
-  border:2px solid black;
+  border:2px solid #00acee;
   width:30%;
   margin-top:20px;
   padding:15px;
@@ -183,6 +266,7 @@ header .recherche form input[type="submit"]:hover{
 }
 .imgpost{
   width:8%;
+  border-radius:50px;
 }
 .titrepost{
   text-align:center;

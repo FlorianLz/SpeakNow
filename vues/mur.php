@@ -1,7 +1,8 @@
+<div class="contenumur">
 <?php
 
     if(!isset($_SESSION["id"])) {
-        // On n est pas connecté, il faut retourner à la pgae de login
+        // On n est pas connecté, il faut retourner à la page de login
         header("Location:index.php?action=login");
     }
 
@@ -36,7 +37,7 @@
                     </div>
                     <p class="titrepost">'.$line['titre'].'</p><br>';
             echo $line['contenu'];
-            echo '<br>';
+            echo '<br><br>';
             echo 'Posté le '.$line['dateEcrit'];
             echo '</div>';
         };
@@ -86,7 +87,7 @@
                     </div>
                     <p class="titrepost">'.$line['titre'].'</p><br>';
             echo $line['contenu'];
-            echo '<br>';
+            echo '<br><br>';
             echo 'Posté le '.$line['dateEcrit'];
             echo '</div>';
         };
@@ -95,3 +96,4 @@
     
     }
 ?>  
+</div>
