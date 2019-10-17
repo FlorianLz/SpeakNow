@@ -39,6 +39,13 @@
             echo $line['contenu'];
             echo '<br><br>';
             echo 'Posté le '.$line['dateEcrit'];
+            echo '<form method="post" action="index.php?action=supprimerpost">
+                <input type="hidden" name="id" value="'.$line['id'].'">
+                <input type="hidden" name="titre" value="'.$line['titre'].'">
+                <input type="hidden" name="message" value="'.$line['contenu'].'">
+                <input type="hidden" name="date" value="'.$line['dateEcrit'].'">
+                <input type="submit" value="Supprimer">
+                </form>';
             echo '</div>';
         };
         echo '</div>';

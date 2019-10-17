@@ -14,4 +14,5 @@ $listeDesActions = array(
     "modification" => "traitement/modification.php",
     "ajoutavatar" => "traitement/ajoutavatar.php",
     "poster" => "traitement/poster.php",
+    "supprimerpost" => "traitement/supprimerpost.php",
 );

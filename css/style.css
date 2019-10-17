@@ -295,6 +295,13 @@ header .recherche form input[type="submit"]:hover{
   resize:none;
   height:150px;
 }
+.postmur input[type="submit"]{
+  border:0;
+  background-color: transparent;
+  color:white;
+  cursor:pointer;
+  padding-top:5px;
+}
 
 
 
