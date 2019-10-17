@@ -6,51 +6,101 @@
 .main h1{
   text-align:center;
 }
-.header{
+header{
+  position:relative;
   background-color:#21283f;
-  height:50px;
+  height:45px;
   display:flex;
   align-items: center;
   justify-content: space-between;
-  padding:50px;
-}
-.header h3{
-  margin:0;
-}
-.header nav ul{
-  list-style: none;
-  display:flex;
-  align-items:center;
-  margin:0;
-}
-.header nav ul li{
-  padding:15px;
+  padding:10px;
   color:white;
 }
-.header nav ul li a{
-  color:white;
-  font-weight:bold;
+.headerconnecte{
+  justify-content: center;
 }
-.header > a{
-  color:white;
-  padding:15px;
+.logo{
+  height:100%;
+  margin-right:15px;
 }
-.header input{
-  background-color:white;
-  width:30%;
-  border-radius: 5px;
-  padding:5px;
-}
-.header .recherche {
-  width:60%;
-}
-.header .recherche form input{
+.logo > a{
+  height:100%;
   width:100%;
 }
-.avatarmenu{
-  width:80px;
-  border-radius:55px;
+.logo > a img{
+  height:100%;
 }
+header form{
+  text-align:right;
+}
+header input{
+  background-color:white;
+  width:30%;
+  border-radius: 0px;
+  padding:5px;
+  border:0px;
+}
+header .recherche {
+  width:40%;
+  height:90%;
+  padding-right:15px;
+}
+header .recherche form{
+  height:100%;
+  border:1px solid black;
+  position:relative;
+}
+header .recherche form input[type="text"]{
+  width:100%;
+  height:100%;
+  border-radius: 0px;
+  background-color:white;
+}
+header .recherche form input[type="submit"]{
+  width:auto;
+  min-width:20px;
+  height:100%;
+  border-radius: 0px;
+  border:0px;
+  padding:0;
+  background-image: url('../img/loupe.png');
+  background-repeat:no-repeat;
+  background-size:100% 20px;
+  position:absolute;
+}
+header .recherche form input[type="submit"]:hover{
+  background-color:#D5DBE1;
+  cursor:pointer;
+}
+.imageprofil{
+  height:100%;
+  padding-left:15px;
+  padding-right:5px;
+}
+.imageprofil > a{
+  height:100%;
+  width:100%;
+}
+.imageprofil > a img{
+  height:100%;
+  border-radius:150px;
+}
+.deconnexion a,.parametres a,.prenomprofil a{
+  color:white;
+  text-decoration: none;
+}
+.parametres{
+  margin-right:7px;
+  margin-left:7px;
+  padding-right:7px;
+  padding-left:7px;
+  border-left:1px solid lightblue;
+  border-right:1px solid lightblue;
+}
+
+
+
+
 /* Page accueil */
 .accueil{
   height:100%;
@@ -59,16 +109,6 @@
 }
 .accueil h1{
   text-align:center;
-}
-.accueil_gauche{
-  max-width:100%;
-}
-.accueil_gauche p{
-  font-size:20px;
-}
-.accueil_gauche img{
-  width:100%;
-  max-width:50vw;
 }
 .accueil form input{
   background-color:white;
@@ -84,6 +124,14 @@
 #input_prenom, #input_nom{
   width:43%;
 }
+
+
+
+
+
+
+
+
 
 /* Page profil */
 .formprofil input{

@@ -1,14 +1,12 @@
 <?php
-
 include("config/config.php");
 include("config/bd.php"); // commentaire
 include("divers/balises.php");
 include("config/actions.php");
 session_start();
 ob_start(); // Je démarre le buffer de sortie : les données à afficher sont stockées
-
-
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -16,61 +14,48 @@ ob_start(); // Je démarre le buffer de sortie : les données à afficher sont s
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Mini fb</title>
+    <title>Mini Facebook</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS 
+    <link href="./css/bootstrap.min.css" rel="stylesheet">-->
 
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="./css/ie10.css" rel="stylesheet">
-
-
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug 
+    <link href="./css/ie10.css" rel="stylesheet">-->
+    
     <!-- Ma feuille de style à moi -->
     <link href="./css/style.css" rel="stylesheet">
-
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 </head>
 
 <body>
-
-<?php
-if (isset($_SESSION['info'])) {
-    echo "<div class='alert alert-info alert-dismissible' role='alert'>
-        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-        <span aria-hidden='true'>&times;</span></button>
-        <strong>Information : </strong> " . $_SESSION['info'] . "</div>";
-    unset($_SESSION['info']);
-}
-?>
-
-
-<header>
-    <div class="header">
-        <a href='index.php?action=accueil'><h3>Mini Facebook</h3></a>
-        <?php 
-        if (isset($_SESSION['id'])) {
+    <!-- Si jamais un message info est stocké dans une variable de session, on l'affiche -->
+    <?php
+    if (isset($_SESSION['info'])) {
+        echo "<div class='alert alert-info alert-dismissible' role='alert'>
+            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+            <span aria-hidden='true'>&times;</span></button>
+            <strong>Information : </strong> " . $_SESSION['info'] . "</div>";
+        unset($_SESSION['info']);
+    }
+    ?>
+    <!-- Définition du header, commun à toutes les pages-->
+    <?php if (!isset($_SESSION['id'])){
+        echo '<header>
+        <div class="logo"><a href="index.php?action=accueil"><img src="img/logo.png"></a></div>';
+        include("vues/login.php");
+        echo '</header>';
+        }else{
             $avatar=$_SESSION['avatar'];
-            echo '<div class="recherche"><form action="" method="POST"><input type="text"></form></div>';
-            echo "<div class='imageprofil'><a href='index.php?action=profil'><img class='avatarmenu' src='avatars/$avatar'></a></div>";
+            $prenom=$_SESSION['prenom'];
+            echo "<header class='headerconnecte'><div class='logo'><a href='index.php?action=accueil'><img src='img/logo.png'></a></div>";
+            echo "<div class='recherche'><form action='' method='POST'><input type='text' placeholder='Rechercher...'><input type='submit' value=' '></form></div>";
+            echo "<div class='imageprofil'><a href='index.php?action=mur'><img class='avatarmenu' src='avatars/$avatar'></a></div>";
+            echo "<div class='prenomprofil'><a href='index.php?action=mur'><p>$prenom</p></a></div>";
+            echo "<div class='parametres'><a href='index.php?action=profil'><p>Paramètres</p></a></div>";
+            echo "<div class='deconnexion'><a href='index.php?action=deconnexion'>Déconnexion</a></div></header>";
         }
-        ?>
-        <nav>
-            <ul>
-
-                <?php
-                if (isset($_SESSION['id'])) {
-                    echo "<li><a href='index.php?action=deconnexion'>Déconnexion</a></li>";
-                } else {
-                    //echo "<li><a href='index.php?action=login'>Login</a></li>";
-                    //echo "<li><a href='index.php?action=inscription'>Inscription</a></li>";
-                    include("vues/login.php");
-                }
-                ?>
-            </ul>
-        </nav>
-    </div>
-</header>
+    ?>
 
 <div class="container-fluid">
     <div class="row">
@@ -98,6 +83,6 @@ if (isset($_SESSION['info'])) {
         </div>
     </div>
 </div>
-<footer>Le pied de page</footer>
+<footer></footer>
 </body>
 </html>
