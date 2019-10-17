@@ -251,10 +251,11 @@ header .recherche form input[type="submit"]:hover{
   background-color:#21283f;
   color:white;
   text-align:center;
+  display:flex;
 }
 .postmur{
   border:2px solid #00acee;
-  width:30%;
+  width:45%;
   margin-top:20px;
   padding:15px;
 }
@@ -286,6 +287,9 @@ header .recherche form input[type="submit"]:hover{
   padding-left:10px;
   margin:0;
 }
+.formposter{
+  width:45%;
+}
 .formposter input{
   width:100%;
   margin-bottom:5px;
@@ -302,7 +306,38 @@ header .recherche form input[type="submit"]:hover{
   cursor:pointer;
   padding-top:5px;
 }
+.filactu{
+  width:60%;
+}
+.demandesami{
+  width:20%;
+}
+.listeamis{
+  width:20%;
+  text-align:left;
+}
 
+
+/* Mur partie liste amis */
+.ami a{
+  cursor: pointer;
+  text-decoration: none;
+  color:white;
+}
+.ami p{
+  padding-left:10px;
+}
+.ami{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.imgami{
+  width:100%;
+}
+.ami a:nth-child(1){
+  width:8%;
+}
 
 
 
