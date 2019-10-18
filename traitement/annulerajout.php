@@ -9,7 +9,13 @@
         // Etape 2 : execution : 2 paramètres dans la requêtes !!
         $query->execute(array($monid,$idAmi));
         // Etape 3 : ici le login est unique, donc on sait que l'on peut avoir zero ou une  seule ligne.
-        header("Location: index.php?action=mur");
+        if(isset($_POST['texterecherche'])){
+            $texterecherche=$_POST['texterecherche'];
+            header('Location: index.php?action=recherche&texterecherche='.$texterecherche);
+        }else{
+            header("Location: index.php?action=mur");
+        }
+        
     }else{
         header("Location: index.php?action=mur");
     }

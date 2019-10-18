@@ -107,7 +107,7 @@
         // le paramètre  est le $id
 
         //je récupère les infos de l'auteur
-        if(isset($_GET['id'])){
+        if(isset($_GET['id']) && $_GET['id'] != $_SESSION['id']){
             $sql="SELECT * FROM utilisateurs  WHERE id=?";
             $query = $pdo->prepare($sql);
             $query->execute(array($idPers));

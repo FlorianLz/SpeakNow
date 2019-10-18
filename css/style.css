@@ -363,4 +363,20 @@ footer{
   color:white;
   text-align:center;
   display:flex;
+  justify-content: center;
+}
+.resultatsrecherche .ami{
+  border:2px solid #00acee;
+  width:100%;
+  margin-top:25px;
+  padding:15px;
+  margin: 15px auto;
+}
+.resultatsrecherche .ami img{
+  width:40px;
+  height:40px;
+  border-radius:50px;
+}
+.resultatsrecherche .ami a:nth-child(1){
+  width:10%;
 }
