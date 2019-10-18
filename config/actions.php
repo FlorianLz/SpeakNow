@@ -6,6 +6,7 @@ $listeDesActions = array(
     "profil" => "vues/profil.php",
     "login" => "vues/login.php",
     "mur" => "vues/mur.php",
+    "recherche" => "vues/recherche.php",
     "voirprofil" => "vues/voirprofil.php",
     "connexion" => "traitement/connexion.php",
     "deconnexion" => "traitement/deconnexion.php",
@@ -15,4 +16,7 @@ $listeDesActions = array(
     "ajoutavatar" => "traitement/ajoutavatar.php",
     "poster" => "traitement/poster.php",
     "supprimerpost" => "traitement/supprimerpost.php",
+    "ajoutami" => "traitement/ajoutami.php",
+    "annulerajout" => "traitement/annulerajout.php",
+    "refusami" => "traitement/refusami.php",
 );

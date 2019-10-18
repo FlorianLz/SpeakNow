@@ -1,5 +1,35 @@
 <div class="contenumur">
     <div class="demandesami">
+        <?php 
+        echo '<h1>Demandes reçues</h1>';
+        $sql = "SELECT utilisateurs.* FROM utilisateurs WHERE id IN(SELECT idUtilisateur1 FROM lien WHERE idUtilisateur2=? AND etat='attente') ";
+        $query = $pdo->prepare($sql);
+        $query->execute(array($_SESSION['id']));
+        while($line = $query->fetch()){
+            echo '<div class="ami"><a href="index.php?action=mur&id='.$line['id'].'"><img class="imgami" src="avatars/'.$line['avatar'].'"></a><a href="index.php?action=mur&id='.$line['id'].'"><p>'.$line['prenom'].' '.$line['nom'].'</p></a></div>';
+            echo '<form method="post" action="index.php?action=ajoutami">
+                        <input type="hidden" name="idAmi" value="'.$line['id'].'">
+                        <input type="submit" value="Accepter">
+                        </form>
+                        <form method="post" action="index.php?action=refusami">
+                        <input type="hidden" name="idAmi" value="'.$line['id'].'">
+                        <input type="submit" value="Refuser">
+                        </form>';
+        }
+
+        echo '<h1>Demandes envoyées</h1>';
+        $sql = "SELECT utilisateurs.* FROM utilisateurs INNER JOIN lien ON utilisateurs.id=idUtilisateur2 AND etat='attente' AND idUtilisateur1=?";
+        $query = $pdo->prepare($sql);
+        $query->execute(array($_SESSION['id']));
+        while($line = $query->fetch()){
+            echo '<div class="ami"><a href="index.php?action=mur&id='.$line['id'].'"><img class="imgami" src="avatars/'.$line['avatar'].'"></a><a href="index.php?action=mur&id='.$line['id'].'"><p>'.$line['prenom'].' '.$line['nom'].'</p></a></div>';
+            echo '<form method="post" action="index.php?action=annulerajout">
+                        <input type="hidden" name="idAmi" value="'.$line['id'].'">
+                        <input type="submit" value="Annuler">
+                        </form>';
+        }
+    
+    ?>
     </div>
     <div class="filactu">
     <?php
@@ -129,6 +159,15 @@
                     echo $line['contenu'];
                     echo '<br><br>';
                     echo 'Posté le '.$line['dateEcrit'];
+                    if($infos['id'] == $_SESSION['id']){
+                        echo '<form method="post" action="index.php?action=supprimerpost&idredirection='.$_GET['id'].'">
+                        <input type="hidden" name="id" value="'.$line['id'].'">
+                        <input type="hidden" name="titre" value="'.$line['titre'].'">
+                        <input type="hidden" name="message" value="'.$line['contenu'].'">
+                        <input type="hidden" name="date" value="'.$line['dateEcrit'].'">
+                        <input type="submit" value="Supprimer">
+                        </form>';
+                    }
                     echo '</div>';
 
                 }

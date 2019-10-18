@@ -352,3 +352,15 @@ footer{
   text-align:center;
   color:white;
 }
+
+
+/* Page recherche */
+.contenurecherche{
+  height:auto;
+  min-height:100vh;
+  padding-top:45px;
+  background-color:#21283f;
+  color:white;
+  text-align:center;
+  display:flex;
+}

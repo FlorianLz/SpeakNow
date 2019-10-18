@@ -50,7 +50,7 @@ ob_start(); // Je démarre le buffer de sortie : les données à afficher sont s
             $avatar=$_SESSION['avatar'];
             $prenom=$_SESSION['prenom'];
             echo "<header class='headerconnecte'><div class='logo'><a href='index.php?action=accueil'><img src='img/logo.png'></a></div>";
-            echo "<div class='recherche'><form action='' method='POST'><input type='text' placeholder='Rechercher...'><input type='submit' value=' '></form></div>";
+            echo "<div class='recherche'><form action='index.php?action=recherche' method='POST'><input name='texterecherche' type='text' placeholder='Rechercher...'><input type='submit' value=' '></form></div>";
             echo "<div class='imageprofil'><a href='index.php?action=mur'><img class='avatarmenu' src='avatars/$avatar'></a></div>";
             echo "<div class='prenomprofil'><a href='index.php?action=mur'><p>$prenom</p></a></div>";
             echo "<div class='parametres'><a href='index.php?action=profil'><p>Paramètres</p></a></div>";

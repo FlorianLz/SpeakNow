@@ -12,7 +12,11 @@ if (isset($_POST['id']) && isset($_POST['id']) && isset($_POST['id']) && isset($
         $query = $pdo->prepare($sql);
         // Etape 2 : execution : 2 paramètres dans la requêtes !!
         $query->execute(array($id,$titre,$contenu,$date,$idconnecte));
-        header("Location: index.php?action=mur");
+        if (isset($_GET['idredirection'])){
+            header("Location: index.php?action=mur&id=".$_GET['idredirection']);
+        }else{
+            header("Location: index.php?action=mur");
+        }
 
     } catch (Exception $e) {
         $_SESSION['erreur'] = 'Erreur lors de la suppression du message.';
