@@ -316,7 +316,30 @@ header .recherche form input[type="submit"]:hover{
   width:20%;
   text-align:left;
 }
-
+.profil{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  padding:25px;
+}
+.imgprofil{
+  width:20%;
+}
+.imgprofil img{
+  width:100%;
+}
+.infoprofil{
+  padding-left:25px;
+  line-height: 50px;;
+}
+.infoprofil form input[type='submit']{
+  width:100%;
+  border:1px solid #00acee;
+  background-color:transparent;
+  color:white;
+  margin-left:10px;
+  width:50%;
+}
 
 /* Mur partie liste amis */
 .ami a{
@@ -331,12 +354,20 @@ header .recherche form input[type="submit"]:hover{
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  margin-left:15px;
 }
 .imgami{
   width:100%;
 }
 .ami a:nth-child(1){
   width:8%;
+}
+.ami form input[type='submit']{
+  width:100%;
+  border:1px solid #00acee;
+  background-color:transparent;
+  color:white;
+  margin-left:10px;
 }
 
 

@@ -6,8 +6,12 @@
         $sql='INSERT INTO lien VALUES(NULL,?,?,"attente")';
         $query = $pdo->prepare($sql);
         $query->execute(array($monid,$idAmi));
-
-        header('Location: index.php?action=recherche&texterecherche='.$texterecherche);
+        if(isset($_POST['idpage'])){
+            $idpage=$_POST['idpage'];
+            header('Location: index.php?action=mur&id='.$idpage);
+        }else{
+            header('Location: index.php?action=recherche&texterecherche='.$texterecherche);
+        }
     }else{
         echo 'erreur';
     }

@@ -22,11 +22,11 @@
         $query = $pdo->prepare($sql);
         $query->execute(array($_SESSION['id']));
         while($line = $query->fetch()){
-            echo '<div class="ami"><a href="index.php?action=mur&id='.$line['id'].'"><img class="imgami" src="avatars/'.$line['avatar'].'"></a><a href="index.php?action=mur&id='.$line['id'].'"><p>'.$line['prenom'].' '.$line['nom'].'</p></a></div>';
+            echo '<div class="ami"><a href="index.php?action=mur&id='.$line['id'].'"><img class="imgami" src="avatars/'.$line['avatar'].'"></a><a href="index.php?action=mur&id='.$line['id'].'"><p>'.$line['prenom'].' '.$line['nom'].'</p></a>';
             echo '<form method="post" action="index.php?action=annulerajout">
                         <input type="hidden" name="idAmi" value="'.$line['id'].'">
                         <input type="submit" value="Annuler">
-                        </form>';
+                        </form></div>';
         }
     
     ?>
@@ -59,9 +59,9 @@
             </div> 
             <?php
 
-            $sql="SELECT * FROM ecrit WHERE idAuteur=? ORDER BY dateEcrit DESC";
+            $sql="SELECT * FROM ecrit WHERE idAuteur=? AND idAmi=? ORDER BY dateEcrit DESC";
             $query = $pdo->prepare($sql);
-            $query->execute(array($_SESSION['id']));
+            $query->execute(array($_SESSION['id'],$_SESSION['id']));
 
             echo '<div class="conteneurposts">';
             while($line = $query->fetch()){
@@ -99,7 +99,39 @@
         }
 
         if($ok==false) {
-            echo "Vous n êtes pas encore ami, vous ne pouvez voir son mur !!";       
+            $infospers='SELECT * FROM utilisateurs WHERE id=?';
+            $querypers = $pdo->prepare($infospers);
+            $querypers->execute(array($_GET['id']));
+            $infos = $querypers->fetch();
+            echo '<div class="profil"><div class="imgprofil"><img src=avatars/'.$infos['avatar'].'></div><div class="infoprofil">';
+            echo '<h2>'.$infos['prenom'].' '.$infos['nom'].'</h2>';
+            
+            
+            
+            $sql='SELECT * FROM lien WHERE (idUtilisateur1=? AND idUtilisateur2=?) OR ((idUtilisateur1=? AND idUtilisateur2=?))';
+            $query = $pdo->prepare($sql);
+            $query->execute(array($_SESSION['id'],$_GET['id'],$_GET['id'],$_SESSION['id']));
+            if ($line = $query->fetch()){
+                if ($line['etat'] == 'attente'){
+                    if($line['idUtilisateur1'] == $_SESSION['id']){
+                        echo '<p> Vous avez demandé en ami</p>';
+                        echo '<form method="post" action="index.php?action=annulerajout">
+                        <input type="hidden" name="idAmi" value="'.$_GET['id'].'">
+                        <input type="hidden" name="idpage" value="'.$_GET['id'].'">
+                        <input type="submit" value="Annuler">
+                        </form></div></div></div>';
+                    }else{
+                        echo '<p> Vous a demandé en ami</p></div></div></div>';
+                    }
+                            
+                }
+                if ($line['etat'] == 'banni'){
+                    echo '<p> Utilisateur Banni</p></div></div></div>';
+                }
+            }else{
+                echo "Vous n êtes pas encore ami, vous ne pouvez voir son mur !!";
+                echo '<form action="index.php?action=demandeami" method="POST"><input type="hidden" name="idAmi" value="'.$_GET['id'].'"><input type="hidden" name="idpage" value="'.$_GET['id'].'"><input type="submit" value="Ajouter"></form></div></div></div>';                        
+            }       
         } else {
         // A completer
         // Requête de sélection des éléments dun mur

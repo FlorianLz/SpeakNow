@@ -20,7 +20,7 @@
     <div class="photoprofil">
       <img class="avatar" src="avatars/<?php echo $avatar ?>">
       <form enctype="multipart/form-data" action="traitement/ajoutavatar.php" method="post">
-        <input type="file" name="avatar" >
+        <input type="file" name="avatar" required>
         <input type="submit" value="Modifier ma photo de profil">
       </form>
     </div>

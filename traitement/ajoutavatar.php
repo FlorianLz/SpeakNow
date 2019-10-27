@@ -40,7 +40,8 @@ echo $_SESSION['id'];
              }
              else //Sinon (la fonction renvoie FALSE).
              {
-                  echo 'Echec de l\'upload !';
+               $_SESSION['erreur']='Une erreur est survenue durant l\'upload. Merci de réessayer';
+               header('Location: ../index.php?action=profil');
              }
         }
         else //S'il y a eu une erreur...
@@ -48,7 +49,8 @@ echo $_SESSION['id'];
              echo $erreur;
         }
       }else{
-          echo 'Erreur';
+          $_SESSION['erreur']='Une erreur est survenue. Merci de réessayer'; 
+          header('Location: ../index.php?action=profil');
       }
 
 

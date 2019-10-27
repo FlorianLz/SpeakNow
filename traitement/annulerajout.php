@@ -12,6 +12,9 @@
         if(isset($_POST['texterecherche'])){
             $texterecherche=$_POST['texterecherche'];
             header('Location: index.php?action=recherche&texterecherche='.$texterecherche);
+        }elseif(isset($_POST['idpage'])){
+            $idpage=$_POST['idpage'];
+            header('Location: index.php?action=mur&id='.$idpage);
         }else{
             header("Location: index.php?action=mur");
         }
