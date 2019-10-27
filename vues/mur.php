@@ -1,7 +1,7 @@
 <div class="contenumur">
     <div class="demandesami">
         <?php 
-        echo '<h1>Demandes reçues</h1>';
+        echo '<h2>Demandes reçues</h2>';
         $sql = "SELECT utilisateurs.* FROM utilisateurs WHERE id IN(SELECT idUtilisateur1 FROM lien WHERE idUtilisateur2=? AND etat='attente') ";
         $query = $pdo->prepare($sql);
         $query->execute(array($_SESSION['id']));
@@ -17,7 +17,7 @@
                         </form>';
         }
 
-        echo '<h1>Demandes envoyées</h1>';
+        echo '<h2>Demandes envoyées</h2>';
         $sql = "SELECT utilisateurs.* FROM utilisateurs INNER JOIN lien ON utilisateurs.id=idUtilisateur2 AND etat='attente' AND idUtilisateur1=?";
         $query = $pdo->prepare($sql);
         $query->execute(array($_SESSION['id']));
@@ -46,8 +46,9 @@
             $id = $_SESSION["id"];
             $ok = true; // On a le droit d afficher notre mur
 
-            echo '<h1>Bienvenue sur ton mur '.$_SESSION['prenom'].' !</h1>';
-
+            echo '<div class="profil"><div class="imgprofil"><img src=avatars/'.$_SESSION['avatar'].'></div><div class="infoprofil">';
+            echo '<h2>'.$_SESSION['prenom'].' '.$_SESSION['nom'].'</h2>';
+            echo '</div></div>';
             ?>
             <div class="poster">
                 <form class="formposter" action="index.php?action=poster" method="post">
@@ -147,6 +148,12 @@
             $nomPers=$line['nom'];
             $prenomPers=$line['prenom'];
             $avatarPers=$line['avatar'];
+            echo '<div class="profil"><div class="imgprofil"><img src=avatars/'.$avatarPers.'></div><div class="infoprofil">';
+            echo '<h2>'.$prenomPers.' '.$nomPers.'</h2>';
+            echo '<form method="post" action="index.php?action=refusami">
+            <input type="hidden" name="idAmi" value="'.$idPers.'">
+            <input type="submit" value="Supprimer cet ami">
+            </form></div></div>';
             ?>
             <div class="poster">
                 <form class="formposter" action="index.php?action=poster" method="post">
@@ -214,7 +221,7 @@
 
     <div class="listeamis">
     <?php 
-    echo '<h1>Liste de mes amis</h1>';
+    echo '<h2>Liste de mes amis</h2>';
     $sql = "SELECT * FROM utilisateurs WHERE id IN ( SELECT utilisateurs.id FROM utilisateurs INNER JOIN lien ON idUtilisateur1=utilisateurs.id AND etat='ami' AND idUTilisateur2=? UNION SELECT utilisateurs.id FROM utilisateurs INNER JOIN lien ON idUtilisateur2=utilisateurs.id AND etat='ami' AND idUTilisateur1=?)";
     $query = $pdo->prepare($sql);
     $query->execute(array($_SESSION['id'],$_SESSION['id']));

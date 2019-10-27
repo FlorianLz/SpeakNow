@@ -254,10 +254,12 @@ header .recherche form input[type="submit"]:hover{
   display:flex;
 }
 .postmur{
-  border:2px solid #00acee;
+  border:2px solid lightgray;
   width:45%;
   margin-top:20px;
   padding:15px;
+  background-color: lightslategray;
+  border-radius:10px;
 }
 .conteneurposts{
   display:flex;
@@ -293,11 +295,23 @@ header .recherche form input[type="submit"]:hover{
 .formposter input{
   width:100%;
   margin-bottom:5px;
+  background-color: transparent;
+  color:white;
+  border:1px solid #00acee;
 }
 .formposter textarea{
   width:100%;
   resize:none;
   height:150px;
+  background-color: transparent;
+  color:white;
+  border:1px solid #00acee;
+}
+.formposter input[type="submit"]{
+  width:100%;
+  border:1px solid #00acee;
+  background-color:transparent;
+  color:white;
 }
 .postmur input[type="submit"]{
   border:0;
@@ -312,6 +326,9 @@ header .recherche form input[type="submit"]:hover{
 .demandesami{
   width:20%;
 }
+.demandesami h2:nth-child(2){
+  padding-top:30vh;
+}
 .listeamis{
   width:20%;
   text-align:left;
@@ -323,10 +340,11 @@ header .recherche form input[type="submit"]:hover{
   padding:25px;
 }
 .imgprofil{
-  width:20%;
+  width:10%;
 }
 .imgprofil img{
   width:100%;
+  border-radius:150px;
 }
 .infoprofil{
   padding-left:25px;
@@ -338,7 +356,6 @@ header .recherche form input[type="submit"]:hover{
   background-color:transparent;
   color:white;
   margin-left:10px;
-  width:50%;
 }
 
 /* Mur partie liste amis */
@@ -355,6 +372,7 @@ header .recherche form input[type="submit"]:hover{
   align-items: center;
   justify-content: flex-start;
   margin-left:15px;
+  padding-top:10px;
 }
 .imgami{
   width:100%;
