@@ -1,12 +1,12 @@
 <div class="contenumur">
     <div class="demandesami">
         <?php 
-        echo '<h1>Demandes reçues</h1>';
+        echo '<h2>Demandes reçues</h2>';
         $sql = "SELECT utilisateurs.* FROM utilisateurs WHERE id IN(SELECT idUtilisateur1 FROM lien WHERE idUtilisateur2=? AND etat='attente') ";
         $query = $pdo->prepare($sql);
         $query->execute(array($_SESSION['id']));
         while($line = $query->fetch()){
-            echo '<div class="ami"><a href="index.php?action=mur&id='.$line['id'].'"><img class="imgami" src="avatars/'.$line['avatar'].'"></a><a href="index.php?action=mur&id='.$line['id'].'"><p>'.$line['prenom'].' '.$line['nom'].'</p></a></div>';
+            echo '<div class="ami"><a href="index.php?action=mur&id='.$line['id'].'"><img class="imgami" src="avatars/'.$line['avatar'].'"></a><a href="index.php?action=mur&id='.$line['id'].'"><p>'.$line['prenom'].' '.$line['nom'].'</p></a>';
             echo '<form method="post" action="index.php?action=ajoutami">
                         <input type="hidden" name="idAmi" value="'.$line['id'].'">
                         <input type="submit" value="Accepter">
@@ -14,10 +14,10 @@
                         <form method="post" action="index.php?action=refusami">
                         <input type="hidden" name="idAmi" value="'.$line['id'].'">
                         <input type="submit" value="Refuser">
-                        </form>';
+                        </form></div>';
         }
 
-        echo '<h1>Demandes envoyées</h1>';
+        echo '<h2>Demandes envoyées</h2>';
         $sql = "SELECT utilisateurs.* FROM utilisateurs INNER JOIN lien ON utilisateurs.id=idUtilisateur2 AND etat='attente' AND idUtilisateur1=?";
         $query = $pdo->prepare($sql);
         $query->execute(array($_SESSION['id']));
@@ -46,18 +46,24 @@
             $id = $_SESSION["id"];
             $ok = true; // On a le droit d afficher notre mur
 
-            echo '<h1>Bienvenue sur ton mur '.$_SESSION['prenom'].' !</h1>';
+            echo '<div class="profil"><div class="imgprofil"><img src=avatars/'.$_SESSION['avatar'].'></div><div class="infoprofil">';
+            echo '<h2>'.$_SESSION['prenom'].' '.$_SESSION['nom'].'</h2></div></div>';
 
             ?>
             <div class="poster">
                 <form class="formposter" action="index.php?action=poster" method="post">
                     <h3>Nouvelle publication</h3>
                     <input type="text" name="titre" placeholder="Titre...">
+                    <input type="hidden" name="idpers" value="<?php echo $_SESSION['id'];?>">
                     <textarea name="message" placeholder="Message..."></textarea>
                     <input type="submit">
                 </form>
             </div> 
             <?php
+            if(isset($_SESSION['alerte'])){
+                echo '<p>'.$_SESSION['alerte'].'</p>';
+                unset($_SESSION['alerte']);
+            }
 
             $sql="SELECT * FROM ecrit WHERE idAuteur=? AND idAmi=? ORDER BY dateEcrit DESC";
             $query = $pdo->prepare($sql);
@@ -147,6 +153,12 @@
             $nomPers=$line['nom'];
             $prenomPers=$line['prenom'];
             $avatarPers=$line['avatar'];
+            echo '<div class="profil"><div class="imgprofil"><img src=avatars/'.$avatarPers.'></div><div class="infoprofil">';
+            echo '<h2>'.$prenomPers.' '.$nomPers.'</h2>';
+            echo '<form method="post" action="index.php?action=refusami">
+            <input type="hidden" name="idAmi" value="'.$idPers.'">
+            <input type="submit" value="Supprimer cet ami">
+            </form></div></div>';
             ?>
             <div class="poster">
                 <form class="formposter" action="index.php?action=poster" method="post">
@@ -159,6 +171,10 @@
             </div> 
 
             <?php
+            if(isset($_SESSION['alerte'])){
+                echo '<p>'.$_SESSION['alerte'].'</p>';
+                unset($_SESSION['alerte']);
+            }
 
             $sql="SELECT * FROM ecrit  WHERE idAmi=? ORDER BY dateEcrit DESC";
             $query = $pdo->prepare($sql);
@@ -214,7 +230,7 @@
 
     <div class="listeamis">
     <?php 
-    echo '<h1>Liste de mes amis</h1>';
+    echo '<h2>Liste de mes amis</h2>';
     $sql = "SELECT * FROM utilisateurs WHERE id IN ( SELECT utilisateurs.id FROM utilisateurs INNER JOIN lien ON idUtilisateur1=utilisateurs.id AND etat='ami' AND idUTilisateur2=? UNION SELECT utilisateurs.id FROM utilisateurs INNER JOIN lien ON idUtilisateur2=utilisateurs.id AND etat='ami' AND idUTilisateur1=?)";
     $query = $pdo->prepare($sql);
     $query->execute(array($_SESSION['id'],$_SESSION['id']));

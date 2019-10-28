@@ -26,6 +26,7 @@ echo $_SESSION['id'];
              if(move_uploaded_file($_FILES['avatar']['tmp_name'], $dossier . $fichier)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
              {
                   echo 'Upload effectué avec succès !';
+                  $_SESSION['avatar']=$fichier;
                   //On insére les données dans la bdd
                   include("../config/config.php");
                   include("../config/bd.php");

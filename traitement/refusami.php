@@ -3,11 +3,11 @@
         $idAmi=htmlspecialchars($_POST['idAmi']);
         $monid=htmlspecialchars($_SESSION['id']);
 
-        $sql = "UPDATE lien SET etat = 'banni' WHERE idUtilisateur1=? AND idUtilisateur2=?";
+        $sql = "UPDATE lien SET etat = 'banni' WHERE idUtilisateur1=? AND idUtilisateur2=? OR idUtilisateur1=? AND idUtilisateur2=? ";
         // Etape 1  : preparation
         $query = $pdo->prepare($sql);
         // Etape 2 : execution : 2 paramètres dans la requêtes !!
-        $query->execute(array($idAmi,$monid));
+        $query->execute(array($idAmi,$monid,$monid,$idAmi));
         // Etape 3 : ici le login est unique, donc on sait que l'on peut avoir zero ou une  seule ligne.
         header("Location: index.php?action=mur");
     }else{
