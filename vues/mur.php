@@ -93,7 +93,16 @@
                     echo '<input type="hidden" name="date" value="'.$line['dateEcrit'].'">
                         <input type="submit" value="Supprimer">
                         </form>';
-                    echo '<div class="commentairespost">';
+                    echo '<div class="commentairespost">
+                            <form method="post" action="index.php?action=ajoutcommentaire">
+                                <textarea name="comm"></textarea>
+                                <input type="hidden" name="idpost" value="'.$line['id'].'">
+                                <input type="submit" value="Commenter">
+                            </form>';
+                    if(isset($_SESSION['alertecomm'])){
+                        echo $_SESSION['alertecomm'];
+                        unset($_SESSION['alertecomm']);
+                    }
 
                     $sqlcomm="SELECT * FROM commentaires WHERE idPost=? ORDER BY dateCommentaire DESC";
                     $querycomm = $pdo->prepare($sqlcomm);
@@ -145,7 +154,37 @@
                         <input type="submit" value="Supprimer">
                         </form>';
                     }
-                    echo '</div>';
+                    echo '<div class="commentairespost">
+                            <form method="post" action="index.php?action=ajoutcommentaire">
+                                <textarea name="comm"></textarea>
+                                <input type="hidden" name="idpost" value="'.$line['id'].'">
+                                <input type="submit" value="Commenter">
+                            </form>';
+                        if(isset($_SESSION['alertecomm'])){
+                            echo $_SESSION['alertecomm'];
+                            unset($_SESSION['alertecomm']);
+                        }
+                        $sqlcomm="SELECT * FROM commentaires WHERE idPost=? ORDER BY dateCommentaire DESC";
+                        $querycomm = $pdo->prepare($sqlcomm);
+                        $querycomm->execute(array($line['id']));
+                        while($linecomm = $querycomm->fetch()){
+                            if($linecomm['idAuteur']==$_SESSION['id']){
+                                echo '<div class="comm"><div class="auteur"><img class="imgpost" src="avatars/'.$_SESSION['avatar'].'"><p>'.$_SESSION['prenom'].' '.$_SESSION['nom'].'</p>
+                                </div><p>'.$linecomm['commentaire'].'</p></div><br>';
+                            }else{
+                                $sqlcomm1="SELECT * FROM utilisateurs  WHERE id=?";
+                                $querycomm1 = $pdo->prepare($sqlcomm1);
+                                $querycomm1->execute(array($linecomm['idAuteur']));
+                                $infoscomm=$querycomm1->fetch();
+    
+                                $nomauteurcomm=$infoscomm['nom'];
+                                $prenomauteurcomm=$infoscomm['prenom'];
+                                $avatarauteurcomm=$infoscomm['avatar'];
+                                echo '<div class="comm"><div class="auteur"><img class="imgpost" src="avatars/'.$avatarauteurcomm.'"><p>'.$prenomauteurcomm.' '.$nomauteurcomm.'</p>
+                                </div><p>'.$linecomm['commentaire'].'</p></div><br>';
+                            }
+                        }    
+                    echo '</div></div>';
 
                 }
                 
@@ -257,7 +296,38 @@
                     echo '<img src="./imagesposts/'.$line['image'].'">';
                 }
                 echo 'Posté le '.$line['dateEcrit'];
-                echo '</div>';
+                echo '<div class="commentairespost">
+                            <form method="post" action="index.php?action=ajoutcommentaire">
+                                <textarea name="comm"></textarea>
+                                <input type="hidden" name="idpost" value="'.$line['id'].'">
+                                <input type="submit" value="Commenter">
+                            </form>';
+                    if(isset($_SESSION['alertecomm'])){
+                        echo $_SESSION['alertecomm'];
+                        unset($_SESSION['alertecomm']);
+                    }
+                    $sqlcomm="SELECT * FROM commentaires WHERE idPost=? ORDER BY dateCommentaire DESC";
+                    $querycomm = $pdo->prepare($sqlcomm);
+                    $querycomm->execute(array($line['id']));
+                    while($linecomm = $querycomm->fetch()){
+                        if($linecomm['idAuteur']==$_SESSION['id']){
+                            echo '<div class="comm"><div class="auteur"><img class="imgpost" src="avatars/'.$_SESSION['avatar'].'"><p>'.$_SESSION['prenom'].' '.$_SESSION['nom'].'</p>
+                            </div><p>'.$linecomm['commentaire'].'</p></div><br>';
+                        }else{
+                            $sqlcomm1="SELECT * FROM utilisateurs  WHERE id=?";
+                            $querycomm1 = $pdo->prepare($sqlcomm1);
+                            $querycomm1->execute(array($linecomm['idAuteur']));
+                            $infoscomm=$querycomm1->fetch();
+
+                            $nomauteurcomm=$infoscomm['nom'];
+                            $prenomauteurcomm=$infoscomm['prenom'];
+                            $avatarauteurcomm=$infoscomm['avatar'];
+                            echo '<div class="comm"><div class="auteur"><img class="imgpost" src="avatars/'.$avatarauteurcomm.'"><p>'.$prenomauteurcomm.' '.$nomauteurcomm.'</p>
+                            </div><p>'.$linecomm['commentaire'].'</p></div><br>';
+                        }
+                    }
+                echo '</div></div>';
+                
                 }else{
                     $sql1="SELECT * FROM utilisateurs  WHERE id=?";
                     $query1 = $pdo->prepare($sql1);
@@ -290,7 +360,37 @@
                         <input type="submit" value="Supprimer">
                         </form>';
                     }
-                    echo '</div>';
+                    echo '<div class="commentairespost">
+                            <form method="post" action="index.php?action=ajoutcommentaire">
+                                <textarea name="comm"></textarea>
+                                <input type="hidden" name="idpost" value="'.$line['id'].'">
+                                <input type="submit" value="Commenter">
+                            </form>';
+                    if(isset($_SESSION['alertecomm'])){
+                        echo $_SESSION['alertecomm'];
+                        unset($_SESSION['alertecomm']);
+                    }
+                    $sqlcomm="SELECT * FROM commentaires WHERE idPost=? ORDER BY dateCommentaire DESC";
+                    $querycomm = $pdo->prepare($sqlcomm);
+                    $querycomm->execute(array($line['id']));
+                    while($linecomm = $querycomm->fetch()){
+                        if($linecomm['idAuteur']==$_SESSION['id']){
+                            echo '<div class="comm"><div class="auteur"><img class="imgpost" src="avatars/'.$_SESSION['avatar'].'"><p>'.$_SESSION['prenom'].' '.$_SESSION['nom'].'</p>
+                            </div><p>'.$linecomm['commentaire'].'</p></div><br>';
+                        }else{
+                            $sqlcomm1="SELECT * FROM utilisateurs  WHERE id=?";
+                            $querycomm1 = $pdo->prepare($sqlcomm1);
+                            $querycomm1->execute(array($linecomm['idAuteur']));
+                            $infoscomm=$querycomm1->fetch();
+
+                            $nomauteurcomm=$infoscomm['nom'];
+                            $prenomauteurcomm=$infoscomm['prenom'];
+                            $avatarauteurcomm=$infoscomm['avatar'];
+                            echo '<div class="comm"><div class="auteur"><img class="imgpost" src="avatars/'.$avatarauteurcomm.'"><p>'.$prenomauteurcomm.' '.$nomauteurcomm.'</p>
+                            </div><p>'.$linecomm['commentaire'].'</p></div><br>';
+                        }
+                    }
+                echo '</div></div>';
 
                 }
                 

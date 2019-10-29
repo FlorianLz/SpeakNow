@@ -258,7 +258,6 @@ header .recherche form input[type="submit"]:hover{
   border:2px solid lightgray;
   width:45%;
   margin-top:20px;
-  padding:15px;
   background-color: lightslategray;
   border-radius:10px;
   position:relative;
@@ -281,6 +280,7 @@ header .recherche form input[type="submit"]:hover{
 .auteur{
   display:flex;
   align-items: center;
+  padding:15px;
 }
 .poster{
   display:flex;
@@ -347,6 +347,7 @@ header .recherche form input[type="submit"]:hover{
 .postmur > img{
   max-width:100%;
   width:100%;
+  padding:10px;
 }
 .filactu{
   width:60%;
@@ -355,9 +356,15 @@ header .recherche form input[type="submit"]:hover{
 .commentairespost{
   padding: 15px;
   background-color: lightslategray;
-  border-radius: 10px;
+  border-radius: 0px;
   width: 100%;
-  border: 2px solid red;
+  border-top: 2px solid red;
+  margin-top:10px;
+}
+.commentairespost form textarea{
+  width:80%;
+  height:60px;
+  resize:none;
 }
 .comm{
   padding-bottom:5px;

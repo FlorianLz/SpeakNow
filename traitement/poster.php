@@ -58,7 +58,6 @@ if(isset($_POST['message']) && !empty($_POST['message']) && isset($_POST['titre'
         $sql = "INSERT INTO ecrit VALUES ('','$titre','$message','$date','','$monid','$idami')";
         $query = $pdo->prepare($sql);
         $query->execute();
-        $_SESSION['alerte']="ici";
         header('Location: ./index.php?action=mur&id=' . $idami);
       }
 }else{

@@ -20,4 +20,5 @@ $listeDesActions = array(
     "annulerajout" => "traitement/annulerajout.php",
     "refusami" => "traitement/refusami.php",
     "demandeami" => "traitement/demandeami.php",
+    "ajoutcommentaire" => "traitement/ajoutcommentaire.php",
 );
