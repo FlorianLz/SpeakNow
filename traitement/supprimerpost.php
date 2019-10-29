@@ -1,5 +1,5 @@
 <?php
-if (isset($_POST['id']) && isset($_POST['id']) && isset($_POST['id']) && isset($_POST['id'])){
+if (isset($_POST['id']) && isset($_POST['titre']) && isset($_POST['message']) && isset($_POST['date'])){
     $id=htmlspecialchars($_POST['id']);
     $idconnecte=htmlspecialchars($_SESSION['id']);
     $titre=htmlspecialchars($_POST['titre']);
