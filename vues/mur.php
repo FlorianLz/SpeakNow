@@ -42,7 +42,7 @@
         // On veut affchier notre mur ou celui d'un de nos amis et pas faire n'importe quoi
         $ok = false;
 
-        if(!isset($_GET["id"]) || ($_GET["id"]==$_SESSION["id"])){
+        if(!isset($_GET["id"]) || ($_GET["id"]==$_SESSION["id"])){ //Il n'y as pas d'id en GET ou celui-ci est celui de la session
             $id = $_SESSION["id"];
             $ok = true; // On a le droit d afficher notre mur
 
@@ -51,11 +51,13 @@
 
             ?>
             <div class="poster">
-                <form class="formposter" action="index.php?action=poster" method="post">
+                <form enctype="multipart/form-data" class="formposter" action="index.php?action=poster" method="post">
                     <h3>Nouvelle publication</h3>
                     <input type="text" name="titre" placeholder="Titre...">
                     <input type="hidden" name="idpers" value="<?php echo $_SESSION['id'];?>">
                     <textarea name="message" placeholder="Message..."></textarea>
+                    <label class="uploadfile" for="image"><img src="https://www.logolynx.com/images/logolynx/2a/2a71ec307740510ce1e7300904131154.png" width="25px"><p>Ajouter une photo</p></label>
+                    <input type="file" name="photo" id="image" class="inputfile">
                     <input type="submit">
                 </form>
             </div> 
@@ -65,27 +67,88 @@
                 unset($_SESSION['alerte']);
             }
 
-            $sql="SELECT * FROM ecrit WHERE idAuteur=? AND idAmi=? ORDER BY dateEcrit DESC";
+            $sql="SELECT * FROM ecrit WHERE idAmi=? ORDER BY dateEcrit DESC";
             $query = $pdo->prepare($sql);
-            $query->execute(array($_SESSION['id'],$_SESSION['id']));
+            $query->execute(array($_SESSION['id']));
 
             echo '<div class="conteneurposts">';
             while($line = $query->fetch()){
-                echo '<div class="postmur">
+                if($line['idAuteur']==$_SESSION['id']){
+                    echo '<div class="postmur">
                         <div class="auteur"><img class="imgpost" src="avatars/'.$_SESSION['avatar'].'"><p>'.$_SESSION['prenom'].' '.$_SESSION['nom'].'</p>
                         </div>
                         <p class="titrepost">'.$line['titre'].'</p><br>';
-                echo $line['contenu'];
-                echo '<br><br>';
-                echo 'Posté le '.$line['dateEcrit'];
-                echo '<form method="post" action="index.php?action=supprimerpost">
-                    <input type="hidden" name="id" value="'.$line['id'].'">
-                    <input type="hidden" name="titre" value="'.$line['titre'].'">
-                    <input type="hidden" name="message" value="'.$line['contenu'].'">
-                    <input type="hidden" name="date" value="'.$line['dateEcrit'].'">
-                    <input type="submit" value="Supprimer">
-                    </form>';
-                echo '</div>';
+                    echo $line['contenu'].'<br><br>';
+                    if(isset($line['image']) && !empty($line['image'])){
+                        echo '<img src="./imagesposts/'.$line['image'].'">';
+                    }
+                    echo '<p>Posté le '.$line['dateEcrit'].'</p>';
+                    echo '<form method="post" action="index.php?action=supprimerpost">
+                        <input type="hidden" name="id" value="'.$line['id'].'">
+                        <input type="hidden" name="titre" value="'.$line['titre'].'">
+                        <input type="hidden" name="message" value="'.$line['contenu'].'">';
+                        if(isset($line['image']) && !empty($line['image'])){
+                            echo '<input type="hidden" name="image" value="'.$line['image'].'">';
+                        }
+                    echo '<input type="hidden" name="date" value="'.$line['dateEcrit'].'">
+                        <input type="submit" value="Supprimer">
+                        </form>';
+                    echo '<div class="commentairespost">';
+
+                    $sqlcomm="SELECT * FROM commentaires WHERE idPost=? ORDER BY dateCommentaire DESC";
+                    $querycomm = $pdo->prepare($sqlcomm);
+                    $querycomm->execute(array($line['id']));
+                    while($linecomm = $querycomm->fetch()){
+                        if($linecomm['idAuteur']==$_SESSION['id']){
+                            echo '<div class="comm"><div class="auteur"><img class="imgpost" src="avatars/'.$_SESSION['avatar'].'"><p>'.$_SESSION['prenom'].' '.$_SESSION['nom'].'</p>
+                            </div><p>'.$linecomm['commentaire'].'</p></div><br>';
+                        }else{
+                            $sqlcomm1="SELECT * FROM utilisateurs  WHERE id=?";
+                            $querycomm1 = $pdo->prepare($sqlcomm1);
+                            $querycomm1->execute(array($linecomm['idAuteur']));
+                            $infoscomm=$querycomm1->fetch();
+
+                            $nomauteurcomm=$infoscomm['nom'];
+                            $prenomauteurcomm=$infoscomm['prenom'];
+                            $avatarauteurcomm=$infoscomm['avatar'];
+                            echo '<div class="comm"><div class="auteur"><img class="imgpost" src="avatars/'.$avatarauteurcomm.'"><p>'.$prenomauteurcomm.' '.$nomauteurcomm.'</p>
+                            </div><p>'.$linecomm['commentaire'].'</p></div><br>';
+                        }
+                    }
+                    echo '</div></div>';
+                }else{
+                    $sql1="SELECT * FROM utilisateurs  WHERE id=?";
+                    $query1 = $pdo->prepare($sql1);
+                    $query1->execute(array($line['idAuteur']));
+                    $infos=$query1->fetch();
+
+                    $nomauteur=$infos['nom'];
+                    $prenomauteur=$infos['prenom'];
+                    $avatarauteur=$infos['avatar'];
+
+                    echo '<div class="postmur">
+                        <div class="auteur"><img class="imgpost" src="avatars/'.$avatarauteur.'"><p>'.$prenomauteur.' '.$nomauteur.'</p>
+                        </div>
+                        <p class="titrepost">'.$line['titre'].'</p><br>';
+                    echo $line['contenu'];
+                    echo '<br><br>';
+                    if(isset($line['image']) && !empty($line['image'])){
+                        echo '<img src="./imagesposts/'.$line['image'].'">';
+                    }
+                    echo 'Posté le '.$line['dateEcrit'];
+                    if($infos['id'] == $_SESSION['id']){
+                        echo '<form method="post" action="index.php?action=supprimerpost&idredirection='.$_GET['id'].'">
+                        <input type="hidden" name="id" value="'.$line['id'].'">
+                        <input type="hidden" name="titre" value="'.$line['titre'].'">
+                        <input type="hidden" name="message" value="'.$line['contenu'].'">
+                        <input type="hidden" name="date" value="'.$line['dateEcrit'].'">
+                        <input type="submit" value="Supprimer">
+                        </form>';
+                    }
+                    echo '</div>';
+
+                }
+                
             };
             echo '</div>';
 
@@ -161,11 +224,13 @@
             </form></div></div>';
             ?>
             <div class="poster">
-                <form class="formposter" action="index.php?action=poster" method="post">
+                <form enctype="multipart/form-data" class="formposter" action="index.php?action=poster" method="post">
                     <h3>Ecrire un message à <?php echo $prenomPers; ?></h3>
                     <input type="hidden" name="idpers" value="<?php echo $_GET['id'];?>">
                     <input type="text" name="titre" placeholder="Titre...">
                     <textarea name="message" placeholder="Message..."></textarea>
+                    <label class="uploadfile" for="image"><img src="https://www.logolynx.com/images/logolynx/2a/2a71ec307740510ce1e7300904131154.png" width="25px"><p>Ajouter une photo</p></label>
+                    <input type="file" name="photo" id="image" class="inputfile">
                     <input type="submit">
                 </form>
             </div> 
@@ -188,6 +253,9 @@
                         <p class="titrepost">'.$line['titre'].'</p><br>';
                 echo $line['contenu'];
                 echo '<br><br>';
+                if(isset($line['image']) && !empty($line['image'])){
+                    echo '<img src="./imagesposts/'.$line['image'].'">';
+                }
                 echo 'Posté le '.$line['dateEcrit'];
                 echo '</div>';
                 }else{
@@ -206,13 +274,19 @@
                         <p class="titrepost">'.$line['titre'].'</p><br>';
                     echo $line['contenu'];
                     echo '<br><br>';
+                    if(isset($line['image']) && !empty($line['image'])){
+                        echo '<img src="./imagesposts/'.$line['image'].'">';
+                    }
                     echo 'Posté le '.$line['dateEcrit'];
                     if($infos['id'] == $_SESSION['id']){
                         echo '<form method="post" action="index.php?action=supprimerpost&idredirection='.$_GET['id'].'">
                         <input type="hidden" name="id" value="'.$line['id'].'">
                         <input type="hidden" name="titre" value="'.$line['titre'].'">
-                        <input type="hidden" name="message" value="'.$line['contenu'].'">
-                        <input type="hidden" name="date" value="'.$line['dateEcrit'].'">
+                        <input type="hidden" name="message" value="'.$line['contenu'].'">';
+                        if(isset($line['image']) && !empty($line['image'])){
+                            echo '<input type="hidden" name="image" value="'.$line['image'].'">';
+                        }
+                    echo '<input type="hidden" name="date" value="'.$line['dateEcrit'].'">
                         <input type="submit" value="Supprimer">
                         </form>';
                     }

@@ -12,6 +12,13 @@ if (isset($_POST['id']) && isset($_POST['id']) && isset($_POST['id']) && isset($
         $query = $pdo->prepare($sql);
         // Etape 2 : execution : 2 paramètres dans la requêtes !!
         $query->execute(array($id,$titre,$contenu,$date,$idconnecte));
+
+        if(isset($_POST['image']) && !empty($_POST['image'])){
+            $fichier = './imagesposts/'.$_POST['image'];
+            if( file_exists ($fichier)){
+            unlink( $fichier ) ;
+            }
+        }
         if (isset($_GET['idredirection'])){
             header("Location: index.php?action=mur&id=".$_GET['idredirection']);
         }else{

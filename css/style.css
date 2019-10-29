@@ -15,6 +15,7 @@ header{
   padding:10px;
   color:white;
   border-bottom: 2px solid #00acee;
+  z-index:10;
 }
 .headerconnecte{
   justify-content: center;
@@ -260,6 +261,7 @@ header .recherche form input[type="submit"]:hover{
   padding:15px;
   background-color: lightslategray;
   border-radius:10px;
+  position:relative;
 }
 .conteneurposts{
   display:flex;
@@ -307,11 +309,33 @@ header .recherche form input[type="submit"]:hover{
   color:white;
   border:1px solid #00acee;
 }
+/*.formposter input[type='file'] {
+  width: 0.1px!important;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+.formposter .inputfile:focus + label {
+  outline: 1px dotted #000;
+  outline: -webkit-focus-ring-color auto 5px;
+}
+.formposter .inputfile + label * {
+  pointer-events: none;
+}*/
+.formposter .uploadfile{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom:5px;
+}
 .formposter input[type="submit"]{
   width:100%;
   border:1px solid #00acee;
   background-color:transparent;
   color:white;
+  margin-top:10px;
 }
 .postmur input[type="submit"]{
   border:0;
@@ -320,9 +344,28 @@ header .recherche form input[type="submit"]:hover{
   cursor:pointer;
   padding-top:5px;
 }
+.postmur > img{
+  max-width:100%;
+  width:100%;
+}
 .filactu{
   width:60%;
 }
+/* Espace commentaires */
+.commentairespost{
+  padding: 15px;
+  background-color: lightslategray;
+  border-radius: 10px;
+  width: 100%;
+  border: 2px solid red;
+}
+.comm{
+  padding-bottom:5px;
+  border-bottom:1px solid grey;
+}
+
+
+
 .demandesami{
   width:20%;
 }
