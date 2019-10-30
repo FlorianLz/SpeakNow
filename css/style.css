@@ -5,6 +5,9 @@
     font-family: 'Roboto';
     color:black;
 }
+.fas{
+  cursor:pointer;
+}
 header{
   position:fixed;
   width:100%;
@@ -103,7 +106,7 @@ header .recherche form input[type="submit"]:hover{
 }
 .imageprofil > a img{
   height:40px;
-  width!40px;
+  width:40px;
   border-radius:150px;
 }
 .headercentre a{
@@ -269,7 +272,7 @@ header .recherche form input[type="submit"]:hover{
   display:flex;
 }
 .postmur{
-  width:45%;
+  width:70%;
   margin-top:20px;
   background-color: white;
   border-radius:10px;
@@ -303,24 +306,33 @@ header .recherche form input[type="submit"]:hover{
 .auteur p{
   padding-left:10px;
   margin:0;
+  align-self: baseline;
+  font-size: 0.9rem;
 }
 .formposter{
-  width:45%;
+  width:70%;
+  background-color: white;
+  padding: 15px;
+  border-radius: 12px;
 }
 .formposter input{
   width:100%;
   margin-bottom:5px;
-  background-color: transparent;
-  color:white;
-  border:1px solid #00acee;
+  background-color: #f2f3f5;
+  border-radius:50px;
+  border:1px solid rgb(169, 169, 169);
+  padding:5px;
 }
 .formposter textarea{
   width:100%;
   resize:none;
   height:150px;
-  background-color: transparent;
-  color:white;
-  border:1px solid #00acee;
+  background-color: #f2f3f5;
+  border-radius:10px;
+  padding:5px;
+}
+.formposter h3{
+  padding-bottom:15px;
 }
 /*.formposter input[type='file'] {
   width: 0.1px!important;
@@ -337,17 +349,35 @@ header .recherche form input[type="submit"]:hover{
 .formposter .inputfile + label * {
   pointer-events: none;
 }*/
-.formposter .uploadfile{
+
+.uploadfile i{
+  width:25px;
+  padding-bottom:7px;
+}
+.cacherbtnfile{
+  position: relative;
+  overflow: hidden;
+  height: 35px;
+  width:100%;
+}
+.formposter .inputfile{
+  position: absolute;
+  top: 0;
+  left: -123px;
+  width: auto;
+  background-color: white;
+  border: 0;
+  width:160%;
+}
+.uploadimage{
   display:flex;
   align-items: center;
-  justify-content: center;
-  padding-bottom:5px;
 }
 .formposter input[type="submit"]{
   width:100%;
-  border:1px solid #00acee;
-  background-color:transparent;
-  margin-top:10px;
+  border:1px solid #3498db;
+  background-color:#3498db;
+  color:white;
 }
 .postmur input[type="submit"]{
   border:0;
@@ -362,40 +392,59 @@ header .recherche form input[type="submit"]:hover{
 }
 .filactu{
   width:60%;
+  margin-left:20%;
 }
 /* Espace commentaires */
 .commentairespost{
-  padding: 15px;
   background-color: white;
-  border-radius: 0px;
+  border-radius: 0px 0px 50px 50px;
   width: 100%;
   border-top: 1px solid #3498db;
   margin-top:10px;
   color:black;
+  padding:15px;
 }
 .commentairespost form textarea{
-  width:90%;
-  height:40px;
+  width:75%;
+  height:33px;
   resize:none;
   background-color:#f2f3f5;
   border-radius:50px;
+  padding:7px;
+}
+.commentairespost > form{
+  display:flex;
+  align-items: center;
+  justify-content: space-around;
+  border-bottom: 1px solid #3498db;
+  padding-bottom:15px;
+}
+.commentairespost > form label i{
+  color:#3498db;
+  cursor:pointer
 }
 .comm{
   padding-bottom:5px;
-  border-bottom:1px solid grey;
+  border-bottom:1px solid #f2f3f5;
 }
 
 
 
 .demandesami{
   width:20%;
+  position:fixed;
 }
 .demandesami h2:nth-child(2){
   padding-top:30vh;
 }
+.demandesami .ami{
+  padding-left:15px;
+}
 .listeamis{
   width:20%;
   text-align:left;
+  position: fixed;
+  right: 0;
 }
 .profil{
   display:flex;
@@ -404,7 +453,7 @@ header .recherche form input[type="submit"]:hover{
   padding:25px;
 }
 .imgprofil{
-  width:10%;
+  width:100px;
 }
 .imgprofil img{
   width:100%;
@@ -412,15 +461,18 @@ header .recherche form input[type="submit"]:hover{
 }
 .infoprofil{
   padding-left:25px;
-  line-height: 50px;;
+  line-height: 50px;
+  align-self:baseline;
 }
 .infoprofil form input[type='submit']{
   width:100%;
-  border:1px solid #00acee;
-  background-color:transparent;
+  border:1px solid #3498db;
+  background-color:#3498db;
   color:white;
   margin-left:10px;
-  width:50%;
+  width:auto;
+  padding:5px;
+  border-radius:50px;
 }
 
 /* Mur partie liste amis */
@@ -436,22 +488,26 @@ header .recherche form input[type="submit"]:hover{
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin-left:15px;
   padding-top:10px;
+  padding-bottom:10px;
+  border-bottom:1px solid #3498db;
 }
 .imgami{
   width:100%;
   border-radius:150px;
 }
 .ami a:nth-child(1){
-  width:8%;
+  width:30px;
+  height:30px;
 }
 .ami form input[type='submit']{
   width:100%;
-  border:1px solid #00acee;
-  background-color:transparent;
+  border:1px solid #3498db;
+  background-color:#3498db;
   color:white;
   margin-left:10px;
+  padding:3px;
+  border-radius:50px;
 }
 
 

@@ -61,8 +61,12 @@
                     <input type="text" name="titre" placeholder="Titre...">
                     <input type="hidden" name="idpers" value="<?php echo $_SESSION['id'];?>">
                     <textarea name="message" placeholder="Message..."></textarea>
-                    <label class="uploadfile" for="image"><img src="https://www.logolynx.com/images/logolynx/2a/2a71ec307740510ce1e7300904131154.png" width="25px"><p>Ajouter une photo</p></label>
-                    <input type="file" name="photo" id="image" class="inputfile">
+                    <div class="uploadimage">
+                        <label class="uploadfile" for="image"><i class="fas fa-image"></i></label>
+                        <div class="cacherbtnfile">
+                            <input type="file" name="photo" id="image" class="inputfile">
+                        </div>
+                    </div>
                     <input type="submit">
                 </form>
             </div> 
@@ -99,16 +103,18 @@
                             echo '<input type="hidden" name="image" value="'.$line['image'].'">';
                         }
                     echo '<input type="hidden" name="date" value="'.$line['dateEcrit'].'">
-                        <input type="submit" value="Supprimer">
+                        <label for="supprimer"><i class="fas fa-times"></i></label>
+                        <input type="submit" value="" id="supprimer">
                         </form>';
                     echo '<div class="commentairespost">
                             <form method="post" action="index.php?action=ajoutcommentaire">
-                                <textarea name="comm"></textarea>
+                                <img class="imgpost" src="avatars/'.$_SESSION['avatar'].'">
+                                <textarea name="comm" placeholder="Votre commentaire..."></textarea>
                                 <input type="hidden" name="idpost" value="'.$line['id'].'">
-                                <input type="submit" value="Commenter">
+                                <input type="submit" value="" name="submit" id="submit"><label for="submit"><i class="fas fa-paper-plane"></i></label>
                             </form>';
                     if(isset($_SESSION['alertecomm'])){
-                        echo $_SESSION['alertecomm'];
+                        echo ($_SESSION['alertecomm']);
                         unset($_SESSION['alertecomm']);
                     }
 
@@ -132,7 +138,8 @@
                                 <input type="hidden" name="idCommentaire" value="'.$linecomm['id'].'">
                                 <input type="hidden" name="commentaire" value="'.$linecomm['commentaire'].'">
                                 <input type="hidden" name="idredirection" value="'.$_SESSION['id'].'">
-                                <input type="submit" value="Supprimer">                                
+                                <label for="supprimercomm"><i class="fas fa-times"></i></label>
+                                <input type="submit" value="" id="supprimercomm">                                
                                 </form>';
                         }
                         echo '</div><br>';
@@ -164,9 +171,10 @@
                     //On affiche les commentaires liés au post
                     echo '<div class="commentairespost">
                             <form method="post" action="index.php?action=ajoutcommentaire">
-                                <textarea name="comm"></textarea>
+                                <img class="imgpost" src="avatars/'.$_SESSION['avatar'].'">
+                                <textarea name="comm" placeholder="Votre commentaire..."></textarea>
                                 <input type="hidden" name="idpost" value="'.$line['id'].'">
-                                <input type="submit" value="Commenter">
+                                <input type="submit" value="" name="submit" id="submit"><label for="submit"><i class="fas fa-paper-plane"></i></label>
                             </form>';
                         if(isset($_SESSION['alertecomm'])){
                             echo $_SESSION['alertecomm'];
@@ -193,7 +201,8 @@
                                 <input type="hidden" name="idCommentaire" value="'.$linecomm['id'].'">
                                 <input type="hidden" name="commentaire" value="'.$linecomm['commentaire'].'">
                                 <input type="hidden" name="idredirection" value="'.$_SESSION['id'].'">
-                                <input type="submit" value="Supprimer">                                
+                                <label for="supprimercomm"><i class="fas fa-times"></i></label>
+                                <input type="submit" value="" id="supprimercomm">                                
                                 </form>';
                             }
                             
@@ -285,8 +294,12 @@
                     <input type="hidden" name="idpers" value="<?php echo $_GET['id'];?>">
                     <input type="text" name="titre" placeholder="Titre...">
                     <textarea name="message" placeholder="Message..."></textarea>
-                    <label class="uploadfile" for="image"><img src="https://www.logolynx.com/images/logolynx/2a/2a71ec307740510ce1e7300904131154.png" width="25px"><p>Ajouter une photo</p></label>
-                    <input type="file" name="photo" id="image" class="inputfile">
+                    <div class="uploadimage">
+                        <label class="uploadfile" for="image"><i class="fas fa-image"></i></label>
+                        <div class="cacherbtnfile">
+                            <input type="file" name="photo" id="image" class="inputfile">
+                        </div>
+                    </div>
                     <input type="submit">
                 </form>
             </div> 
@@ -315,9 +328,10 @@
                 echo 'Posté le '.$line['dateEcrit'];
                 echo '<div class="commentairespost">
                             <form method="post" action="index.php?action=ajoutcommentaire">
-                                <textarea name="comm"></textarea>
+                                <img class="imgpost" src="avatars/'.$_SESSION['avatar'].'">
+                                <textarea name="comm" placeholder="Votre commentaire..."></textarea>
                                 <input type="hidden" name="idpost" value="'.$line['id'].'">
-                                <input type="submit" value="Commenter">
+                                <input type="submit" value="" name="submit" id="submit"><label for="submit"><i class="fas fa-paper-plane"></i></label>
                             </form>';
                     if(isset($_SESSION['alertecomm'])){
                         echo $_SESSION['alertecomm'];
@@ -374,14 +388,16 @@
                             echo '<input type="hidden" name="image" value="'.$line['image'].'">';
                         }
                     echo '<input type="hidden" name="date" value="'.$line['dateEcrit'].'">
-                        <input type="submit" value="Supprimer">
+                        <label for="supprimer"><i class="fas fa-times"></i></label>
+                        <input type="submit" value="" id="supprimer">
                         </form>';
                     }
                     echo '<div class="commentairespost">
                             <form method="post" action="index.php?action=ajoutcommentaire">
-                                <textarea name="comm"></textarea>
+                                <img class="imgpost" src="avatars/'.$_SESSION['avatar'].'">
+                                <textarea name="comm" placeholder="Votre commentaire..."></textarea>
                                 <input type="hidden" name="idpost" value="'.$line['id'].'">
-                                <input type="submit" value="Commenter">
+                                <input type="submit" value="" name="submit" id="submit"><label for="submit"><i class="fas fa-paper-plane"></i></label>
                             </form>';
                     if(isset($_SESSION['alertecomm'])){
                         echo $_SESSION['alertecomm'];
