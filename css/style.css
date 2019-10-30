@@ -3,22 +3,39 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Roboto';
+    color:black;
 }
 header{
   position:fixed;
   width:100%;
-  background-color:#21283f;
-  height:45px;
+  background-color:#3498db;
+  height:64px;
   display:flex;
   align-items: center;
   justify-content: space-between;
-  padding:10px;
+  padding:11px;
   color:white;
-  border-bottom: 2px solid #00acee;
+  border-bottom: 2px solid #3498db;
   z-index:10;
 }
 .headerconnecte{
-  justify-content: center;
+  justify-content: space-between;
+}
+.headergauche, .headercentre, .headerdroite{
+  height:100%;
+  width:30%;
+  display:flex;
+}
+.headercentre{
+  font-size: 1.7rem;
+  justify-content: space-around;
+  align-items: center;
+}
+.headercentre a i{
+  color:white;
+}
+.headerdroite{
+  justify-content: flex-end;
 }
 .logo{
   height:100%;
@@ -53,27 +70,23 @@ header .recherche {
 }
 header .recherche form{
   height:100%;
-  border:1px solid black;
   position:relative;
+  width:15vw;
 }
 header .recherche form input[type="text"]{
   width:100%;
   height:100%;
-  border-radius: 0px;
-  background-color:white;
+  border-radius: 50px 0px 0px 50px;
+  background-color:#F2F3F5;
 }
 header .recherche form input[type="submit"]{
-  width:auto;
-  min-width:20px;
   height:100%;
-  border-radius: 0px;
-  border:0px;
-  padding:0;
+  border-radius: 0px 50px 50px 0px;
+  background-color:#F2F3F5;
   background-image: url('../img/loupe.png');
   background-repeat:no-repeat;
-  background-size:100% 20px;
-  position:absolute;
-  right:0;
+  background-size:65%;
+  background-position:center;
 }
 header .recherche form input[type="submit"]:hover{
   background-color:#D5DBE1;
@@ -89,10 +102,11 @@ header .recherche form input[type="submit"]:hover{
   width:100%;
 }
 .imageprofil > a img{
-  height:100%;
+  height:40px;
+  width!40px;
   border-radius:150px;
 }
-.deconnexion a,.parametres a,.prenomprofil a{
+.headercentre a{
   color:white;
   text-decoration: none;
 }
@@ -196,9 +210,9 @@ header .recherche form input[type="submit"]:hover{
 .contenuprofil{
   height:auto;
   min-height:100vh;
-  padding-top:50px;
+  padding-top:70px;
   text-align:center;
-  background-color:#21283f;
+  background-color:#f2f3f5;
   color:white;
 }
 .formprofil input{
@@ -248,17 +262,16 @@ header .recherche form input[type="submit"]:hover{
 .contenumur{
   height:auto;
   min-height:100vh;
-  padding-top:45px;
-  background-color:#21283f;
+  padding-top:70px;
+  background-color:#f2f3f5;
   color:white;
   text-align:center;
   display:flex;
 }
 .postmur{
-  border:2px solid lightgray;
   width:45%;
   margin-top:20px;
-  background-color: lightslategray;
+  background-color: white;
   border-radius:10px;
   position:relative;
 }
@@ -269,7 +282,7 @@ header .recherche form input[type="submit"]:hover{
   flex-direction:column;
 }
 .imgpost{
-  width:8%;
+  width:40px;
   border-radius:50px;
 }
 .titrepost{
@@ -334,19 +347,17 @@ header .recherche form input[type="submit"]:hover{
   width:100%;
   border:1px solid #00acee;
   background-color:transparent;
-  color:white;
   margin-top:10px;
 }
 .postmur input[type="submit"]{
   border:0;
   background-color: transparent;
-  color:white;
   cursor:pointer;
   padding-top:5px;
 }
 .postmur > img{
   max-width:100%;
-  width:100%;
+  width:50%;
   padding:10px;
 }
 .filactu{
@@ -355,16 +366,19 @@ header .recherche form input[type="submit"]:hover{
 /* Espace commentaires */
 .commentairespost{
   padding: 15px;
-  background-color: lightslategray;
+  background-color: white;
   border-radius: 0px;
   width: 100%;
-  border-top: 2px solid red;
+  border-top: 1px solid #3498db;
   margin-top:10px;
+  color:black;
 }
 .commentairespost form textarea{
-  width:80%;
-  height:60px;
+  width:90%;
+  height:40px;
   resize:none;
+  background-color:#f2f3f5;
+  border-radius:50px;
 }
 .comm{
   padding-bottom:5px;

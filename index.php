@@ -24,6 +24,7 @@ ob_start(); // Je démarre le buffer de sortie : les données à afficher sont s
     
     <!-- Ma feuille de style à moi -->
     <link href="./css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -49,14 +50,21 @@ ob_start(); // Je démarre le buffer de sortie : les données à afficher sont s
         }else{
             $avatar=$_SESSION['avatar'];
             $prenom=$_SESSION['prenom'];
-            echo "<header class='headerconnecte'><div class='logo'><a href='index.php?action=accueil'><img src='img/logo.png'></a></div>";
-            echo "<div class='recherche'><form action='index.php' method='GET'><input type='hidden' name='action' value='recherche'><input name='texterecherche' type='text' placeholder='Rechercher...' required><input type='submit' value=' '></form></div>";
-            echo "<div class='imageprofil'><a href='index.php?action=mur'><img class='avatarmenu' src='avatars/$avatar'></a></div>";
-            echo "<div class='prenomprofil'><a href='index.php?action=mur'><p>$prenom</p></a></div>";
-            echo "<div class='parametres'><a href='index.php?action=profil'><p>Paramètres</p></a></div>";
-            echo "<div class='deconnexion'><a href='index.php?action=deconnexion'>Déconnexion</a></div>";
-            
-            echo '</header>';
+            echo "<header class='headerconnecte'>
+                <div class='headergauche'>
+                    <div class='logo'><a href='index.php?action=accueil'><img src='img/logo.png'></a></div>
+                    <div class='recherche'><form action='index.php' method='GET'><input type='hidden' name='action' value='recherche'><input name='texterecherche' type='text' placeholder='Rechercher...' required><input type='submit' value=' '></form></div>
+                </div>
+                <div class='headercentre'>
+                    <a href='index.php?action=mur'><i class='fas fa-home'></i></a>
+                    <a href='index.php?action=profil'><i class='fas fa-cog'></i></a>
+                    <a href='index.php?action=deconnexion'><i class='fas fa-sign-out-alt'></i></a>
+                </div>
+                <div class='headerdroite'>
+                    <div class='imageprofil'><a href='index.php?action=mur'><img class='avatarmenu' src='avatars/$avatar'></a></div>
+                </div>
+                
+            </header>";
         }
     ?>
 
