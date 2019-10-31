@@ -78,7 +78,7 @@
             }
 
             //Requête permettant de sélectionner tous les commentaires qui nous concerne
-            $sql="SELECT nom, prenom, avatar, titre, ecrit.id, contenu, dateEcrit, ecrit.image, idAuteur FROM utilisateurs JOIN ecrit ON utilisateurs.id=ecrit.idAuteur WHERE ecrit.idAmi=? ORDER BY dateEcrit DESC";
+            $sql="SELECT nom, prenom, avatar, titre, ecrit.id, contenu, dateEcrit, DATE_FORMAT(dateEcrit, 'Le %d/%m/%Y à %Hh%i') AS dateEcritFormate, ecrit.image, idAuteur FROM utilisateurs JOIN ecrit ON utilisateurs.id=ecrit.idAuteur WHERE ecrit.idAmi=? ORDER BY dateEcrit DESC";
             $query = $pdo->prepare($sql);
             $query->execute(array($_SESSION['id']));
             //On affiche un conteneur pour les posts
@@ -86,17 +86,9 @@
             //Pour chaque post, on crée une div
             while($line = $query->fetch()){
                 echo '<div class="postmur" id="post'.$line['id'].'">
-                        <div class="auteur"><img class="imgpost" src="avatars/'.$line['avatar'].'"><p>'.$line['prenom'].' '.$line['nom'].'</p>
-                        </div>
-                        <p class="titrepost">'.$line['titre'].'</p><br>';
-                echo $line['contenu'];
-                echo '<br><br>';
-                //Une image est liée au post ? On l'affiche
-                if(isset($line['image']) && !empty($line['image'])){
-                    echo '<img src="./imagesposts/'.$line['image'].'">';
-                }
-                //On affiche la date du post
-                echo 'Posté le '.$line['dateEcrit'];
+                <div class="auteur"><div><a href="index.php?action=mur&id='.$line['idAuteur'].'"><img class="imgpost" src="avatars/'.$line['avatar'].'">
+                <div><p>'.$line['prenom'].' '.$line['nom'].'</p></a><p>'.$line['dateEcritFormate'].'</p></div></div>
+                <div>';
                 if($line['idAuteur'] == $_SESSION['id']){
                     echo '<form method="post" action="index.php?action=supprimerpost&idredirection='.$_SESSION['id'].'">
                     <input type="hidden" name="id" value="'.$line['id'].'">
@@ -109,9 +101,16 @@
                     <label for="supprimer"><i class="fas fa-times"></i></label>
                     <input type="submit" value="" id="supprimer">
                     </form>';
+                };
+                echo '</div>
+                </div>
+                <p class="titrepost">'.$line['titre'].'</p><br>';
+                echo $line['contenu'];
+                echo '<br><br>';
+                //Une image est liée au post ? On l'affiche
+                if(isset($line['image']) && !empty($line['image'])){
+                    echo '<img src="./imagesposts/'.$line['image'].'">';
                 }
-
-
                 //On affiche le formulaire permettant de poster un commentaire
                 echo '<div class="commentairespost">
                         <form method="post" action="index.php?action=ajoutcommentaire">
@@ -126,22 +125,27 @@
                     unset($_SESSION['alertecomm']);
                 }
                 //On affiche les commentaires
-                $sql1='SELECT nom, prenom, avatar, commentaires.id, commentaires.commentaire, commentaires.idAuteur FROM utilisateurs JOIN commentaires ON commentaires.idAuteur=utilisateurs.id WHERE commentaires.idPost=?';
+                $sql1="SELECT nom, prenom, avatar, commentaires.id, commentaires.commentaire, commentaires.idAuteur, DATE_FORMAT(dateCommentaire, 'Le %d/%m/%Y à %Hh%i') AS dateCommentaire FROM utilisateurs JOIN commentaires ON commentaires.idAuteur=utilisateurs.id WHERE commentaires.idPost=? ORDER BY commentaires.id DESC";
                 $query1 = $pdo->prepare($sql1);
                 $query1->execute(array($line['id']));
                 while($line1 = $query1->fetch()){
-                    echo '<div class="comm"><div class="auteur"><img class="imgpost" src="avatars/'.$line1['avatar'].'"><p>'.$line1['prenom'].' '.$line1['nom'].'</p>
-                        </div><p>'.$line1['commentaire'].'</p>';
-                    if($line1['idAuteur']==$_SESSION['id']){
-                        echo '<form method="post" action="index.php?action=supprimercommentaire">
-                        <input type="hidden" name="idCommentaire" value="'.$line1['id'].'">
-                        <input type="hidden" name="commentaire" value="'.$line1['commentaire'].'">
-                        <input type="hidden" name="idpost" value="'.$line['id'].'">
-                        <input type="hidden" name="idredirection" value="'.$_SESSION['id'].'">
-                        <label for="supprimercomm1"><i class="fas fa-times"></i></label>
-                        <input type="submit" value="" id="supprimercomm1">                                
-                        </form>';
-                    }
+                    echo '<div class="comm">
+                    <div class="auteur"><div><a href="index.php?action=mur&id='.$line1['idAuteur'].'"><img class="imgpost" src="avatars/'.$line1['avatar'].'">
+                        <div><p>'.$line1['prenom'].' '.$line1['nom'].'</p></a><p>'.$line1['dateCommentaire'].'</p></div></div>
+                        <div>';
+                        if($line1['idAuteur']==$_SESSION['id']){
+                            echo '<form method="post" action="index.php?action=supprimercommentaire">
+                            <input type="hidden" name="idCommentaire" value="'.$line1['id'].'">
+                            <input type="hidden" name="commentaire" value="'.$line1['commentaire'].'">
+                            <input type="hidden" name="idpost" value="'.$line['id'].'">
+                            <input type="hidden" name="idredirection" value="'.$_SESSION['id'].'">
+                            <label for="supprimercomm'.$line1['id'].'"><i class="fas fa-times"></i></label>
+                            <input type="submit" value="" id="supprimercomm'.$line1['id'].'">                                
+                            </form>';
+                        }
+                        echo '</div>
+                        </div>
+                        <p>'.$line1['commentaire'].'</p>';
                     echo '</div>';
                 }        
                 echo'</div></div>';
@@ -244,7 +248,7 @@
                     unset($_SESSION['alerte']);
                 }
                 //Requête permettant de sélectionner tous les commentaires qui la concerne
-                $sql="SELECT nom, prenom, avatar, titre, ecrit.id, contenu, dateEcrit, ecrit.image, idAuteur FROM utilisateurs JOIN ecrit ON utilisateurs.id=ecrit.idAuteur WHERE ecrit.idAmi=? ORDER BY dateEcrit DESC";
+                $sql="SELECT nom, prenom, avatar, titre, ecrit.id, contenu, dateEcrit, DATE_FORMAT(dateEcrit, 'Le %d/%m/%Y à %Hh%i') AS dateEcritFormate, ecrit.image, idAuteur FROM utilisateurs JOIN ecrit ON utilisateurs.id=ecrit.idAuteur WHERE ecrit.idAmi=? ORDER BY dateEcrit DESC";
                 $query = $pdo->prepare($sql);
                 $query->execute(array($idPers));
                 //On affiche un conteneur pour les posts
@@ -252,7 +256,23 @@
                 //Pour chaque post, on crée une div
                 while($line = $query->fetch()){
                     echo '<div class="postmur" id="post'.$line['id'].'">
-                            <div class="auteur"><img class="imgpost" src="avatars/'.$line['avatar'].'"><p>'.$line['prenom'].' '.$line['nom'].'</p>
+                            <div class="auteur"><div><a href="index.php?action=mur&id='.$line['idAuteur'].'"><img class="imgpost" src="avatars/'.$line['avatar'].'">
+                            <div><p>'.$line['prenom'].' '.$line['nom'].'</p></a><p>'.$line['dateEcritFormate'].'</p></div></div>
+                            <div>';
+                            if($line['idAuteur'] == $_SESSION['id']){
+                                echo '<form method="post" action="index.php?action=supprimerpost&idredirection='.$idPers.'">
+                                <input type="hidden" name="id" value="'.$line['id'].'">
+                                <input type="hidden" name="titre" value="'.$line['titre'].'">
+                                <input type="hidden" name="message" value="'.$line['contenu'].'">';
+                                if(isset($line['image']) && !empty($line['image'])){
+                                    echo '<input type="hidden" name="image" value="'.$line['image'].'">';
+                                }
+                            echo '<input type="hidden" name="date" value="'.$line['dateEcrit'].'">
+                                <label for="supprimer"><i class="fas fa-times"></i></label>
+                                <input type="submit" value="" id="supprimer">
+                                </form>';
+                            };
+                            echo '</div>
                             </div>
                             <p class="titrepost">'.$line['titre'].'</p><br>';
                     echo $line['contenu'];
@@ -260,21 +280,6 @@
                     //Une image est liée au post ? On l'affiche
                     if(isset($line['image']) && !empty($line['image'])){
                         echo '<img src="./imagesposts/'.$line['image'].'">';
-                    }
-                    //On affiche la date du post
-                    echo 'Posté le '.$line['dateEcrit'];
-                    if($line['idAuteur'] == $_SESSION['id']){
-                        echo '<form method="post" action="index.php?action=supprimerpost&idredirection='.$idPers.'">
-                        <input type="hidden" name="id" value="'.$line['id'].'">
-                        <input type="hidden" name="titre" value="'.$line['titre'].'">
-                        <input type="hidden" name="message" value="'.$line['contenu'].'">';
-                        if(isset($line['image']) && !empty($line['image'])){
-                            echo '<input type="hidden" name="image" value="'.$line['image'].'">';
-                        }
-                    echo '<input type="hidden" name="date" value="'.$line['dateEcrit'].'">
-                        <label for="supprimer"><i class="fas fa-times"></i></label>
-                        <input type="submit" value="" id="supprimer">
-                        </form>';
                     }
                     //On affiche le formulaire permettant de poster un commentaire
                     echo '<div class="commentairespost">
@@ -290,22 +295,27 @@
                         unset($_SESSION['alertecomm']);
                     }
                     //On affiche les commentaires
-                    $sql1='SELECT nom, prenom, avatar, commentaires.id, commentaires.commentaire, commentaires.idAuteur FROM utilisateurs JOIN commentaires ON commentaires.idAuteur=utilisateurs.id WHERE commentaires.idPost=?';
+                    $sql1="SELECT nom, prenom, avatar, commentaires.id, commentaires.commentaire, commentaires.idAuteur, DATE_FORMAT(dateCommentaire, 'Le %d/%m/%Y à %Hh%i') AS dateCommentaire FROM utilisateurs JOIN commentaires ON commentaires.idAuteur=utilisateurs.id WHERE commentaires.idPost=? ORDER BY commentaires.id DESC";
                     $query1 = $pdo->prepare($sql1);
                     $query1->execute(array($line['id']));
                     while($line1 = $query1->fetch()){
-                        echo '<div class="comm"><div class="auteur"><img class="imgpost" src="avatars/'.$line1['avatar'].'"><p>'.$line1['prenom'].' '.$line1['nom'].'</p>
-                            </div><p>'.$line1['commentaire'].'</p>';
-                        if($line1['idAuteur']==$_SESSION['id']){
-                            echo '<form method="post" action="index.php?action=supprimercommentaire">
-                            <input type="hidden" name="idCommentaire" value="'.$line1['id'].'">
-                            <input type="hidden" name="commentaire" value="'.$line1['commentaire'].'">
-                            <input type="hidden" name="idpost" value="'.$line['id'].'">
-                            <input type="hidden" name="idredirection" value="'.$idPers.'">
-                            <label for="supprimercomm1"><i class="fas fa-times"></i></label>
-                            <input type="submit" value="" id="supprimercomm1">                                
-                            </form>';
-                        }
+                        echo '<div class="comm">
+                        <div class="auteur"><div><a href="index.php?action=mur&id='.$line1['idAuteur'].'"><img class="imgpost" src="avatars/'.$line1['avatar'].'">
+                            <div><p>'.$line1['prenom'].' '.$line1['nom'].'</p></a><p>'.$line1['dateCommentaire'].'</p></div></div>
+                            <div>';
+                            if($line1['idAuteur']==$_SESSION['id']){
+                                echo '<form method="post" action="index.php?action=supprimercommentaire">
+                                <input type="hidden" name="idCommentaire" value="'.$line1['id'].'">
+                                <input type="hidden" name="commentaire" value="'.$line1['commentaire'].'">
+                                <input type="hidden" name="idpost" value="'.$line['id'].'">
+                                <input type="hidden" name="idredirection" value="'.$idPers.'">
+                                <label for="supprimercomm'.$line1['id'].'"><i class="fas fa-times"></i></label>
+                                <input type="submit" value="" id="supprimercomm'.$line1['id'].'">                                
+                                </form>';
+                            }
+                            echo '</div>
+                            </div>
+                            <p>'.$line1['commentaire'].'</p>';
                         echo '</div>';
                     }        
                     echo'</div></div>';

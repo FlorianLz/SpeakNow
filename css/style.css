@@ -299,8 +299,11 @@ header .recherche form input[type="submit"]:hover{
 }
 .auteur{
   display:flex;
-  align-items: center;
   padding:15px;
+  justify-content: space-between;
+}
+.auteur div:nth-child(1){
+  display:flex;
 }
 .poster{
   display:flex;
@@ -312,6 +315,10 @@ header .recherche form input[type="submit"]:hover{
   margin:0;
   align-self: baseline;
   font-size: 0.9rem;
+}
+.auteur a{
+  display: flex;
+  text-decoration: none;
 }
 .formposter{
   width:70%;

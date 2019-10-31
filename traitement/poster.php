@@ -5,6 +5,7 @@ if(isset($_POST['message']) && !empty($_POST['message']) && isset($_POST['titre'
     $idami=htmlspecialchars($_POST['idpers']);
     $titre=htmlspecialchars(addslashes($_POST['titre']));
     $message = htmlspecialchars(addslashes($_POST['message']));
+    date_default_timezone_set('Europe/Paris');
     $date = date("Y-m-d H:i:s");
     print_r($_FILES);
 
