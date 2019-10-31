@@ -49,8 +49,8 @@
         if(!isset($_GET["id"]) || ($_GET["id"]==$_SESSION["id"])){ //Il n'y as pas d'id en GET ou celui-ci est celui de la session
             $id = $_SESSION["id"];
             $ok = true; // On a le droit d afficher notre mur
-
-            echo '<div class="profil"><div class="imgprofil"><img src=avatars/'.$_SESSION['avatar'].'></div><div class="infoprofil">';
+            $avatar=$_SESSION['avatar'];
+            echo "<div class='profil'><div class='imgprofil' style='background-image:url(./avatars/$avatar);'></div><div class='infoprofil'>";
             echo '<h2>'.$_SESSION['prenom'].' '.$_SESSION['nom'].'</h2></div></div>';
 
             ?>
@@ -86,7 +86,7 @@
             while($line = $query->fetch()){
                 //Si l'auteur du post correspond à notre SESSION id
                 if($line['idAuteur']==$_SESSION['id']){
-                    echo '<div class="postmur">
+                    echo '<div class="postmur" id="post'.$line['id'].'">
                         <div class="auteur"><img class="imgpost" src="avatars/'.$_SESSION['avatar'].'"><p>'.$_SESSION['prenom'].' '.$_SESSION['nom'].'</p>
                         </div>
                         <p class="titrepost">'.$line['titre'].'</p><br>';
@@ -110,8 +110,9 @@
                             <form method="post" action="index.php?action=ajoutcommentaire">
                                 <img class="imgpost" src="avatars/'.$_SESSION['avatar'].'">
                                 <textarea name="comm" placeholder="Votre commentaire..."></textarea>
+                                <input type="hidden" name="idredirection" value="'.$_SESSION['id'].'">
                                 <input type="hidden" name="idpost" value="'.$line['id'].'">
-                                <input type="submit" value="" name="submit" id="submit"><label for="submit"><i class="fas fa-paper-plane"></i></label>
+                                <input type="submit" value="" name="submit" id="submit1"><label for="submit1"><i class="fas fa-paper-plane"></i></label>
                             </form>';
                     if(isset($_SESSION['alertecomm'])){
                         echo ($_SESSION['alertecomm']);
@@ -137,6 +138,7 @@
                             echo '<form method="post" action="index.php?action=supprimercommentaire">
                                 <input type="hidden" name="idCommentaire" value="'.$linecomm['id'].'">
                                 <input type="hidden" name="commentaire" value="'.$linecomm['commentaire'].'">
+                                <input type="hidden" name="idpost" value="'.$line['id'].'">
                                 <input type="hidden" name="idredirection" value="'.$_SESSION['id'].'">
                                 <label for="supprimercomm"><i class="fas fa-times"></i></label>
                                 <input type="submit" value="" id="supprimercomm">                                
@@ -156,7 +158,7 @@
                     $prenomauteur=$infos['prenom'];
                     $avatarauteur=$infos['avatar'];
                     //On affiche une div par post
-                    echo '<div class="postmur">
+                    echo '<div class="postmur" id="post'.$line['id'].'">
                         <div class="auteur"><img class="imgpost" src="avatars/'.$avatarauteur.'"><p>'.$prenomauteur.' '.$nomauteur.'</p>
                         </div>
                         <p class="titrepost">'.$line['titre'].'</p><br>';
@@ -173,6 +175,7 @@
                             <form method="post" action="index.php?action=ajoutcommentaire">
                                 <img class="imgpost" src="avatars/'.$_SESSION['avatar'].'">
                                 <textarea name="comm" placeholder="Votre commentaire..."></textarea>
+                                <input type="hidden" name="idredirection" value="'.$_SESSION['id'].'">
                                 <input type="hidden" name="idpost" value="'.$line['id'].'">
                                 <input type="submit" value="" name="submit" id="submit"><label for="submit"><i class="fas fa-paper-plane"></i></label>
                             </form>';
@@ -200,9 +203,10 @@
                                 echo '<form method="post" action="index.php?action=supprimercommentaire">
                                 <input type="hidden" name="idCommentaire" value="'.$linecomm['id'].'">
                                 <input type="hidden" name="commentaire" value="'.$linecomm['commentaire'].'">
+                                <input type="hidden" name="idpost" value="'.$line['id'].'">
                                 <input type="hidden" name="idredirection" value="'.$_SESSION['id'].'">
-                                <label for="supprimercomm"><i class="fas fa-times"></i></label>
-                                <input type="submit" value="" id="supprimercomm">                                
+                                <label for="supprimercomm1"><i class="fas fa-times"></i></label>
+                                <input type="submit" value="" id="supprimercomm1">                                
                                 </form>';
                             }
                             
@@ -316,7 +320,7 @@
             echo '<div class="conteneurposts">';
             while($line = $query->fetch()){
                 if ($line['idAuteur']==$idPers){
-                    echo '<div class="postmur">
+                    echo '<div class="postmur" id="post'.$line['id'].'">
                         <div class="auteur"><img class="imgpost" src="avatars/'.$avatarPers.'"><p>'.$prenomPers.' '.$nomPers.'</p>
                         </div>
                         <p class="titrepost">'.$line['titre'].'</p><br>';
@@ -330,6 +334,7 @@
                             <form method="post" action="index.php?action=ajoutcommentaire">
                                 <img class="imgpost" src="avatars/'.$_SESSION['avatar'].'">
                                 <textarea name="comm" placeholder="Votre commentaire..."></textarea>
+                                <input type="hidden" name="idredirection" value="'.$_GET['id'].'">
                                 <input type="hidden" name="idpost" value="'.$line['id'].'">
                                 <input type="submit" value="" name="submit" id="submit"><label for="submit"><i class="fas fa-paper-plane"></i></label>
                             </form>';
@@ -343,7 +348,17 @@
                     while($linecomm = $querycomm->fetch()){
                         if($linecomm['idAuteur']==$_SESSION['id']){
                             echo '<div class="comm"><div class="auteur"><img class="imgpost" src="avatars/'.$_SESSION['avatar'].'"><p>'.$_SESSION['prenom'].' '.$_SESSION['nom'].'</p>
-                            </div><p>'.$linecomm['commentaire'].'</p></div><br>';
+                            </div><p>'.$linecomm['commentaire'].'</p>';
+                            echo '<form method="post" action="index.php?action=supprimercommentaire">
+                            <input type="hidden" name="idCommentaire" value="'.$linecomm['id'].'">
+                            <input type="hidden" name="commentaire" value="'.$linecomm['commentaire'].'">
+                            <input type="hidden" name="idpost" value="'.$line['id'].'">
+                            <input type="hidden" name="idredirection" value="'.$_GET['id'].'">
+                            <label for="supprimercomm"><i class="fas fa-times"></i></label>
+                            <input type="submit" value="" id="supprimercomm">                                
+                            </form>';
+                            echo'</div><br>';
+                            
                         }else{
                             $sqlcomm1="SELECT * FROM utilisateurs  WHERE id=?";
                             $querycomm1 = $pdo->prepare($sqlcomm1);
@@ -369,7 +384,7 @@
                     $prenomauteur=$infos['prenom'];
                     $avatarauteur=$infos['avatar'];
 
-                    echo '<div class="postmur">
+                    echo '<div class="postmur" id="post'.$line['id'].'">
                         <div class="auteur"><img class="imgpost" src="avatars/'.$avatarauteur.'"><p>'.$prenomauteur.' '.$nomauteur.'</p>
                         </div>
                         <p class="titrepost">'.$line['titre'].'</p><br>';
@@ -396,8 +411,9 @@
                             <form method="post" action="index.php?action=ajoutcommentaire">
                                 <img class="imgpost" src="avatars/'.$_SESSION['avatar'].'">
                                 <textarea name="comm" placeholder="Votre commentaire..."></textarea>
+                                <input type="hidden" name="idredirection" value="'.$_GET['id'].'">
                                 <input type="hidden" name="idpost" value="'.$line['id'].'">
-                                <input type="submit" value="" name="submit" id="submit"><label for="submit"><i class="fas fa-paper-plane"></i></label>
+                                <input type="submit" value="" name="submit" id="submit1"><label for="submit1"><i class="fas fa-paper-plane"></i></label>
                             </form>';
                     if(isset($_SESSION['alertecomm'])){
                         echo $_SESSION['alertecomm'];
@@ -409,7 +425,16 @@
                     while($linecomm = $querycomm->fetch()){
                         if($linecomm['idAuteur']==$_SESSION['id']){
                             echo '<div class="comm"><div class="auteur"><img class="imgpost" src="avatars/'.$_SESSION['avatar'].'"><p>'.$_SESSION['prenom'].' '.$_SESSION['nom'].'</p>
-                            </div><p>'.$linecomm['commentaire'].'</p></div><br>';
+                            </div><p>'.$linecomm['commentaire'].'</p>';
+                            echo '<form method="post" action="index.php?action=supprimercommentaire">
+                            <input type="hidden" name="idCommentaire" value="'.$linecomm['id'].'">
+                            <input type="hidden" name="commentaire" value="'.$linecomm['commentaire'].'">
+                            <input type="hidden" name="idpost" value="'.$line['id'].'">
+                            <input type="hidden" name="idredirection" value="'.$_GET['id'].'">
+                            <label for="supprimercomm1"><i class="fas fa-times"></i></label>
+                            <input type="submit" value="" id="supprimercomm1">                                
+                            </form>';
+                            echo'</div><br>';
                         }else{
                             $sqlcomm1="SELECT * FROM utilisateurs  WHERE id=?";
                             $querycomm1 = $pdo->prepare($sqlcomm1);
@@ -420,7 +445,7 @@
                             $prenomauteurcomm=$infoscomm['prenom'];
                             $avatarauteurcomm=$infoscomm['avatar'];
                             echo '<div class="comm"><div class="auteur"><img class="imgpost" src="avatars/'.$avatarauteurcomm.'"><p>'.$prenomauteurcomm.' '.$nomauteurcomm.'</p>
-                            </div><p>'.$linecomm['commentaire'].'</p></div><br>';
+                            </div><p>'.$linecomm['commentaire'].'</p>';
                         }
                     }
                 echo '</div></div>';

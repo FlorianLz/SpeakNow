@@ -6,6 +6,7 @@ $listeDesActions = array(
     "profil" => "vues/profil.php",
     "login" => "vues/login.php",
     "mur" => "vues/mur.php",
+    "amis" => "vues/amis.php",
     "recherche" => "vues/recherche.php",
     "voirprofil" => "vues/voirprofil.php",
     "connexion" => "traitement/connexion.php",

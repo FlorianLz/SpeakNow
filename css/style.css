@@ -113,6 +113,9 @@ header .recherche form input[type="submit"]:hover{
   color:white;
   text-decoration: none;
 }
+.headercentre .fa-resp{
+  display:none;
+}
 .parametres{
   margin-right:7px;
   margin-left:7px;
@@ -286,6 +289,7 @@ header .recherche form input[type="submit"]:hover{
 }
 .imgpost{
   width:40px;
+  height:40px;
   border-radius:50px;
 }
 .titrepost{
@@ -427,6 +431,12 @@ header .recherche form input[type="submit"]:hover{
   padding-bottom:5px;
   border-bottom:1px solid #f2f3f5;
 }
+.comm .auteur{
+  padding-left:0;
+}
+.comm p{
+  text-align:left;
+}
 
 
 
@@ -454,10 +464,14 @@ header .recherche form input[type="submit"]:hover{
 }
 .imgprofil{
   width:100px;
+  height:100px;
+  background-size:cover;
+  border-radius:20px;
 }
 .imgprofil img{
   width:100%;
-  border-radius:150px;
+  border-radius:20px;
+  height:100%;
 }
 .infoprofil{
   padding-left:25px;
@@ -510,8 +524,43 @@ header .recherche form input[type="submit"]:hover{
   border-radius:50px;
 }
 
+/* Page amis */
+.contenuamis{
+  height:auto;
+  min-height:100vh;
+  padding-top:70px;
+  background-color:#f2f3f5;
+  color:white;
+  text-align:center;
+  display:flex;
+}
+.demandesamis{
+  width:100%;
+  padding:10px;
+}
+.recues{
+  padding-bottom:25px;
+} 
 
-
+/* Page 404 */
+.page404{
+  width:100%;
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f2f3f5;
+  line-height:1.25;
+  text-align:center;
+}
+.page404 i{
+  font-size:3rem;
+  color:#3498db;
+}
+.page404 h3, .page404 p{
+  padding-bottom:15px;
+}
 
 /* Footer */
 footer{
@@ -550,4 +599,62 @@ footer{
 }
 .resultatsrecherche .ami a:nth-child(1){
   width:10%;
+}
+
+/* RESPONSIVE MOBILE */
+@media screen and (max-width:500px){
+  /* Header */
+  .headerconnecte{
+    justify-content:center;
+  }
+  .headergauche, .headerdroite{
+    display:none;
+  }
+  .headercentre{
+    width:100%;
+  }
+  .headercentre .fa-resp{
+    display:block;
+  }
+
+  /* Mur */
+  .demandesami, .listeamis{
+    display:none;
+  }
+  .filactu{
+    width:100%;
+    margin:0;
+  }
+  .formposter, .postmur{
+    width:95%;
+  }
+  .contenuamis{
+    height:auto;
+    min-height:100vh;
+    padding-top:70px;
+    background-color:#f2f3f5;
+    color:white;
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+  }
+  .demandesamis{
+    width:100%;
+    padding:10px;
+  }
+  .recues{
+    padding-bottom:25px;
+  }
+  .listeami{
+    padding-top:30px;
+    padding-left:10px;
+    padding-right:10px;
+    padding-bottom:10px;
+  }
+
+
+
+
+
+
 }

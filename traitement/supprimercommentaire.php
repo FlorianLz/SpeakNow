@@ -12,7 +12,12 @@ if (isset($_POST['idCommentaire']) && isset($_POST['commentaire']) && isset($_SE
         $query->execute(array($idCommentaire,$commentaire,$monid));
         if(isset($_POST['idredirection'])){
             $redir=$_POST['idredirection'];
-            header("Location: index.php?action=mur&id=".$redir);
+            if(isset($_POST['idpost'])){
+                $idpost=$_POST['idpost'];
+                header("Location: index.php?action=mur&id=".$redir."#post".$idpost);
+            }else{
+                header("Location: index.php?action=mur&id=".$redir);
+            }
         }else{
             header("Location: index.php?action=mur");
         }
