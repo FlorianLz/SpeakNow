@@ -93,7 +93,7 @@
                         <form method="post" action="index.php?action=ajoutcommentaire">
                             <img class="imgpost" src="avatars/'.$_SESSION['avatar'].'">
                             <textarea name="comm" placeholder="Votre commentaire..."></textarea>
-                            <input type="hidden" name="idredirection" value="'.$_SESSION['id'].'">
+                            <input type="hidden" name="filredirection" value="ok">
                             <input type="hidden" name="idpost" value="'.$line['id'].'">
                             <input type="submit" value="" name="submit" id="submit'.$line['id'].'"><label for="submit'.$line['id'].'"><i class="fas fa-paper-plane"></i></label>
                         </form>';
@@ -127,7 +127,7 @@
                 }        
                 echo'</div></div>';
             };
-            echo '</div></div>';
+            echo '</div>';
         }
 
 

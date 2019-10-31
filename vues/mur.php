@@ -51,7 +51,8 @@
             $ok = true; // On a le droit d afficher notre mur
             $avatar=$_SESSION['avatar'];
             echo "<div class='profil'><div class='imgprofil' style='background-image:url(./avatars/$avatar);'></div><div class='infoprofil'>";
-            echo '<h2>'.$_SESSION['prenom'].' '.$_SESSION['nom'].'</h2></div></div>';
+            echo '<h2>'.$_SESSION['prenom'].' '.$_SESSION['nom'].'</h2>
+            <div class="modifierprofil"><a href="index.php?action=profil"><i class="fas fa-user-edit"></i><p>Modifier mon profil</p></a></div></div></div>';
 
             ?>
             <!-- Formulaire permettant de poster sur SON mur-->

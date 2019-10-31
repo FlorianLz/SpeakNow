@@ -34,11 +34,17 @@ header{
   justify-content: space-around;
   align-items: center;
 }
-.headercentre a i{
+.headercentre a i,.headerdroite a i{
   color:white;
 }
 .headerdroite{
   justify-content: flex-end;
+  align-items: center;
+  font-size: 1.7rem;
+}
+.headerdroite p{
+  font-size:1rem;
+  color:white;
 }
 .logo{
   height:100%;
@@ -98,9 +104,15 @@ header .recherche form input[type="submit"]:hover{
 .imageprofil{
   height:100%;
   padding-left:15px;
-  padding-right:5px;
+  padding-right:15px;
+}
+.imageprofil p{
+  padding-right:10px;
 }
 .imageprofil > a{
+  display:flex;
+  align-items: center;
+  text-decoration: none;
   height:100%;
   width:100%;
 }
@@ -490,6 +502,18 @@ header .recherche form input[type="submit"]:hover{
   padding-left:25px;
   line-height: 50px;
   align-self:baseline;
+}
+.modifierprofil a{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+.modifierprofil:hover a i{
+  color:#3498db;
+}
+.modifierprofil a p{
+  padding-left:5px;
 }
 .infoprofil form input[type='submit']{
   width:100%;
