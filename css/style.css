@@ -305,6 +305,12 @@ header .recherche form input[type="submit"]:hover{
 .auteur div:nth-child(1){
   display:flex;
 }
+.infosauteurs{
+  display:flex;
+}
+.infosbold{
+  font-weight:bold;
+}
 .poster{
   display:flex;
   align-items: center;

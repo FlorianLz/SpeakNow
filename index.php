@@ -56,7 +56,7 @@ ob_start(); // Je démarre le buffer de sortie : les données à afficher sont s
                     <div class='recherche'><form action='index.php' method='GET'><input type='hidden' name='action' value='recherche'><input name='texterecherche' type='text' placeholder='Rechercher...' required><input type='submit' value=' '></form></div>
                 </div>
                 <div class='headercentre'>
-                    <a href='index.php?action=mur'><i class='fas fa-home'></i></a>
+                    <a href='index.php?action=fil'><i class='fas fa-home'></i></a>
                     <a href='index.php?action=amis' class='fa-resp'><i class='fas fa-user-friends fa-resp'></i></a>
                     <a href='index.php?action=mur' class='fa-resp'><i class='fas fa-search fa-resp'></i></a>
                     <a href='index.php?action=mur' class='fa-resp'><i class='fas fa-user-circle fa-resp'></i></a>
