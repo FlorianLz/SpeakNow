@@ -15,7 +15,7 @@
   $avatar=$line['avatar'];
 ?>
 <div class="contenuprofil">
-  <h1>Modification du profil de : <?php echo $_SESSION['prenom'].' '.$_SESSION['nom'] ?></h1>
+  <h2>Modification du profil de : <?php echo $_SESSION['prenom'].' '.$_SESSION['nom'] ?></h2>
   <div class="infosprofil">
     <div class="photoprofil">
       <img class="avatar" src="avatars/<?php echo $avatar ?>">

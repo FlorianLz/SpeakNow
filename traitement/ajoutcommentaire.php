@@ -18,9 +18,17 @@ if(isset($_POST['comm']) && !empty($_POST['comm']) && isset($_POST['idpost']) &&
     }
 
 }else{
-    //$_SESSION['alertecomm']='Impossible de poster le commentaire';
+    $idPost=$_POST['idpost'];
+    $_SESSION['alertecomm'.$idPost]='<p>Merci d\'entrer un commentaire valide !</p>';
     //header("Location: index.php?action=mur");
-    print_r($_POST);
+    if(isset($_POST['idredirection'])){
+        $redir=$_POST['idredirection'];
+        header("Location: index.php?action=mur&id=".$redir."#post".$idPost);
+    }else if(isset($_POST['filredirection']) && $_POST['filredirection'] == "ok"){
+        header("Location: index.php?action=fil#post".$idPost);
+    }else{
+        header("Location: index.php?action=mur");
+    }
 }
 
 

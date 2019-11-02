@@ -245,6 +245,7 @@ header .recherche form input[type="submit"]:hover{
   float:none;
   margin-top:15px;
 }
+
 .avatar{
   width:150px;
   height:150px;
@@ -252,8 +253,10 @@ header .recherche form input[type="submit"]:hover{
 }
 .infosprofil{
   display:flex;
+  flex-wrap:wrap;
   align-items:center;
   justify-content:center;
+  max-width:100%;
 }
 .infosprofil .avatar{
   margin:20px;
@@ -269,11 +272,12 @@ header .recherche form input[type="submit"]:hover{
   padding:10px;
   float:none;
 }
-.infosprofil form input[type="submit"]{
-  width:100%;
-  border:1px solid #00acee;
-  background-color:transparent;
-  color:white;
+.infosprofil form input[type="submit"] {
+  width: 100%;
+  border: 1px solid #3498db;
+  background-color: #3498db;
+  border-radius:25px;
+  color: white;
 }
 
 /* Mur */
@@ -643,6 +647,7 @@ footer{
   /* Header */
   .headerconnecte{
     justify-content:center;
+    max-width:100vw;
   }
   .headergauche, .headerdroite{
     display:none;
@@ -687,6 +692,19 @@ footer{
     padding-left:10px;
     padding-right:10px;
     padding-bottom:10px;
+  }
+
+  /* Page profil */
+
+ .infosprofil form input[type="file"] {
+  padding: 0px;
+  }
+  .infosprofil .photoprofil form input[type="submit"] {
+    width: 100%;
+  }
+  .formprofil table, .infosprofil form, .photoprofil{
+    width:100%;
+    padding: 10px;
   }
 
 

@@ -99,8 +99,8 @@
                         echo '<input type="hidden" name="image" value="'.$line['image'].'">';
                     }
                 echo '<input type="hidden" name="date" value="'.$line['dateEcrit'].'">
-                    <label for="supprimer"><i class="fas fa-times"></i></label>
-                    <input type="submit" value="" id="supprimer">
+                    <label for="supprimer'.$line['id'].'"><i class="fas fa-times"></i></label>
+                    <input type="submit" value="" id="supprimer'.$line['id'].'">
                     </form>';
                 };
                 echo '</div>
@@ -121,9 +121,9 @@
                             <input type="hidden" name="idpost" value="'.$line['id'].'">
                             <input type="submit" value="" name="submit" id="submit'.$line['id'].'"><label for="submit'.$line['id'].'"><i class="fas fa-paper-plane"></i></label>
                         </form>';
-                if(isset($_SESSION['alertecomm'])){
-                    echo $_SESSION['alertecomm'];
-                    unset($_SESSION['alertecomm']);
+                if(isset($_SESSION['alertecomm'.$line['id']])){
+                    echo $_SESSION['alertecomm'.$line['id']];
+                    unset($_SESSION['alertecomm'.$line['id']]);
                 }
                 //On affiche les commentaires
                 $sql1="SELECT nom, prenom, avatar, commentaires.id, commentaires.commentaire, commentaires.idAuteur, DATE_FORMAT(dateCommentaire, 'Le %d/%m/%Y à %Hh%i') AS dateCommentaire FROM utilisateurs JOIN commentaires ON commentaires.idAuteur=utilisateurs.id WHERE commentaires.idPost=? ORDER BY commentaires.id DESC";
@@ -269,8 +269,8 @@
                                     echo '<input type="hidden" name="image" value="'.$line['image'].'">';
                                 }
                             echo '<input type="hidden" name="date" value="'.$line['dateEcrit'].'">
-                                <label for="supprimer"><i class="fas fa-times"></i></label>
-                                <input type="submit" value="" id="supprimer">
+                                <label for="supprimer'.$line['id'].'"><i class="fas fa-times"></i></label>
+                                <input type="submit" value="" id="supprimer'.$line['id'].'">
                                 </form>';
                             };
                             echo '</div>
@@ -291,9 +291,9 @@
                                 <input type="hidden" name="idpost" value="'.$line['id'].'">
                                 <input type="submit" value="" name="submit" id="submit'.$line['id'].'"><label for="submit'.$line['id'].'"><i class="fas fa-paper-plane"></i></label>
                             </form>';
-                    if(isset($_SESSION['alertecomm'])){
-                        echo $_SESSION['alertecomm'];
-                        unset($_SESSION['alertecomm']);
+                    if(isset($_SESSION['alertecomm'.$line['id']])){
+                        echo $_SESSION['alertecomm'.$line['id']];
+                        unset($_SESSION['alertecomm'.$line['id']]);
                     }
                     //On affiche les commentaires
                     $sql1="SELECT nom, prenom, avatar, commentaires.id, commentaires.commentaire, commentaires.idAuteur, DATE_FORMAT(dateCommentaire, 'Le %d/%m/%Y à %Hh%i') AS dateCommentaire FROM utilisateurs JOIN commentaires ON commentaires.idAuteur=utilisateurs.id WHERE commentaires.idPost=? ORDER BY commentaires.id DESC";

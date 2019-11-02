@@ -60,7 +60,7 @@ ob_start(); // Je démarre le buffer de sortie : les données à afficher sont s
                     <a href='index.php?action=amis' class='fa-resp'><i class='fas fa-user-friends fa-resp'></i></a>
                     <a href='index.php?action=mur' class='fa-resp'><i class='fas fa-search fa-resp'></i></a>
                     <a href='index.php?action=mur' class='fa-resp'><i class='fas fa-user-circle fa-resp'></i></a>
-                    
+                    <a href='index.php?action=deconnexion' class='fa-resp'><i class='fas fa-sign-out-alt fa-resp'></i></a>
                 </div>
                 <div class='headerdroite'>
                     <div class='imageprofil'><a href='index.php?action=mur'><p>$prenom</p><img class='avatarmenu' src='avatars/$avatar'></a></div>
