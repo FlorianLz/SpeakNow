@@ -55,9 +55,9 @@
                     $qreq->execute(array($line['idAmi']));
                     $infos = $qreq->fetch();
                     if($line['idAmi'] == $_SESSION['id']){
-                        echo '<p class="infosbold">> '.$infos['prenom'].' '.$infos['nom'].'</p></div>';
+                        echo '<a href="index.php?action=mur&id='.$_SESSION['id'].'"><p class="infosbold">> '.$infos['prenom'].' '.$infos['nom'].'</p></a></div>';
                     }else{
-                        echo '<p>> '.$infos['prenom'].' '.$infos['nom'].'</p></div>';
+                        echo '<a href="index.php?action=mur&id='.$line['idAmi'].'"><p>> '.$infos['prenom'].' '.$infos['nom'].'</p></a></div>';
                     }
 
                 }else{
