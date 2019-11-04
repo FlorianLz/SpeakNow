@@ -1,3 +1,6 @@
+:root{
+  --principale:#e74c3c;
+}
 * {
     margin: 0;
     padding: 0;
@@ -11,14 +14,14 @@
 header{
   position:fixed;
   width:100%;
-  background-color:#3498db;
+  background-color:var(--principale);
   height:64px;
   display:flex;
   align-items: center;
   justify-content: space-between;
   padding:11px;
   color:white;
-  border-bottom: 2px solid #3498db;
+  border-bottom: 2px solid var(--principale);
   z-index:10;
 }
 .headerconnecte{
@@ -163,7 +166,7 @@ header .recherche form input[type="submit"]:hover{
 .accueil .gauche{
   width:50vw;
   height:60%;
-  border-right:2px solid #3498db;
+  border-right:2px solid var(--principale);
   display:flex;
   flex-direction:column;
   align-items: center;
@@ -201,8 +204,8 @@ header .recherche form input[type="submit"]:hover{
   float:right;
 }
 .accueil form input[type='submit']{
-  border:1px solid #3498db;
-  background-color:#3498db;
+  border:1px solid var(--principale);
+  background-color:var(--principale);
   border-radius:5px;
   color:white;
 }
@@ -274,8 +277,8 @@ header .recherche form input[type="submit"]:hover{
 }
 .infosprofil form input[type="submit"] {
   width: 100%;
-  border: 1px solid #3498db;
-  background-color: #3498db;
+  border: 1px solid var(--principale);
+  background-color: var(--principale);
   border-radius:25px;
   color: white;
 }
@@ -408,8 +411,8 @@ header .recherche form input[type="submit"]:hover{
 }
 .formposter input[type="submit"]{
   width:100%;
-  border:1px solid #3498db;
-  background-color:#3498db;
+  border:1px solid var(--principale);
+  background-color:var(--principale);
   color:white;
 }
 .postmur input[type="submit"]{
@@ -432,7 +435,7 @@ header .recherche form input[type="submit"]:hover{
   float:left;
   padding-left:15px;
   font-size:1.5rem;
-  color:#3498db;
+  color:var(--principale);
   padding-bottom:20px;
   cursor:pointer;
 }
@@ -453,7 +456,7 @@ header .recherche form input[type="submit"]:hover{
   background-color: white;
   border-radius: 0px 0px 50px 50px;
   width: 100%;
-  border-top: 1px solid #3498db;
+  border-top: 1px solid var(--principale);
   margin-top:10px;
   color:black;
   padding:15px;
@@ -470,11 +473,11 @@ header .recherche form input[type="submit"]:hover{
   display:flex;
   align-items: center;
   justify-content: space-around;
-  border-bottom: 1px solid #3498db;
+  border-bottom: 1px solid var(--principale);
   padding-bottom:15px;
 }
 .commentairespost > form label i{
-  color:#3498db;
+  color:var(--principale);
   cursor:pointer
 }
 .comm{
@@ -535,15 +538,15 @@ header .recherche form input[type="submit"]:hover{
   text-decoration: none;
 }
 .modifierprofil:hover a i{
-  color:#3498db;
+  color:var(--principale);
 }
 .modifierprofil a p{
   padding-left:5px;
 }
 .infoprofil form input[type='submit']{
   width:100%;
-  border:1px solid #3498db;
-  background-color:#3498db;
+  border:1px solid var(--principale);
+  background-color:var(--principale);
   color:white;
   margin-left:10px;
   width:auto;
@@ -566,7 +569,7 @@ header .recherche form input[type="submit"]:hover{
   justify-content: flex-start;
   padding-top:10px;
   padding-bottom:10px;
-  border-bottom:1px solid #3498db;
+  border-bottom:1px solid var(--principale);
 }
 .imgami{
   width:100%;
@@ -578,8 +581,8 @@ header .recherche form input[type="submit"]:hover{
 }
 .ami form input[type='submit']{
   width:100%;
-  border:1px solid #3498db;
-  background-color:#3498db;
+  border:1px solid var(--principale);
+  background-color:var(--principale);
   color:white;
   margin-left:10px;
   padding:3px;
@@ -618,7 +621,7 @@ header .recherche form input[type="submit"]:hover{
 }
 .page404 i{
   font-size:3rem;
-  color:#3498db;
+  color:var(--principale);
 }
 .page404 h3, .page404 p{
   padding-bottom:15px;
