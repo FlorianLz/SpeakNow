@@ -82,8 +82,25 @@
                 echo '</div>
                 </div>
                 <p class="titrepost">'.$line['titre'].'</p><br>';
-                echo $line['contenu'];
-                echo '<br><br>';
+                echo '<p>'.$line['contenu'].'</p>';
+                    $sqllike='SELECT * FROM aime WHERE idEcrit=? AND idUtilisateur=?';
+                    $querylike = $pdo->prepare($sqllike);
+                    $querylike->execute(array($line['id'],$_SESSION['id']));
+                    if($linelike = $querylike->fetch()){
+                        echo '<form action="index.php?action=suppressionlike" method="POST">
+                        <input type="hidden" name="idPost" value="'.$line['id'].'">
+                        <input type="hidden" name="filredirection" value="ok">
+                        <label for="like'.$line['id'].'"><i class="far fa-thumbs-up boutonlike"></i></label>
+                        <input id="like'.$line['id'].'" type="submit" class="inputlike">
+                        </form><br><br>';
+                    }else{
+                        echo '<form action="index.php?action=ajoutlike" method="POST">
+                        <input type="hidden" name="idPost" value="'.$line['id'].'">
+                        <input type="hidden" name="filredirection" value="ok">
+                        <label for="like'.$line['id'].'"><i class="far fa-thumbs-up boutonpaslike"></i></label>
+                        <input id="like'.$line['id'].'" type="submit" class="inputlike">
+                        </form><br><br>';
+                    }
                 //Une image est liée au post ? On l'affiche
                 if(isset($line['image']) && !empty($line['image'])){
                     echo '<img src="./imagesposts/'.$line['image'].'">';
