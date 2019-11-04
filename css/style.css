@@ -427,6 +427,27 @@ header .recherche form input[type="submit"]:hover{
   width:60%;
   margin-left:20%;
 }
+
+.boutonlike{
+  float:left;
+  padding-left:15px;
+  font-size:1.5rem;
+  color:#3498db;
+  padding-bottom:20px;
+  cursor:pointer;
+}
+.boutonpaslike{
+  float:left;
+  padding-left:15px;
+  font-size:1.5rem;
+  padding-bottom:20px;
+  cursor:pointer;
+}
+.inputlike{
+  width:0px;
+  height:0px;
+}
+
 /* Espace commentaires */
 .commentairespost{
   background-color: white;
