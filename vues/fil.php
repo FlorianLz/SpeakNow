@@ -132,7 +132,7 @@
                             <input type="hidden" name="idCommentaire" value="'.$line1['id'].'">
                             <input type="hidden" name="commentaire" value="'.$line1['commentaire'].'">
                             <input type="hidden" name="idpost" value="'.$line['id'].'">
-                            <input type="hidden" name="idredirection" value="'.$_SESSION['id'].'">
+                            <input type="hidden" name="filredirection" value="ok">
                             <label for="supprimercomm'.$line1['id'].'"><i class="fas fa-times"></i></label>
                             <input type="submit" value="" id="supprimercomm'.$line1['id'].'">                                
                             </form>';

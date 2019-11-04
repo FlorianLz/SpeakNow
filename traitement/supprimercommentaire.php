@@ -12,15 +12,12 @@ if (isset($_POST['idCommentaire']) && isset($_POST['commentaire']) && isset($_SE
         $query->execute(array($idCommentaire,$commentaire,$monid));
         if(isset($_POST['idredirection'])){
             $redir=$_POST['idredirection'];
-            if(isset($_POST['idpost'])){
-                $idpost=$_POST['idpost'];
-                header("Location: index.php?action=mur&id=".$redir."#post".$idpost);
+            header("Location: index.php?action=mur&id=".$redir."#post".$idPost);
+            }else if(isset($_POST['filredirection']) && $_POST['filredirection'] == "ok"){
+                header("Location: index.php?action=fil#post".$_POST['idpost']);
             }else{
-                header("Location: index.php?action=mur&id=".$redir);
+                header("Location: index.php?action=mur");
             }
-        }else{
-            header("Location: index.php?action=mur");
-        }
 
     } catch (Exception $e) {
         $_SESSION['erreur'] = 'Erreur lors de la suppression du comentaire.';
