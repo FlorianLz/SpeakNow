@@ -43,6 +43,9 @@ ob_start(); // Je démarre le buffer de sortie : les données à afficher sont s
     ?>
     <!-- Définition du header, commun à toutes les pages-->
     <?php if (!isset($_SESSION['id'])){
+        if(isset($_COOKIE['remember'])){
+            $sql="SELECT * FROM utilisateurs WHERE remember=?";
+        }
         echo '<header>
         <div class="logo"><a href="index.php?action=accueil"><img src="img/logo.png"></a></div>';
         include("vues/login.php");

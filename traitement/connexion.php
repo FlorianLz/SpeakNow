@@ -16,6 +16,16 @@ if($line == false){
   $_SESSION['erreurlogin'] = 'Identifiant ou mdp invalide !';
   header('Location: index.php?action=accueil');
 }else{
+  if(isset($_POST['checkbox'])){
+    $hash = uniqid(true);
+    $sqlrem="UPDATE utilisateurs SET remember=? where id=?";
+    // Etape 1  : preparation
+    $queryrem = $pdo->prepare($sqlrem);
+    // Etape 2 : execution : 2 paramètres dans la requêtes !!
+    $queryrem->execute(array($hash,$line['id']));
+    setcookie('remember', $hash, time()+3600*24*30);
+    
+  }
   $_SESSION['id'] = $line['id'];
   $_SESSION['nom'] = $line['nom'];
   $_SESSION['prenom'] = $line['prenom'];

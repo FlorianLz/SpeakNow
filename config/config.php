@@ -8,3 +8,8 @@ define("HOST", "florianlaignez.fr:3306");
 define("USER", "florianl");
 define("DB", "florianl_");
 define("PASSWORD", "floflo62790!");
+
+//define("HOST", "localhost");
+//define("USER", "root");
+//define("DB", "florianl_");
+//define("PASSWORD", "");
