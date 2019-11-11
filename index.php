@@ -45,6 +45,14 @@ ob_start(); // Je démarre le buffer de sortie : les données à afficher sont s
     <?php if (!isset($_SESSION['id'])){
         if(isset($_COOKIE['remember'])){
             $sql="SELECT * FROM utilisateurs WHERE remember=?";
+            $query = $pdo->prepare($sql);
+            $query->execute(array($_COOKIE['remember']));
+            $line = $query->fetch();
+            $_SESSION['id']=$line['id'];
+            $_SESSION['avatar']=$line['avatar'];
+            $_SESSION['prenom']=$line['prenom'];
+            $_SESSION['nom']=$line['nom'];
+            $_SESSION['email'] = $line['email'];
         }
         echo '<header>
         <div class="logo"><a href="index.php?action=accueil"><img src="img/logo.png"></a></div>';
