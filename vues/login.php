@@ -7,7 +7,7 @@
   <form class="" action="index.php?action=connexion" method="post">
     <input type="text" name="email" placeholder="Email...">
     <input type="password" name="password" placeholder="Mot de passe...">
-    <input type="checkbox" value="remember" name="checkbox">
+    <div><label for="checkbox">Rester connecter ?<input type="checkbox" value="remember" name="checkbox"></div>
     <input type="submit" name="valider" value="Connexion">
     <?php 
       if (isset($_SESSION['erreurlogin'])){

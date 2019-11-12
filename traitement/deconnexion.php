@@ -1,5 +1,4 @@
 <?php
-unset($_SESSION['id']);
 unset($_SESSION['nom']);
 unset($_SESSION['prenom']);
 unset($_SESSION['avatar']);

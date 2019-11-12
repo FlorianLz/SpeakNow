@@ -65,9 +65,23 @@ header form{
   align-items: center;
   justify-content: space-around;
 }
+header form > div{
+  text-align:center;
+}
+header form > div > label{
+  color:white;
+}
+header > div:nth-child(2){
+  width:60%;
+}
+@media screen and (max-width:850px){
+  header > div:nth-child(2){
+    width:80%;
+  }
+}
 header input{
   background-color:white;
-  width:25%;
+  width:20%;
   border-radius: 0px;
   padding:5px;
   border:0px;
@@ -182,18 +196,21 @@ header .recherche form input[type="submit"]:hover{
   color:red;
 }
 .accueil form input{
-  background-color:white;
+  background-color: #f2f3f5;
+  border-radius: 15px;
+  border: 1px solid rgb(169, 169, 169);
   padding:15px;
   margin-top:5px;
   margin-bottom:5px;
-  border-radius:0;
-  border:0;
   width:100%;
 }
 .accueil form{
   width:80%;
   text-align: center;
   margin:auto;
+  background-color:white;
+  border-radius:25px;
+  padding:25px
 }
 #input_prenom{
   float:left;
@@ -643,19 +660,31 @@ footer{
 .contenurecherche{
   height:auto;
   min-height:100vh;
-  padding-top:45px;
-  background-color:#21283f;
+  padding-top:65px;
+  background-color:#f2f3f5;
   color:white;
   text-align:center;
   display:flex;
   justify-content: center;
 }
 .resultatsrecherche .ami{
-  border:2px solid #00acee;
+  border:2px solid var(--principale);
   width:100%;
   margin-top:25px;
   padding:15px;
   margin: 15px auto;
+  justify-content: space-between;
+}
+.resultatsrecherche .ami > div{
+  display:flex;
+  align-items: center;
+}
+.resultatsrecherche > .ami > .modifierprofil{
+  width:50%;
+}
+.resultatsrecherche > .ami > .modifierprofil > a{
+  width:100%!important;
+  justify-content:flex-end;
 }
 .resultatsrecherche .ami img{
   width:40px;
@@ -663,7 +692,8 @@ footer{
   border-radius:50px;
 }
 .resultatsrecherche .ami a:nth-child(1){
-  width:10%;
+  width:40px;
+  height:40px;
 }
 
 /* RESPONSIVE MOBILE */

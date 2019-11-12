@@ -9,7 +9,7 @@ if (!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['password
     $mdp = $_POST['password'];
     $email = htmlspecialchars($_POST['email']);
       try{
-        $sql = "INSERT INTO utilisateurs VALUES('','$nom', '$prenom',PASSWORD('$mdp'),'$email','','default.jpg')";
+        $sql = "INSERT INTO utilisateurs VALUES('','$nom', '$prenom',PASSWORD('$mdp'),'$email','remember','default.jpg')";
         $query = $pdo->prepare($sql);
         $query->execute();
 
