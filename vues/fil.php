@@ -8,15 +8,7 @@
         $query = $pdo->prepare($sql);
         $query->execute(array($_SESSION['id']));
         while($line = $query->fetch()){
-            echo '<div class="ami"><a href="index.php?action=mur&id='.$line['id'].'"><img class="imgami" src="avatars/'.$line['avatar'].'"></a><a href="index.php?action=mur&id='.$line['id'].'"><p>'.$line['prenom'].' '.$line['nom'].'</p></a>';
-            echo '<form method="post" action="index.php?action=ajoutami">
-                        <input type="hidden" name="idAmi" value="'.$line['id'].'">
-                        <input type="submit" value="Accepter">
-                        </form>
-                        <form method="post" action="index.php?action=refusami">
-                        <input type="hidden" name="idAmi" value="'.$line['id'].'">
-                        <input type="submit" value="Refuser">
-                        </form></div>';
+            demandesrecues($line['id'],$line['avatar'],$line['prenom'],$line['nom']);
         }
 
         echo '<h2>Demandes envoyées</h2>';
@@ -24,11 +16,7 @@
         $query = $pdo->prepare($sql);
         $query->execute(array($_SESSION['id']));
         while($line = $query->fetch()){
-            echo '<div class="ami"><a href="index.php?action=mur&id='.$line['id'].'"><img class="imgami" src="avatars/'.$line['avatar'].'"></a><a href="index.php?action=mur&id='.$line['id'].'"><p>'.$line['prenom'].' '.$line['nom'].'</p></a>';
-            echo '<form method="post" action="index.php?action=annulerajout">
-                        <input type="hidden" name="idAmi" value="'.$line['id'].'">
-                        <input type="submit" value="Annuler">
-                        </form></div>';
+            demandesrecues($line['id'],$line['avatar'],$line['prenom'],$line['nom']);
         }
         ?>
     </div>
