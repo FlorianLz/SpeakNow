@@ -3,7 +3,7 @@
 if (isset($_POST['idPost']) && isset($_SESSION['id'])){
     $idPost=htmlspecialchars(addslashes($_POST['idPost']));
     $monid=$_SESSION['id'];
-    $sql="INSERT INTO aime VALUES ('','$idPost','$monid')";
+    $sql="INSERT INTO aime VALUES (NULL,'$idPost','$monid')";
     $query = $pdo->prepare($sql);
     $query->execute();
     if(isset($_POST['murredirection'])){

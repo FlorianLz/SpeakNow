@@ -56,7 +56,7 @@ if(isset($_POST['message']) && !empty($_POST['message']) && isset($_POST['titre'
              header('Location: ./index.php?action=mur&id=' . $idami);
         }
       }else{
-        $sql = "INSERT INTO ecrit VALUES ('','$titre','$message','$date','','$monid','$idami')";
+        $sql = "INSERT INTO ecrit VALUES (NULL,'$titre','$message','$date',NULL,'$monid','$idami')";
         $query = $pdo->prepare($sql);
         $query->execute();
         header('Location: ./index.php?action=mur&id=' . $idami);

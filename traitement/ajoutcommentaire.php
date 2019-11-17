@@ -5,7 +5,7 @@ if(isset($_POST['comm']) && !empty($_POST['comm']) && isset($_POST['idpost']) &&
     $commentaire=htmlspecialchars(addslashes($_POST['comm']));
     $date = date("Y-m-d H:i:s");
 
-    $sql = "INSERT INTO commentaires VALUES ('','$commentaire','$idPost','$monid','$date')";
+    $sql = "INSERT INTO commentaires VALUES (NULL,'$commentaire','$idPost','$monid','$date')";
     $query = $pdo->prepare($sql);
     $query->execute();
     if(isset($_POST['murredirection'])){
