@@ -25,8 +25,8 @@ if (isset($_POST['id']) && isset($_POST['titre']) && isset($_POST['message']) &&
             unlink( $fichier ) ;
             }
         }
-        if (isset($_GET['idredirection'])){
-            header("Location: index.php?action=mur&id=".$_GET['idredirection']);
+        if (isset($_POST['murredirection'])){
+            header("Location: index.php?action=mur&id=".$_POST['murredirection']);
         }else{
             header("Location: index.php?action=mur");
         }

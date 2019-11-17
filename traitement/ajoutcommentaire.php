@@ -8,8 +8,8 @@ if(isset($_POST['comm']) && !empty($_POST['comm']) && isset($_POST['idpost']) &&
     $sql = "INSERT INTO commentaires VALUES ('','$commentaire','$idPost','$monid','$date')";
     $query = $pdo->prepare($sql);
     $query->execute();
-    if(isset($_POST['idredirection'])){
-        $redir=$_POST['idredirection'];
+    if(isset($_POST['murredirection'])){
+        $redir=$_POST['murredirection'];
         header("Location: index.php?action=mur&id=".$redir."#post".$idPost);
     }else if(isset($_POST['filredirection']) && $_POST['filredirection'] == "ok"){
         header("Location: index.php?action=fil#post".$idPost);
@@ -21,8 +21,8 @@ if(isset($_POST['comm']) && !empty($_POST['comm']) && isset($_POST['idpost']) &&
     $idPost=$_POST['idpost'];
     $_SESSION['alertecomm'.$idPost]='<p>Merci d\'entrer un commentaire valide !</p>';
     //header("Location: index.php?action=mur");
-    if(isset($_POST['idredirection'])){
-        $redir=$_POST['idredirection'];
+    if(isset($_POST['murredirection'])){
+        $redir=$_POST['murredirection'];
         header("Location: index.php?action=mur&id=".$redir."#post".$idPost);
     }else if(isset($_POST['filredirection']) && $_POST['filredirection'] == "ok"){
         header("Location: index.php?action=fil#post".$idPost);
