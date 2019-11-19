@@ -8,6 +8,7 @@ $listeDesActions = array(
     "mur" => "vues/mur.php",
     "amis" => "vues/amis.php",
     "fil" => "vues/fil.php",
+    "accueil2" => "vues/accueil2.php",
     "recherche" => "vues/recherche.php",
     "voirprofil" => "vues/voirprofil.php",
     "connexion" => "traitement/connexion.php",
