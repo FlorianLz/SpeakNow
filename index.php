@@ -54,14 +54,14 @@ ob_start(); // Je démarre le buffer de sortie : les données à afficher sont s
             $_SESSION['nom']=$line['nom'];
             $_SESSION['email'] = $line['email'];
         }
-        echo '<header>
+        /* echo '<header>
         <div class="logo"><a href="index.php?action=accueil"><img src="img/logo.png"></a></div>';
         include("vues/login.php");
-        echo '</header>';
+        echo '</header>';*/
         }else{
             $avatar=$_SESSION['avatar'];
             $prenom=$_SESSION['prenom'];
-            echo "<header class='headerconnecte'>
+            echo "<div class='headerfond'></div><header class='headerconnecte'>
                 <div class='headergauche'>
                     <div class='logo'><a href='index.php?action=accueil'><img src='img/logo.png'></a></div>
                     <div class='recherche'><form action='index.php' method='GET'><input type='hidden' name='action' value='recherche'><input name='texterecherche' type='text' placeholder='Rechercher...' required><input type='submit' value=' '></form></div>

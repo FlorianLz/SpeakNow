@@ -14,7 +14,7 @@ $line = $query->fetch();
 // Si $line est faux le couple login mdp est mauvais, on retourne au formulaire
 if($line == false){
   $_SESSION['erreurlogin'] = 'Identifiant ou mdp invalide !';
-  header('Location: index.php?action=accueil');
+  header('Location: index.php?action=accueil#login');
 }else{
   if(isset($_POST['checkbox'])){
     $hash = uniqid(true);

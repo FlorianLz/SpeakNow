@@ -8,12 +8,16 @@
     font-family: 'Roboto';
     color:black;
 }
+body{
+  max-width:1200px;
+  margin:auto;
+  background-color: #f2f3f5;
+}
 .fas{
   cursor:pointer;
 }
 header{
   position:fixed;
-  width:100%;
   background-color:var(--principale);
   height:64px;
   display:flex;
@@ -23,9 +27,16 @@ header{
   color:white;
   border-bottom: 2px solid var(--principale);
   z-index:10;
+  max-width:1200px;
+  width:100%;
 }
-.headerconnecte{
-  justify-content: space-between;
+.headerfond{
+  position:absolute;
+  background-color:var(--principale);
+  height:64px;
+  width:100vw;
+  left:0;
+
 }
 .headergauche, .headercentre, .headerdroite{
   height:100%;
@@ -159,50 +170,17 @@ header .recherche form input[type="submit"]:hover{
 
 /* Page accueil */
 .contenuaccueil{
+  position: fixed;
   height:100vh;
   width:100%;
   background-color:#f2f3f5;
   display:flex;
   text-align:center;
   color:white;
+  overflow: hidden;
+  width:100vw;
+  left:0;
 }
-.contenuaccueil h1{
-  padding-top:65px;
-  padding-bottom:20px;
-}
-
-.accueil .gauche{
-  width:50vw;
-  height:60%;
-  border-right:2px solid var(--principale);
-  display:flex;
-  flex-direction:column;
-  align-items: center;
-  justify-content: space-evenly;
-}
-
-
-
-#input_prenom{
-  float:left;
-  width:49%;
-}
-#input_nom{
-  width:49%;
-  float:right;
-}
-.accueilgauche form input[type='submit']{
-  border:1px solid var(--principale);
-  background-color:var(--principale);
-  border-radius:5px;
-  color:white;
-}
-.titreaccueil{
-  padding-top:50px;
-}
-
-
-/* */
 .accueilgauche{
   width:50%;
   height:100vh;
@@ -212,8 +190,9 @@ header .recherche form input[type="submit"]:hover{
   align-items: center;
   flex-direction:column;
 }
-.accueilgauche h1{
+.accueilgauche h1, .accueildroite h1{
   color:white;
+  padding-bottom:15px;
 }
 .accueilgauche form{
   width:80%;
@@ -262,6 +241,69 @@ header .recherche form input[type="submit"]:hover{
   margin-bottom:5px;
   width:100%;
 }
+.accueildroite form input[type="checkbox"]{
+  width:auto;
+  margin:0;
+  margin-left:5px;
+}
+.masque{
+  position:absolute;
+  width:100%;
+  height:100%;
+  right:-50%;;
+  background-color:white;
+  transition : all 700ms;
+}
+#login:target{
+  transform: translateX(-100%);
+}
+.boutonlogin{
+  position:absolute;
+  top:50%;
+  left:25%;
+  transform: translateX(-50%);
+  padding:20px;
+  
+}
+.boutonlogin > a, .boutoninscription >a{
+  text-decoration: none;
+  color:white;
+  padding:20px;
+  background-color:var(--principale);
+  border-radius:5px;
+}
+.boutoninscription{
+  position:absolute;
+  top:50%;
+  right:25%;
+  transform: translateX(50%);
+  
+  padding:20px;
+  border-radius:5px;
+}
+#input_prenom{
+  float:left;
+  width:49%;
+}
+#input_nom{
+  width:49%;
+  float:right;
+}
+.accueilgauche form input[type='submit']{
+  border:1px solid var(--principale);
+  background-color:var(--principale);
+  border-radius:5px;
+  color:white;
+}
+.accueildroite form input[type='submit']{
+  border:1px solid var(--principale);
+  background-color:var(--principale);
+  border-radius:5px;
+  color:white;
+}
+.titreaccueil{
+  padding-top:50px;
+}
 
 
 /* Page profil */
@@ -273,15 +315,23 @@ header .recherche form input[type="submit"]:hover{
   background-color:#f2f3f5;
   color:white;
 }
+.contenuprofil h2{
+  padding-bottom:25px;
+}
+.formprofil{
+  border-left:2px solid var(--principale);
+  width:50%;
+}
 .formprofil input{
   background-color:white;
 }
 .photoprofil{
   text-align:center;
   padding:10px;
+  width:50%;
 }
 .infosprofil .photoprofil form input[type="submit"]{
-  width:50%;
+  width:90%;
   float:none;
   margin-top:15px;
 }
@@ -296,21 +346,27 @@ header .recherche form input[type="submit"]:hover{
   flex-wrap:wrap;
   align-items:center;
   justify-content:center;
-  max-width:100%;
-}
-.infosprofil .avatar{
-  margin:20px;
+  width:60%;
+  margin:auto;
+  background-color:white;
+  border-radius: 20px;
+
 }
 .infosprofil form{
   padding:20px;
 }
 .infosprofil form input{
-  float:right;
   padding:10px;
+  margin-bottom:15px;
+  width:91%;
 }
 .infosprofil form input[type="file"]{
-  padding:10px;
-  float:none;
+  width:0px;
+  height:0px;
+  padding:0;
+}
+.infosprofil form input[name="nom"], .infosprofil form input[name="prenom"] {
+  width:45%;
 }
 .infosprofil form input[type="submit"] {
   width: 100%;
@@ -318,7 +374,28 @@ header .recherche form input[type="submit"]:hover{
   background-color: var(--principale);
   border-radius:25px;
   color: white;
+  cursor:pointer;
 }
+.photop{
+  position:relative;
+  width:fit-content;
+  margin:auto;
+  cursor:pointer;
+  display:flex;
+  flex-direction: column;
+}
+.photop:hover > label:nth-child(1){
+  opacity:0.5;
+}
+.photop .avatar, .uploadavatar{
+  cursor:pointer;
+}
+.uploadavatar > i{
+  padding-right:5px;
+  padding-top:10px;
+}
+
+
 
 /* Mur */
 .contenumur{
@@ -329,6 +406,7 @@ header .recherche form input[type="submit"]:hover{
   color:white;
   text-align:center;
   display:flex;
+  position:relative;
 }
 .postmur{
   width:70%;
@@ -533,6 +611,7 @@ header .recherche form input[type="submit"]:hover{
 .demandesami{
   width:20%;
   position:fixed;
+  text-align: left;
 }
 .demandesami h2:nth-child(2){
   padding-top:30vh;
@@ -541,10 +620,11 @@ header .recherche form input[type="submit"]:hover{
   padding-left:15px;
 }
 .listeamis{
-  width:20%;
+  width:auto;
   text-align:left;
   position: fixed;
-  right: 0;
+  right:0;
+  width:20%;
 }
 .profil{
   display:flex;
