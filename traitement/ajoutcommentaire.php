@@ -11,7 +11,7 @@ if(isset($_POST['comm']) && !empty($_POST['comm']) && isset($_POST['idpost']) &&
     if(isset($_POST['murredirection'])){
         $redir=$_POST['murredirection'];
         header("Location: index.php?action=mur&id=".$redir."#post".$idPost);
-    }else if(isset($_POST['filredirection']) && $_POST['filredirection'] == "ok"){
+    }else if(isset($_POST['filredirection'])){
         header("Location: index.php?action=fil#post".$idPost);
     }else{
         header("Location: index.php?action=mur");
@@ -24,7 +24,7 @@ if(isset($_POST['comm']) && !empty($_POST['comm']) && isset($_POST['idpost']) &&
     if(isset($_POST['murredirection'])){
         $redir=$_POST['murredirection'];
         header("Location: index.php?action=mur&id=".$redir."#post".$idPost);
-    }else if(isset($_POST['filredirection']) && $_POST['filredirection'] == "ok"){
+    }else if(isset($_POST['filredirection'])){
         header("Location: index.php?action=fil#post".$idPost);
     }else{
         header("Location: index.php?action=mur");

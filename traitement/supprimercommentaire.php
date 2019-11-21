@@ -14,7 +14,7 @@ if (isset($_POST['idCommentaire']) && isset($_POST['commentaire']) && isset($_SE
         if(isset($_POST['murredirection'])){
             $redir=$_POST['murredirection'];
             header("Location: index.php?action=mur&id=".$redir."#post".$idPost);
-            }else if(isset($_POST['filredirection']) && $_POST['filredirection'] == "ok"){
+            }else if(isset($_POST['filredirection'])){
                 header("Location: index.php?action=fil#post".$_POST['idpost']);
             }else{
                 header("Location: index.php?action=mur");

@@ -153,6 +153,32 @@ function afficherpost($idpost,$idauteur,$avatarauteur,$prenomauteur,$nomauteur,$
     <p>'.$contenu.'</p>';
 }
 
+function afficherpostfil2($idpost,$idauteur,$avatarauteur,$prenomauteur,$nomauteur,$dateecrit,$idsession,$titre,$contenu,$image,$date,$idredirection,$iddest,$prenomdest,$nomdest){
+    echo '<div class="postmur" id="post'.$idpost.'">
+    <div class="auteur"><div><a href="index.php?action=mur&id='.$idauteur.'"><img class="imgpost" src="avatars/'.$avatarauteur.'">
+    <div><p>'.$prenomauteur.' '.$nomauteur.'</p></a><a href="index.php?action=mur&id='.$iddest.'"><p class="infosbold">> '.$prenomdest.' '.$nomdest.'</p></a><p>'.$dateecrit.'</p></div></div>
+    <div>';
+    if($idauteur == $idsession){
+        formsupprimerpost($idpost,$titre,"filredirection",$idredirection,$contenu,$image,$date);
+    }
+    echo '</div></div>
+    <p class="titrepost">'.$titre.'</p><br>
+    <p>'.$contenu.'</p>';
+}
+
+function afficherpostfil($idpost,$idauteur,$avatarauteur,$prenomauteur,$nomauteur,$dateecrit,$idsession,$titre,$contenu,$image,$date,$idredirection){
+    echo '<div class="postmur" id="post'.$idpost.'">
+    <div class="auteur"><div><a href="index.php?action=mur&id='.$idauteur.'"><img class="imgpost" src="avatars/'.$avatarauteur.'">
+    <div><p>'.$prenomauteur.' '.$nomauteur.'</p></a><p>'.$dateecrit.'</p></div></div>
+    <div>';
+    if($idauteur == $idsession){
+        formsupprimerpost($idpost,$titre,"filredirection",$idredirection,$contenu,$image,$date);
+    }
+    echo '</div></div>
+    <p class="titrepost">'.$titre.'</p><br>
+    <p>'.$contenu.'</p>';
+}
+
 ?>
 
 
