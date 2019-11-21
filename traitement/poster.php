@@ -36,7 +36,7 @@ if(isset($_POST['message']) && !empty($_POST['message']) && isset($_POST['titre'
                   include("../config/config.php");
                   include("../config/bd.php");
                   try{
-                    $sql = "INSERT INTO ecrit VALUES ('','$titre','$message','$date','$fichier','$monid','$idami')";
+                    $sql = "INSERT INTO ecrit VALUES (NULL,'$titre','$message','$date','$fichier','$monid','$idami')";
                     $query = $pdo->prepare($sql);
                     $query->execute();
                     header('Location: ./index.php?action=mur&id=' . $idami);

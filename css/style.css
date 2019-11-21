@@ -31,7 +31,7 @@ header{
   width:100%;
 }
 .headerfond{
-  position:absolute;
+  position:fixed;
   background-color:var(--principale);
   height:64px;
   width:100vw;
