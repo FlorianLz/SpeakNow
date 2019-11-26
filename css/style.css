@@ -9,7 +9,7 @@
     color:black;
 }
 body{
-  max-width:1200px;
+  max-width:1400px;
   margin:auto;
   background-color: #f2f3f5;
 }
@@ -27,7 +27,7 @@ header{
   color:white;
   border-bottom: 2px solid var(--principale);
   z-index:10;
-  max-width:1200px;
+  max-width:1400px;
   width:100%;
 }
 .headerfond{
@@ -304,6 +304,18 @@ header .recherche form input[type="submit"]:hover{
 .titreaccueil{
   padding-top:50px;
 }
+#listerecues, #listeenvoyees{
+  height:0px;
+  overflow:hidden;
+  transition: all 4s ease-in-out;
+}
+#mesamis{
+  overflow:hidden;
+}
+.listeamis > h2{
+  padding-top:15px;
+  cursor:pointer;
+}
 
 
 /* Page profil */
@@ -407,9 +419,11 @@ header .recherche form input[type="submit"]:hover{
   text-align:center;
   display:flex;
   position:relative;
+  justify-content: space-between;
+  padding-left:20px;
 }
 .postmur{
-  width:70%;
+  width:100%;
   margin-top:20px;
   background-color: white;
   border-radius:10px;
@@ -461,7 +475,7 @@ header .recherche form input[type="submit"]:hover{
   text-decoration: none;
 }
 .formposter{
-  width:70%;
+  width:100%;
   background-color: white;
   padding: 15px;
   border-radius: 12px;
@@ -543,7 +557,6 @@ header .recherche form input[type="submit"]:hover{
 }
 .filactu{
   width:60%;
-  margin-left:20%;
 }
 
 .boutonlike{
@@ -622,9 +635,7 @@ header .recherche form input[type="submit"]:hover{
 .listeamis{
   width:auto;
   text-align:left;
-  position: fixed;
-  right:0;
-  width:20%;
+  min-width:25%;
 }
 .profil{
   display:flex;

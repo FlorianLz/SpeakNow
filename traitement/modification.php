@@ -11,17 +11,19 @@ if (!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['password
     $prenom = $_POST['prenom'];
     $mdp = $_POST['password'];
     $email = $_POST['email'];
+    $datenaissance=$_POST['datenaissance'];
       try{
-        $sql = 'UPDATE utilisateurs SET nom = ?, prenom=? ,mdp=PASSWORD(?), email=? WHERE id=?';
+        $sql = 'UPDATE utilisateurs SET nom = ?, prenom=? ,mdp=PASSWORD(?), email=?, datenaissance=? WHERE id=?';
 
         // Etape 1  : preparation
         $query = $pdo->prepare($sql);
         // Etape 2 : execution : 2 paramètres dans la requêtes !!
-        $query->execute(array($nom,$prenom,$mdp,$email,$id));
+        $query->execute(array($nom,$prenom,$mdp,$email,$datenaissance,$id));
         // Etape 3 : ici le login est unique, donc on sait que l'on peut avoir zero ou une  seule ligne.
 
         $_SESSION['nom'] = $nom;
         $_SESSION['prenom'] = $prenom;
+        $_SESSION['date']=$_POST['datenaissance'];
 
         header('Location: index.php?action=profil');
 

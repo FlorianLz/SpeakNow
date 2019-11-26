@@ -13,6 +13,7 @@
   $email=$line['email'];
   $mdp=$line['mdp'];
   $avatar=$line['avatar'];
+  $datenaissance = $line['datenaissance'];
 ?>
 <div class="contenuprofil">
   <h2>Modification du profil de : <?php echo $_SESSION['prenom'].' '.$_SESSION['nom'] ?></h2>
@@ -30,10 +31,10 @@
       </form>
     </div>
       <form class="formprofil" action="index.php?action=modification" method="post">
-        <input type="text" name="prenom" value="<?php echo $prenom; ?>">
-          <input type="text" name="nom" value="<?php echo $nom; ?>">
-          <input type="date">
-          <input type="text" name="email" value="<?php echo $email; ?>">
+        <input type="text" name="prenom" value="<?php echo $prenom; ?>" required>
+          <input type="text" name="nom" value="<?php echo $nom; ?>" required>
+          <input type="date" name="datenaissance" value="<?php echo $datenaissance; ?>" required>
+          <input type="text" name="email" value="<?php echo $email; ?>" required>
           <input type="password" name="password" placeholder="Mot de passe..." required>
           <input type="password" name="password2" placeholder="Vérification du mot de passe..." required>
           <input type="submit" name="valider" value="Mettre à jour mes informations">
