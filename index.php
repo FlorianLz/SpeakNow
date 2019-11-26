@@ -13,8 +13,12 @@ ob_start(); // Je démarre le buffer de sortie : les données à afficher sont s
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="description" content="SpeakNow, le réseau social pour tous !" />
+    <link rel="icon" type="image/png" href="img/logosn.png" />
 
-    <title>Mini Facebook</title>
+    <title>SpeakNow</title>
 
     <!-- Bootstrap core CSS 
     <link href="./css/bootstrap.min.css" rel="stylesheet">-->
@@ -63,7 +67,7 @@ ob_start(); // Je démarre le buffer de sortie : les données à afficher sont s
             $prenom=$_SESSION['prenom'];
             echo "<div class='headerfond'></div><header class='headerconnecte'>
                 <div class='headergauche'>
-                    <div class='logo'><a href='index.php?action=accueil'><img src='img/logo.png'></a></div>
+                    <div class='logo'><a href='index.php?action=accueil'><img src='img/logosn.png'></a></div>
                     <div class='recherche'><form action='index.php' method='GET'><input type='hidden' name='action' value='recherche'><input name='texterecherche' type='text' placeholder='Rechercher...' required><input type='submit' value=' '></form></div>
                 </div>
                 <div class='headercentre'>
