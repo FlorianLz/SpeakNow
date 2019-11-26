@@ -93,7 +93,11 @@
             //Pour chaque post, on crée une div
             while($line = $query->fetch()){
                 afficherpost($line['id'],$line['idAuteur'],$line['avatar'],$line['prenom'],$line['nom'],$line['dateEcritFormate'],$_SESSION['id'],$line['titre'],$line['contenu'],$line['image'],$line['dateEcrit'],$_SESSION['id']);
-                
+
+                //Une image est liée au post ? On l'affiche
+                if(isset($line['image']) && !empty($line['image'])){
+                    echo '<img src="./imagesposts/'.$line['image'].'">';
+                }
                 $sqllike='SELECT * FROM aime WHERE idEcrit=? AND idUtilisateur=?';
                 $querylike = $pdo->prepare($sqllike);
                 $querylike->execute(array($line['id'],$_SESSION['id']));
@@ -102,15 +106,11 @@
                 }else{
                     formlike($line['id'],$_SESSION['id'],"murredirection","boutonpaslike","ajoutlike");
                 }
-
-                //Une image est liée au post ? On l'affiche
-                if(isset($line['image']) && !empty($line['image'])){
-                    echo '<img src="./imagesposts/'.$line['image'].'">';
-                }
                 //On affiche le formulaire permettant de poster un commentaire
                 echo '<div class="commentairespost">';
                 formajoutcommentaire($line['id'],$_SESSION['id'],"murredirection");
                 alertecomm($line['id']);
+                
                 //On affiche les commentaires
                 $sql1="SELECT nom, prenom, avatar, commentaires.id, commentaires.commentaire, commentaires.idAuteur, DATE_FORMAT(dateCommentaire, 'Le %d/%m/%Y à %Hh%i') AS dateCommentaire FROM utilisateurs JOIN commentaires ON commentaires.idAuteur=utilisateurs.id WHERE commentaires.idPost=? ORDER BY commentaires.id DESC";
                 $query1 = $pdo->prepare($sql1);
@@ -220,7 +220,10 @@
                 //Pour chaque post, on crée une div
                 while($line = $query->fetch()){
                     afficherpost($line['id'],$line['idAuteur'],$line['avatar'],$line['prenom'],$line['nom'],$line['dateEcritFormate'],$_SESSION['id'],$line['titre'],$line['contenu'],$line['image'],$line['dateEcrit'],$idPers);
-
+                    //Une image est liée au post ? On l'affiche
+                    if(isset($line['image']) && !empty($line['image'])){
+                        echo '<img src="./imagesposts/'.$line['image'].'">';
+                    }
                     $sqllike='SELECT * FROM aime WHERE idEcrit=? AND idUtilisateur=?';
                     $querylike = $pdo->prepare($sqllike);
                     $querylike->execute(array($line['id'],$_SESSION['id']));
@@ -228,10 +231,6 @@
                         formlike($line['id'],$idPers,"murredirection","boutonlike","suppressionlike");
                     }else{
                         formlike($line['id'],$idPers,"murredirection","boutonpaslike","ajoutlike");
-                    }
-                    //Une image est liée au post ? On l'affiche
-                    if(isset($line['image']) && !empty($line['image'])){
-                        echo '<img src="./imagesposts/'.$line['image'].'">';
                     }
                     //On affiche le formulaire permettant de poster un commentaire
                     echo '<div class="commentairespost">';
