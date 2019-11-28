@@ -42,3 +42,4 @@ var loadFile = function(event) {
     sortie.style.display="block";
     sortie.src = URL.createObjectURL(event.target.files[0]);
   };
+});
