@@ -651,6 +651,9 @@ header .recherche form input[type="submit"]:hover{
   text-align:left;
   min-width:25%;
 }
+.listeamismobile{
+  padding:70px 25px 0px 25px;
+}
 .profil{
   display:flex;
   align-items: center;
