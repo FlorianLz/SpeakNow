@@ -200,6 +200,7 @@
             $avatarPers=$line['avatar'];
                 echo '<div class="profil"><div class="imgprofil"><img src=avatars/'.$avatarPers.'></div><div class="infoprofil">';
                 echo '<h2>'.$prenomPers.' '.$nomPers.'</h2>';
+                echo '<a href="index.php?action=prives&id='.$idPers.'"><i class="far fa-comment-alt chat"></i></a>';
                 echo '<form method="post" action="index.php?action=refusami">
                 <input type="hidden" name="idAmi" value="'.$idPers.'">
                 <input type="submit" value="Supprimer cet ami">
