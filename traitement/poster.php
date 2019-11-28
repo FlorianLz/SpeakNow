@@ -12,7 +12,7 @@ if(isset($_POST['message']) && !empty($_POST['message']) && isset($_POST['titre'
     if (!empty($_FILES['photo']['name'])){
         $dossier = './imagesposts/';
         $fichier = basename($_FILES['photo']['name']);
-        $taille_maxi = 10000000;
+        $taille_maxi = 10000000000;
         $taille = filesize($_FILES['photo']['tmp_name']);
         $extensions = array('.png', '.gif', '.jpg', '.jpeg');
         $extension = strrchr($_FILES['photo']['name'], '.');

@@ -60,7 +60,7 @@ function formlike($idpost,$idredirection,$lieuredirection,$typebouton,$action){
 function formajoutcommentaire($idpost,$idredirection,$lieuredirection){
     echo '<form method="post" action="index.php?action=ajoutcommentaire">
          <img class="imgpost" src="avatars/'.$_SESSION['avatar'].'">
-        <textarea name="comm" placeholder="Votre commentaire..."></textarea>
+        <textarea name="comm" placeholder="Votre commentaire..." class="autoExpand" rows="1" data-min-rows="1"></textarea>
         <input type="hidden" name='.$lieuredirection.' value="'.$idredirection.'">
         <input type="hidden" name="idpost" value="'.$idpost.'">
         <input type="submit" value="" name="submit" id="submit'.$idpost.'"><label for="submit'.$idpost.'"><i class="fas fa-paper-plane"></i></label>
@@ -105,7 +105,7 @@ function formajoutpost($idpers,$prenompers){
     if(!empty($prenompers)){
         echo "<h3>Ecrire un message à $prenompers</h3>";
     }else{
-        echo "<h3>Nouvelle publication</h3>";
+        echo "<h3>Nouveau speak</h3>";
     }
     echo "<input type='text' name='titre' placeholder='Titre...'>
     <input type='hidden' name='idpers' value='$idpers'>
@@ -113,10 +113,11 @@ function formajoutpost($idpers,$prenompers){
     <div class='uploadimage'>
         <label class='uploadfile' for='image'><i class='fas fa-image'></i></label>
         <div class='cacherbtnfile'>
-            <input type='file' name='photo' id='image' class='inputfile'>
+            <input type='file' name='photo' id='image' class='inputfile' onchange='loadFile(event)'>
         </div>
     </div>
-    <input type='submit'>
+    <div class='apercuimage'><img src='' alt='Aperçu de l'image sélectionnée' id='apercuimg'></div>
+    <input type='submit' value='Speaker'>
 </form></div>";
 }
 

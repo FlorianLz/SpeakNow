@@ -69,8 +69,7 @@
             //$queryami->execute(array($_SESSION['id'],$_SESSION['id']));
             //while($lineami = $queryami->fetch()){
 
-                $sql="SELECT DISTINCT utilisateurs.id, nom, prenom, avatar, idAmi, idAuteur, ecrit.id, titre, contenu, dateEcrit, DATE_FORMAT(dateEcrit, 'Le %d/%m/%Y à %Hh%i') AS dateEcritFormate, image FROM ecrit JOIN utilisateurs ON utilisateurs.id=ecrit.idAuteur JOIN lien ON (utilisateurs.id=lien.idUtilisateur1 OR utilisateurs.id=lien.idUtilisateur2 ) WHERE NOT (idAmi=? AND idAuteur=?) OR ecrit.idAmi = ? OR ecrit.idAuteur=? OR ecrit.idAmi IN ( SELECT ecrit.idAmi FROM ecrit INNER JOIN lien ON idUtilisateur1=ecrit.idAmi AND etat='ami' AND idUtilisateur2=? UNION SELECT ecrit.idAmi FROM ecrit INNER JOIN lien ON idUtilisateur2=ecrit.idAmi AND etat='ami' AND idUtilisateur1=?) ORDER BY dateEcrit DESC";
-                $query = $pdo->prepare($sql);
+                $sql="SELECT DISTINCT utilisateurs.id, nom, prenom, avatar, idAmi, idAuteur, ecrit.id, titre, contenu, dateEcrit, DATE_FORMAT(dateEcrit, 'Le %d/%m/%Y à %Hh%i') AS dateEcritFormate, image FROM ecrit JOIN utilisateurs ON utilisateurs.id=ecrit.idAuteur JOIN lien ON (utilisateurs.id=lien.idUtilisateur1 OR utilisateurs.id=lien.idUtilisateur2 ) WHERE NOT (idAmi=? AND idAuteur=?) AND ecrit.idAmi = ? AND ecrit.idAuteur=? OR ecrit.idAmi IN ( SELECT ecrit.idAmi FROM ecrit INNER JOIN lien ON idUtilisateur1=ecrit.idAmi AND etat='ami' AND idUtilisateur2=? UNION SELECT ecrit.idAmi FROM ecrit INNER JOIN lien ON idUtilisateur2=ecrit.idAmi AND etat='ami' AND idUtilisateur1=?) ORDER BY dateEcrit DESC";                $query = $pdo->prepare($sql);
                 $query->execute(array($_SESSION['id'],$_SESSION['id'],$_SESSION['id'],$_SESSION['id'],$_SESSION['id'],$_SESSION['id']));
                 //Pour chaque ami, on affiche les posts qui lui sont liés
                 echo '<div class="conteneurposts">';

@@ -4,8 +4,8 @@
 ?>
 <div class="contenuaccueil">
   <div id="login" class="masque">
-    <div class="boutonlogin"><a href="#login">Déjà incrit ? Connexion</a></div>
-    <div class="boutoninscription"><a href="#">Pas encore inscris ? Inscription</a></div>
+    <div class="boutonlogin"><a href="#login">Déjà inscrit ? Connexion</a></div>
+    <div class="boutoninscription"><a href="#">Pas encore inscrit ? Inscription</a></div>
   </div>
   <div class="accueilgauche">
       <h1>Pas encore inscrit ?</h1>
