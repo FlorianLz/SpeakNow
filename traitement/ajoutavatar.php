@@ -8,7 +8,7 @@ echo $_SESSION['id'];
         $fichier = basename($_FILES['avatar']['name']);
         $taille_maxi = 10000000;
         $taille = filesize($_FILES['avatar']['tmp_name']);
-        $extensions = array('.png', '.gif', '.jpg', '.jpeg');
+        $extensions = array('.png', '.PNG', '.gif', '.GIF', '.jpg', '.JPG', '.jpeg', '.JPEG');
         $extension = strrchr($_FILES['avatar']['name'], '.');
         //Début des vérifications de sécurité...
         if(!in_array($extension, $extensions)) //Si l'extension n'est pas dans le tableau
@@ -42,7 +42,7 @@ echo $_SESSION['id'];
              else //Sinon (la fonction renvoie FALSE).
              {
                $_SESSION['erreur']='Une erreur est survenue durant l\'upload. Merci de réessayer';
-               header('Location: ../index.php?action=profil');
+               //header('Location: ../index.php?action=profil');
              }
         }
         else //S'il y a eu une erreur...
@@ -51,7 +51,7 @@ echo $_SESSION['id'];
         }
       }else{
           $_SESSION['erreur']='Une erreur est survenue. Merci de réessayer'; 
-          header('Location: ../index.php?action=profil');
+          //header('Location: ../index.php?action=profil');
       }
 
 

@@ -157,8 +157,20 @@ function afficherpost($idpost,$idauteur,$avatarauteur,$prenomauteur,$nomauteur,$
 function afficherpostfil2($idpost,$idauteur,$avatarauteur,$prenomauteur,$nomauteur,$dateecrit,$idsession,$titre,$contenu,$image,$date,$idredirection,$iddest,$prenomdest,$nomdest){
     echo '<div class="postmur" id="post'.$idpost.'">
     <div class="auteur"><div><a href="index.php?action=mur&id='.$idauteur.'"><img class="imgpost" src="avatars/'.$avatarauteur.'">
-    <div><p>'.$prenomauteur.' '.$nomauteur.'</p></a><a href="index.php?action=mur&id='.$iddest.'"><p class="infosbold">> '.$prenomdest.' '.$nomdest.'</p></a><p>'.$dateecrit.'</p></div></div>
     <div>';
+    if($idauteur == $idsession){
+        echo '<p class="infosbold">'.$prenomauteur.' '.$nomauteur.'</p>';
+    }else{
+        echo'<p>'.$prenomauteur.' '.$nomauteur.'</p>';
+    }
+    echo '</a><a href="index.php?action=mur&id='.$iddest.'">';
+    if ($iddest==$idsession){
+        echo '<p class="infosbold">> '.$prenomdest.' '.$nomdest.'</p></a><p>'.$dateecrit.'</p></div></div>
+    <div>';
+    }else{
+        echo '<p>> '.$prenomdest.' '.$nomdest.'</p></a><p>'.$dateecrit.'</p></div></div>
+    <div>';
+    }
     if($idauteur == $idsession){
         formsupprimerpost($idpost,$titre,"filredirection",$idredirection,$contenu,$image,$date);
     }
@@ -178,6 +190,14 @@ function afficherpostfil($idpost,$idauteur,$avatarauteur,$prenomauteur,$nomauteu
     echo '</div></div>
     <p class="titrepost">'.$titre.'</p><br>
     <p>'.$contenu.'</p>';
+}
+
+function formMP($idPers){
+    echo '<form onsubmit="envoi();return false;" id="formMP">
+                <input type="text" id="messageMP" name="message" placeholder="Votre message...">
+                <input type="hidden" id="idAmiMP" name="idAmiMP" value="'.$idPers.'">
+                <i class="fas fa-paper-plane" onclick="envoi();"></i>
+                </form>';
 }
 
 ?>
