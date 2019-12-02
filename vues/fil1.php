@@ -1,24 +1,59 @@
 <div class="contenumur">
     <!-- Partie de gauche : demande d'amis-->
-
-    <div class="demandesami">
-        <?php 
-        echo '<h2>Demandes reçues</h2>';
+    <div class="listeamis">
+    <?php 
+    $sql = "SELECT * FROM utilisateurs WHERE id IN ( SELECT utilisateurs.id FROM utilisateurs INNER JOIN lien ON idUtilisateur1=utilisateurs.id AND etat='ami' AND idUTilisateur2=? UNION SELECT utilisateurs.id FROM utilisateurs INNER JOIN lien ON idUtilisateur2=utilisateurs.id AND etat='ami' AND idUTilisateur1=?)";
+    $query = $pdo->prepare($sql);
+    $query->execute(array($_SESSION['id'],$_SESSION['id']));
+    $nbamis=$query->rowCount();
+    if($nbamis == 0){
+        echo '<h2>Vous n\'avez aucun ami</h2>';
+    }else if($nbamis == 1){
+        echo '<h2 onclick="afficherlisteamis();">Vous avez '.$nbamis.' ami</h2>';
+    }else{
+        echo '<h2 onclick="afficherlisteamis();">Vous avez '.$nbamis.' amis</h2>';
+    }
+    echo '<div id="mesamis">';
+    while($line = $query->fetch()){
+        echo '<div class="ami"><a href="index.php?action=mur&id='.$line['id'].'"><img class="imgami" src="avatars/'.$line['avatar'].'"></a><a href="index.php?action=mur&id='.$line['id'].'"><p>'.$line['prenom'].' '.$line['nom'].'</p></a><a href="index.php?action=prives&id='.$line['id'].'"><i class="far fa-comment-alt chat"></i></a></div>';
+    }
+    echo '</div>';
+    
         $sql = "SELECT utilisateurs.* FROM utilisateurs WHERE id IN(SELECT idUtilisateur1 FROM lien WHERE idUtilisateur2=? AND etat='attente') ";
         $query = $pdo->prepare($sql);
         $query->execute(array($_SESSION['id']));
+        $nbrecues=$query->rowCount();
+        if($nbrecues == 0){
+            echo '<h2>Aucune demande reçue</h2>';
+        }else if($nbrecues == 1){
+            echo '<h2 onclick="afficherlisterecues();">'.$nbrecues.' demande reçue</h2>';
+        }else{
+            echo '<h2 onclick="afficherlisterecues();">'.$nbrecues.' demandes reçues</h2>';
+        }
+        echo '<div id="listerecues">';
         while($line = $query->fetch()){
             demandesrecues($line['id'],$line['avatar'],$line['prenom'],$line['nom']);
         }
+        echo '</div>';
 
-        echo '<h2>Demandes envoyées</h2>';
         $sql = "SELECT utilisateurs.* FROM utilisateurs INNER JOIN lien ON utilisateurs.id=idUtilisateur2 AND etat='attente' AND idUtilisateur1=?";
         $query = $pdo->prepare($sql);
         $query->execute(array($_SESSION['id']));
-        while($line = $query->fetch()){
-            demandesrecues($line['id'],$line['avatar'],$line['prenom'],$line['nom']);
+        $nbenvoyees=$query->rowCount();
+        if($nbenvoyees == 0){
+            echo '<h2>Aucune demande envoyée</h2>';
+        }else if ($nbenvoyees == 1){
+            echo '<h2 onclick="afficherlisteenvoyees();">'.$nbenvoyees.' demande envoyée</h2>';
+        }else{
+            echo '<h2 onclick="afficherlisteenvoyees();">'.$nbenvoyees.' demandes envoyées</h2>';
         }
-        ?>
+        echo '<div id="listeenvoyees">';
+        while($line = $query->fetch()){
+            demandeenvoyees($line['id'],$line['avatar'],$line['prenom'],$line['nom']);
+        }
+        echo '</div>';
+    
+    ?>
     </div>
 
     <!-- Partie centrale : fil d'actus -->
@@ -29,77 +64,50 @@
             // On n est pas connecté, il faut retourner à la page de login
             header("Location:index.php?action=accueil");
         }else{
-            $sql="SELECT * FROM utilisateurs WHERE id IN ( SELECT utilisateurs.id FROM utilisateurs INNER JOIN lien ON idUtilisateur1=utilisateurs.id AND etat='ami' AND idUtilisateur2=? UNION SELECT utilisateurs.id FROM utilisateurs INNER JOIN lien ON idUtilisateur2=utilisateurs.id AND etat='ami' AND idUtilisateur1=?";
-            $query = $pdo->prepare($sql);
-            $query->execute(array($_SESSION['id'],$_SESSION['id']));
-            echo '<div class="conteneurposts">';
-            while($line1 = $query->fetch()){
-                $sqlposts="SELECT nom, prenom, avatar, titre, ecrit.id, contenu, dateEcrit, DATE_FORMAT(dateEcrit, 'Le %d/%m/%Y à %Hh%i') AS dateEcritFormate, ecrit.image, idAuteur, idAmi FROM utilisateurs JOIN ecrit ON utilisateurs.id=ecrit.idAuteur WHERE ecrit.idAmi=7 ORDER BY dateEcrit DESC";
-                $queryposts = $pdo->prepare($sqlposts);
-                $queryposts->execute(array($line1['id']))
-                while($line = $queryposts->fetch()){
-                    echo '<div class="postmur" id="post'.$line['id'].'">
-                    <div class="auteur"><div><a href="index.php?action=mur&id='.$line['idAuteur'].'"><img class="imgpost" src="avatars/'.$line['avatar'].'">
-                    <div><div class="infosauteurs"><p>'.$line['prenom'].' '.$line['nom'].'</a></p>';
-                    if($line['idAmi'] != $line['idAuteur']){
+            //$sqlami="SELECT * FROM utilisateurs WHERE id IN ( SELECT utilisateurs.id FROM utilisateurs INNER JOIN lien ON idUtilisateur1=utilisateurs.id AND etat='ami' AND idUtilisateur2=? UNION SELECT utilisateurs.id FROM utilisateurs INNER JOIN lien ON idUtilisateur2=utilisateurs.id AND etat='ami' AND idUtilisateur1=?)";
+            //$queryami = $pdo->prepare($sqlami);
+            //$queryami->execute(array($_SESSION['id'],$_SESSION['id']));
+            //while($lineami = $queryami->fetch()){
+
+                $sql="SELECT DISTINCT utilisateurs.id, nom, prenom, avatar, idAmi, idAuteur, ecrit.id, titre, contenu, dateEcrit, DATE_FORMAT(dateEcrit, 'Le %d/%m/%Y à %Hh%i') AS dateEcritFormate, image FROM ecrit JOIN utilisateurs ON utilisateurs.id=ecrit.idAuteur JOIN lien ON (utilisateurs.id=lien.idUtilisateur1 OR utilisateurs.id=lien.idUtilisateur2 ) WHERE ecrit.idAmi IN ( SELECT ecrit.idAmi FROM ecrit INNER JOIN lien ON idUtilisateur1=ecrit.idAmi AND etat='ami' AND idUtilisateur2=? UNION SELECT ecrit.idAmi FROM ecrit INNER JOIN lien ON idUtilisateur2=ecrit.idAmi AND etat='ami' AND idUtilisateur1=?) OR (ecrit.idAmi=? AND NOT ecrit.idAuteur=?) ORDER BY dateEcrit DESC";                
+                $query = $pdo->prepare($sql);
+                $query->execute(array($_SESSION['id'],$_SESSION['id'],$_SESSION['id'],$_SESSION['id']));
+                //Pour chaque ami, on affiche les posts qui lui sont liés
+                echo '<div class="conteneurposts">';
+                //Pour chaque post, on crée une div
+                while($line = $query->fetch()){
+                    
+                    if ($line['idAuteur'] != $line['idAmi']){
                         $req="SELECT nom, prenom FROM utilisateurs WHERE id=?";
                         $qreq = $pdo->prepare($req);
                         $qreq->execute(array($line['idAmi']));
                         $infos = $qreq->fetch();
-                        if($line['idAmi'] == $_SESSION['id']){
-                            echo '<a href="index.php?action=mur&id='.$_SESSION['id'].'"><p class="infosbold">> '.$infos['prenom'].' '.$infos['nom'].'</p></a></div>';
-                        }else{
-                            echo '<a href="index.php?action=mur&id='.$line['idAmi'].'"><p>> '.$infos['prenom'].' '.$infos['nom'].'</p></a></div>';
-                        }
-
+                        afficherpostfil2($line['id'],$line['idAuteur'],$line['avatar'],$line['prenom'],$line['nom'],$line['dateEcritFormate'],$_SESSION['id'],$line['titre'],$line['contenu'],$line['image'],$line['dateEcrit'],$_SESSION['id'],$line['idAmi'],$infos['prenom'],$infos['nom']);
                     }else{
-                        echo '</div>';
+                        afficherpostfil($line['id'],$line['idAuteur'],$line['avatar'],$line['prenom'],$line['nom'],$line['dateEcritFormate'],$_SESSION['id'],$line['titre'],$line['contenu'],$line['image'],$line['dateEcrit'],$_SESSION['id']);
                     }
                     
-                    echo '<p>'.$line['dateEcritFormate'].'</p></div></div>
-                    <div>';
-                    if($line['idAuteur'] == $_SESSION['id']){
-                        echo '<form method="post" action="index.php?action=supprimerpost&idredirection='.$_SESSION['id'].'">
-                        <input type="hidden" name="id" value="'.$line['id'].'">
-                        <input type="hidden" name="titre" value="'.$line['titre'].'">
-                        <input type="hidden" name="message" value="'.$line['contenu'].'">';
-                        if(isset($line['image']) && !empty($line['image'])){
-                            echo '<input type="hidden" name="image" value="'.$line['image'].'">';
-                        }
-                    echo '<input type="hidden" name="date" value="'.$line['dateEcrit'].'">
-                        <label for="supprimer"><i class="fas fa-times"></i></label>
-                        <input type="submit" value="" id="supprimer">
-                        </form>';
-                    };
-                    echo '</div>
-                    </div>
-                    <p class="titrepost">'.$line['titre'].'</p><br>';
-                    echo '<p>'.$line['contenu'].'</p>';
-                        $sqllike='SELECT * FROM aime WHERE idEcrit=? AND idUtilisateur=?';
-                        $querylike = $pdo->prepare($sqllike);
-                        $querylike->execute(array($line['id'],$_SESSION['id']));
-                        if($linelike = $querylike->fetch()){
-                            formlike($line['id'],"ok","filredirection","boutonlike","suppressionlike");
-                        }else{
-                            formlike($line['id'],"ok","filredirection","boutonpaslike","ajoutlike");
-                        }
+                    $sqllike='SELECT * FROM aime WHERE idEcrit=? AND idUtilisateur=?';
+                    $querylike = $pdo->prepare($sqllike);
+                    $querylike->execute(array($line['id'],$_SESSION['id']));
+                    $sqlnblike="SELECT * FROM aime WHERE idEcrit=?";
+                    $querynblike = $pdo->prepare($sqlnblike);
+                    $querynblike->execute(array($line['id']));
+                    $nblike=$querynblike->rowCount();
+                    if($linelike = $querylike->fetch()){
+                        formlike($line['id'],$_SESSION['id'],"filredirection","boutonlike","suppressionlike",$nblike);
+                    }else{
+                        formlike($line['id'],$_SESSION['id'],"filredirection","boutonpaslike","ajoutlike",$nblike);
+                    }
+
                     //Une image est liée au post ? On l'affiche
                     if(isset($line['image']) && !empty($line['image'])){
                         echo '<img src="./imagesposts/'.$line['image'].'">';
                     }
                     //On affiche le formulaire permettant de poster un commentaire
-                    echo '<div class="commentairespost">
-                            <form method="post" action="index.php?action=ajoutcommentaire">
-                                <img class="imgpost" src="avatars/'.$_SESSION['avatar'].'">
-                                <textarea name="comm" placeholder="Votre commentaire..."></textarea>
-                                <input type="hidden" name="filredirection" value="ok">
-                                <input type="hidden" name="idpost" value="'.$line['id'].'">
-                                <input type="submit" value="" name="submit" id="submit'.$line['id'].'"><label for="submit'.$line['id'].'"><i class="fas fa-paper-plane"></i></label>
-                            </form>';
-                    if(isset($_SESSION['alertecomm'])){
-                        echo $_SESSION['alertecomm'];
-                        unset($_SESSION['alertecomm']);
-                    }
+                    echo '<div class="commentairespost">';
+                    formajoutcommentaire($line['id'],$_SESSION['id'],"filredirection");
+                    alertecomm($line['id']);
                     //On affiche les commentaires
                     $sql1="SELECT nom, prenom, avatar, commentaires.id, commentaires.commentaire, commentaires.idAuteur, DATE_FORMAT(dateCommentaire, 'Le %d/%m/%Y à %Hh%i') AS dateCommentaire FROM utilisateurs JOIN commentaires ON commentaires.idAuteur=utilisateurs.id WHERE commentaires.idPost=? ORDER BY commentaires.id DESC";
                     $query1 = $pdo->prepare($sql1);
@@ -110,14 +118,7 @@
                             <div><p>'.$line1['prenom'].' '.$line1['nom'].'</p></a><p>'.$line1['dateCommentaire'].'</p></div></div>
                             <div>';
                             if($line1['idAuteur']==$_SESSION['id']){
-                                echo '<form method="post" action="index.php?action=supprimercommentaire">
-                                <input type="hidden" name="idCommentaire" value="'.$line1['id'].'">
-                                <input type="hidden" name="commentaire" value="'.$line1['commentaire'].'">
-                                <input type="hidden" name="idpost" value="'.$line['id'].'">
-                                <input type="hidden" name="filredirection" value="ok">
-                                <label for="supprimercomm'.$line1['id'].'"><i class="fas fa-times"></i></label>
-                                <input type="submit" value="" id="supprimercomm'.$line1['id'].'">                                
-                                </form>';
+                                formsupprimercommentaire($line['id'],$line1['id'],$line1['commentaire'],$_SESSION['id'], "filredirection");
                             }
                             echo '</div>
                             </div>
@@ -125,42 +126,15 @@
                         echo '</div>';
                     }        
                     echo'</div></div>';
-                }
-                
-                
-                
-            };
-            echo '</div>';
+                };
+                echo '</div>';
+            //}
+
         }
 
 
         ?>
     
     </div>
-    
-    <div class="listeamis">
-    <?php 
-    echo '<h2>Liste de mes amis</h2>';
-    $sql = "SELECT * FROM utilisateurs WHERE id IN ( SELECT utilisateurs.id FROM utilisateurs INNER JOIN lien ON idUtilisateur1=utilisateurs.id AND etat='ami' AND idUTilisateur2=? UNION SELECT utilisateurs.id FROM utilisateurs INNER JOIN lien ON idUtilisateur2=utilisateurs.id AND etat='ami' AND idUTilisateur1=?)";
-    $query = $pdo->prepare($sql);
-    $query->execute(array($_SESSION['id'],$_SESSION['id']));
-    while($line = $query->fetch()){
-        echo '<div class="ami"><a href="index.php?action=mur&id='.$line['id'].'"><img class="imgami" src="avatars/'.$line['avatar'].'"></a><a href="index.php?action=mur&id='.$line['id'].'"><p>'.$line['prenom'].' '.$line['nom'].'</p></a></div>';
-    }
-    
-    ?>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
 </div>
+<script src="./js/script.js"></script>

@@ -65,7 +65,7 @@ ob_start(); // Je démarre le buffer de sortie : les données à afficher sont s
         }else{
             $avatar=$_SESSION['avatar'];
             $prenom=$_SESSION['prenom'];
-            echo "<div class='headerfond'></div><header class='headerconnecte'>
+            /*echo "<div class='headerfond'></div><header class='headerconnecte'>
                 <div class='headergauche'>
                     <div class='logo'><a href='index.php?action=mur'><img src='img/logosn.png'></a></div>
                     <div class='recherche'><form action='index.php' method='GET'><input type='hidden' name='action' value='recherche'><input name='texterecherche' type='text' placeholder='Rechercher...' required><input type='submit' value=' '></form></div>
@@ -82,7 +82,7 @@ ob_start(); // Je démarre le buffer de sortie : les données à afficher sont s
                     <a href='index.php?action=deconnexion'><i class='fas fa-sign-out-alt'></i></a>
                 </div>
                 
-            </header>";
+            </header>";*/
         }
     ?>
 

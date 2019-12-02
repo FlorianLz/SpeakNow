@@ -1,7 +1,10 @@
 :root{
-  --principale:#e74c3c;
+  --principale:#0b135a;
   --secondaire:#f2f3f5;
 }
+::-webkit-scrollbar { width: 0 !important }
+.element { overflow: -moz-scrollbars-none; }
+.element { -ms-overflow-style: none; }
 * {
     margin: 0;
     padding: 0;
@@ -12,7 +15,7 @@
 body{
   max-width:1400px;
   margin:auto;
-  background-color:var(--secondaire);
+  background-color:#0b135a;
 }
 .fas{
   cursor:pointer;
@@ -72,17 +75,7 @@ header{
 .logo > a img{
   height:100%;
 }
-header form{
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-header form > div{
-  text-align:center;
-}
-header form > div > label{
-  color:white;
-}
+
 header > div:nth-child(2){
   width:60%;
 }
@@ -362,10 +355,11 @@ header .recherche form input[type="submit"]:hover{
   flex-wrap:wrap;
   align-items:center;
   justify-content:center;
-  width:60%;
+  width:100%;
   margin:auto;
   background-color:white;
   border-radius: 20px;
+  padding-top:30px;
 
 }
 .infosprofil form{
@@ -429,9 +423,13 @@ header .recherche form input[type="submit"]:hover{
 .postmur{
   width:100%;
   margin-top:20px;
-  background-color: white;
-  border-radius:10px;
+  background-color: #f2f3f5;
+  border-radius:10px 10px 0px 0px;
   position:relative;
+  text-align:center;
+}
+.postmur > p{
+  text-align:center;
 }
 .conteneurposts{
   display:flex;
@@ -506,22 +504,6 @@ header .recherche form input[type="submit"]:hover{
 .formposter h3{
   padding-bottom:15px;
 }
-/*.formposter input[type='file'] {
-  width: 0.1px!important;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
-}
-.formposter .inputfile:focus + label {
-  outline: 1px dotted #000;
-  outline: -webkit-focus-ring-color auto 5px;
-}
-.formposter .inputfile + label * {
-  pointer-events: none;
-}*/
-
 .uploadfile i{
   width:25px;
   padding-bottom:7px;
@@ -599,12 +581,15 @@ header .recherche form input[type="submit"]:hover{
 /* Espace commentaires */
 .commentairespost{
   background-color: white;
-  border-radius: 0px 0px 50px 50px;
   width: 100%;
   border-top: 1px solid var(--principale);
   margin-top:10px;
   color:black;
   padding:15px;
+  border-left: 1px solid #f2f3f5;
+  border-right: 1px solid #f2f3f5;
+  border-bottom: 1px solid #f2f3f5;
+  border-radius: 0px 0px 6px 6px;
 }
 .commentairespost form textarea{
   width:75%;
@@ -832,13 +817,12 @@ footer{
 
 /* Pages Messages Prives */
 .listemessages{
-  width:50%;
-  height:90vh;
+  width:100%;
+  height:100%;
   margin:auto;
   overflow:hidden;
   position:relative;
   background-color:white;
-  border-radius:40px;
 }
 #formMP{
   width:100%;
@@ -849,6 +833,7 @@ footer{
   align-items: center;
   position:absolute;
   bottom:15px;
+  background-color:white;
 }
 #formMP input[type="text"]{
   padding:5px;
@@ -874,7 +859,7 @@ footer{
   display:flex;
   flex-direction:column;
   align-items: center;
-  padding:20px;
+  padding:30px;
   width:103%;
   height:103%;
   margin:auto;
@@ -885,9 +870,10 @@ footer{
   width:fit-content;
   padding:10px;
   border-radius: 25px;
+  max-width:70%;
 }
 .gauche{
-  background-color:white;
+  background-color:#f2f3f5;
   align-self:flex-start;
 }
 .droite{
@@ -897,6 +883,41 @@ footer{
 }
 .droite > p{
   color:white;
+}
+.msg{
+  display:flex;
+  align-self:flex-start;
+  align-items: center;
+}
+.msg img{
+  width:20px;
+  height:20px;
+  border-radius:50px;
+  margin-right:5px;
+}
+.msgdroite{
+  display:flex;
+  align-self:flex-end;
+  align-items: center;
+}
+.msgdroite img{
+  width:20px;
+  height:20px;
+  border-radius:50px;
+  margin-left:5px;
+}
+.imgprives{
+  width:50px;
+  height:50px;
+  background-size:cover;
+  border-radius:50px;
+}
+.infosmp{
+  display:flex;
+  align-items: center;
+}
+.infosmp > h2{
+  padding-left:10px;
 }
 
 /* RESPONSIVE MOBILE */
@@ -1028,3 +1049,131 @@ footer{
 
 
   }
+
+
+
+  /* Mur */
+.contenu{
+  background-color:#0b135a;
+  width:100vw;
+  height:100vh;
+  position:relative;
+  max-width:1400px;
+  margin-left:auto;
+  margin-right:auto;
+  color:white;
+}
+.infoscentre{
+  background-color:white;
+  position:absolute;
+  width:66%;
+  height:95%;
+  border-radius:50px;
+  top:50%;
+  transform:translateY(-50%);
+  right:20px;
+  text-align: center;
+}
+.infoscote{
+  width:33%;
+  height:100%;
+  padding:15px;
+  display:flex;
+  flex-direction: column;
+  position:relative;
+}
+.monprofil{
+  height:75px;
+  display:flex;
+}
+.imageprofil{
+  width:75px;;
+  height:75px;
+  border-radius:25px;
+  background-size:cover;
+  background-position: center;
+}
+.txtprofil{
+  display:flex;
+  flex-direction: column;
+  justify-content:center;
+  padding-left:20px;
+}
+.txtprofil > h1{
+  color:white;
+}
+.txtprofil > div > a{
+  display:flex;
+}
+.txtprofil > div > a >p{
+  padding-left:10px;
+  color:white;
+}
+.txtprofil > div > a >i{
+  color:white;
+}
+.itemmenu{
+  padding:15px;
+  display:flex;
+}
+.itemmenu > a{
+  display:flex;
+}
+.itemmenu > a > i{
+  color:white;
+}
+.itemmenu > a > p{
+  padding-left:10px;
+  color:white;
+}
+.menu{
+  padding-top:40%;
+}
+.menu > p{
+  color:#3a407a;
+  padding-bottom:10px;
+}
+.deconnexion{
+  position:absolute;
+  bottom:10px;
+  font-size:2rem;
+}
+.deconnexion > a > i{
+  color:white;
+}
+.deconnexion > a > i:hover{
+  color:#f5cb5c;
+}
+.active >a>p,.active >a> i {
+  color:#f5cb5c;
+}
+.active{
+  border-left:3px solid #f5cb5c;
+}
+.infoscentre{
+  overflow:auto;
+  color:black;
+  padding:40px;
+}
+.infoscentre > h1{
+  text-align:center;
+}
+.activeprofil > a > i, .activeprofil > a > p{
+  color:#f5cb5c!important;
+}
+
+/* Page recherche */
+#formrecherche{
+  padding-top:15px;
+  padding-bottom:40px;
+}
+#formrecherche > input[type="text"]{
+  padding:10px;
+  width:70%;
+}
+#formrecherche > input[type="submit"]{
+  padding:10px;
+  width:20%;
+  background-color:var(--principale);
+  color:white;
+}

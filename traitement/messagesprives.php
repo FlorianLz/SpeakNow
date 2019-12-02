@@ -10,10 +10,11 @@ if(isset($_GET['afaire']) AND $_GET['afaire'] == "refresh"){
     $querymp->execute(array($idPers,$id,$idPers,$idPers,$id));
     $texte = ''; 
     while($linemp = $querymp->fetch()){
+        $avatarpers='avatars/'.$linemp['avatar'];
         if($linemp['idAuteurMP'] == $id){
-            $texte .='<div class="mp droite"><p>'.$linemp['contenuMP'].'</p></div><br>';
+            $texte .='<div class="msgdroite"><div class="mp droite"><p>'.$linemp['contenuMP'].'</p></div><img src="avatars/'.$_SESSION['avatar'].'"></div><br>';
         }else{
-            $texte .='<div class="mp gauche"><p>'.$linemp['contenuMP'].'</p></div><br>';
+            $texte .='<div class="msg"><img src="'.$avatarpers.'"><div class="mp gauche"><p>'.$linemp['contenuMP'].'</p></div></div><br>';
         }
     }
     if($texte != ""){

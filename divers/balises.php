@@ -51,7 +51,7 @@ function formlike($idpost,$idredirection,$lieuredirection,$typebouton,$action,$n
     echo "<form action='index.php?action=$action' method='POST'>
             <input type='hidden' name='idPost' value='$idpost'>
             <input type='hidden' name='$lieuredirection' value='$idredirection'>
-            <label for='like$idpost'><i class='far fa-thumbs-up $typebouton'>$nblike</i></label>
+            <label for='like$idpost'><i class='fas fa-thumbs-up $typebouton'>$nblike</i></label>
             <input id='like$idpost' type='submit' class='inputlike'>
             </form><br><br>";
 }
@@ -198,6 +198,16 @@ function formMP($idPers){
                 <input type="hidden" id="idAmiMP" name="idAmiMP" value="'.$idPers.'">
                 <i class="fas fa-paper-plane" onclick="envoi();"></i>
                 </form>';
+}
+
+function formrecherche(){
+    echo "<div class='recherche'>
+        <form id='formrecherche' action='index.php' method='GET'>
+            <input type='hidden' name='action' value='recherche'>
+            <input name='texterecherche' type='text' placeholder='Rechercher...' required>
+            <input type='submit' value='Rechercher'>
+        </form>
+    </div>";
 }
 
 ?>
