@@ -30,7 +30,14 @@
                                 <input type="submit" value="Annuler">
                                 </form></div>';
                             }else{
-                                echo '<p> Vous a demandé en ami</p></div>';
+                                echo '<div><form method="post" action="index.php?action=ajoutami">
+                                <input type="hidden" name="idAmi" value="'.$line['id'].'">
+                                <input type="submit" value="Accepter">
+                                </form>
+                                <form method="post" action="index.php?action=refusami">
+                                <input type="hidden" name="idAmi" value="'.$line['id'].'">
+                                <input type="submit" value="Refuser">
+                                </form></div></div>';
                             }
                             
                         }

@@ -12,13 +12,15 @@
     <div class="formulaireinscription">
       <?php include("vues/inscription.php");?>
     </div>
+    <div class="boutonloginresp"><a href="#login">Déjà inscris ? Connexion</a></div>
   </div>
 
-  <div class="accueildroite">
+  <div class="accueildroite" id="loginmobile">
     <h1>Déjà inscrit ?</h1>
     <div class="formulaireconnexion">
         <?php include("vues/login.php");?>
     </div>
+    <div class="boutonloginresp"><a href="#">Pas encore inscris ? Inscription</a></div>
   </div>
 
 </div>

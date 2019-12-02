@@ -90,10 +90,14 @@
                     $sqllike='SELECT * FROM aime WHERE idEcrit=? AND idUtilisateur=?';
                     $querylike = $pdo->prepare($sqllike);
                     $querylike->execute(array($line['id'],$_SESSION['id']));
+                    $sqlnblike="SELECT * FROM aime WHERE idEcrit=?";
+                    $querynblike = $pdo->prepare($sqlnblike);
+                    $querynblike->execute(array($line['id']));
+                    $nblike=$querynblike->rowCount();
                     if($linelike = $querylike->fetch()){
-                        formlike($line['id'],$_SESSION['id'],"filredirection","boutonlike","suppressionlike");
+                        formlike($line['id'],$_SESSION['id'],"filredirection","boutonlike","suppressionlike",$nblike);
                     }else{
-                        formlike($line['id'],$_SESSION['id'],"filredirection","boutonpaslike","ajoutlike");
+                        formlike($line['id'],$_SESSION['id'],"filredirection","boutonpaslike","ajoutlike",$nblike);
                     }
 
                     //Une image est liée au post ? On l'affiche
