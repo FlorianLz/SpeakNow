@@ -123,14 +123,14 @@ function formajoutpost($idpers,$prenompers){
 
 function demandesrecues($idpers,$avatarpers,$prenompers,$nompers){
     echo '<div class="ami"><a href="index.php?action=mur&id='.$idpers.'"><img class="imgami" src="avatars/'.$avatarpers.'"></a><a href="index.php?action=mur&id='.$idpers.'"><p>'.$prenompers.' '.$nompers.'</p></a>';
-            echo '<form method="post" action="index.php?action=ajoutami">
+            echo '<div class="recuesetenv"><form method="post" action="index.php?action=ajoutami">
                         <input type="hidden" name="idAmi" value="'.$idpers.'">
                         <input type="submit" value="Accepter">
                         </form>
                         <form method="post" action="index.php?action=refusami">
                         <input type="hidden" name="idAmi" value="'.$idpers.'">
                         <input type="submit" value="Refuser">
-                        </form></div>';
+                        </form></div></div>';
 }
 
 function demandeenvoyees($idpers,$avatarpers,$prenompers,$nompers){

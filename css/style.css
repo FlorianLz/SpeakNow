@@ -13,7 +13,7 @@
     color:black;
 }
 body{
-  max-width:1400px;
+  max-width:1500px;
   margin:auto;
   background-color:#0b135a;
 }
@@ -308,10 +308,15 @@ header .recherche form input[type="submit"]:hover{
 }
 #mesamis{
   overflow:hidden;
+  max-height: 100%;
+  overflow: auto;
 }
 .listeamis > h2{
   padding-top:15px;
   cursor:pointer;
+}
+.ami > a > i, .ami > a >p{
+  color:white;
 }
 
 
@@ -573,6 +578,9 @@ header .recherche form input[type="submit"]:hover{
   padding-bottom:20px;
   cursor:pointer;
 }
+.boutonlike::before,.boutonpaslike::before{
+  padding-right:5px;
+}
 .inputlike{
   width:0px;
   height:0px;
@@ -696,16 +704,19 @@ header .recherche form input[type="submit"]:hover{
 .ami p, .ami .chat{
   padding-left:10px;
 }
+.chat:hover{
+  color:#f5cb5c;
+}
 .ami{
   display: flex;
   align-items: center;
   justify-content: flex-start;
   padding-top:10px;
-  padding-bottom:10px;
+  padding-left:15px;
   border-bottom:1px solid var(--principale);
 }
 .imgami{
-  width:100%;
+  width:75%;
   border-radius:150px;
 }
 .ami a:nth-child(1){
@@ -714,12 +725,22 @@ header .recherche form input[type="submit"]:hover{
 }
 .ami form input[type='submit']{
   width:100%;
-  border:1px solid var(--principale);
   background-color:var(--principale);
   color:white;
   margin-left:10px;
   padding:3px;
   border-radius:50px;
+}
+.recuesetenv{
+  display:flex;
+  align-self:flex-end;
+}
+.recuesetenv form:nth-child(1){
+  padding-right:7px;  
+}
+.recuesetenv > form:nth-child(1):hover > input[type='submit'],.recuesetenv > form:nth-child(2):hover > input[type='submit']{
+  color:#f5cb5c;
+  border:2px solid #f5cb5c;
 }
 
 /* Page amis */
@@ -748,16 +769,18 @@ header .recherche form input[type="submit"]:hover{
   flex-direction:column;
   align-items: center;
   justify-content: center;
-  background-color:var(--secondaire);
+  background-color:var(--principale);
   line-height:1.25;
   text-align:center;
 }
 .page404 i{
   font-size:3rem;
   color:var(--principale);
+  color:white;
 }
 .page404 h3, .page404 p{
   padding-bottom:15px;
+  color:white;
 }
 .page404 img{
   height:15vw;
@@ -1058,7 +1081,7 @@ footer{
   width:100vw;
   height:100vh;
   position:relative;
-  max-width:1400px;
+  max-width:1500px;
   margin-left:auto;
   margin-right:auto;
   color:white;
@@ -1081,10 +1104,13 @@ footer{
   display:flex;
   flex-direction: column;
   position:relative;
+  justify-content:space-around; 
 }
 .monprofil{
   height:75px;
   display:flex;
+  align-items:center;
+  justify-content: space-around;
 }
 .imageprofil{
   width:75px;;
@@ -1113,7 +1139,7 @@ footer{
   color:white;
 }
 .itemmenu{
-  padding:15px;
+  padding:12px;
   display:flex;
 }
 .itemmenu > a{
@@ -1126,16 +1152,19 @@ footer{
   padding-left:10px;
   color:white;
 }
-.menu{
-  padding-top:40%;
+.itemmenu > i{
+  color:white;
+}
+.itemmenu > p{
+  padding-left:10px;
+  color:white;
+  cursor:pointer;
 }
 .menu > p{
   color:#3a407a;
   padding-bottom:10px;
 }
 .deconnexion{
-  position:absolute;
-  bottom:10px;
   font-size:2rem;
 }
 .deconnexion > a > i{
