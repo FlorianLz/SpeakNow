@@ -132,7 +132,7 @@
                 $querynblike = $pdo->prepare($sqlnblike);
                 $querynblike->execute(array($line['id']));
                 
-                $nblike=$querylike->rowCount();
+                $nblike=$querynblike->rowCount();
                 if($linelike = $querylike->fetch()){
                     formlike($line['id'],$_SESSION['id'],"murredirection","boutonlike","suppressionlike",$nblike);
                 }else{
@@ -270,7 +270,7 @@
                     $sqlnblike="SELECT * FROM aime WHERE idEcrit=?";
                     $querynblike = $pdo->prepare($sqlnblike);
                     $querynblike->execute(array($line['id']));
-                    $nblike=$querylike->rowCount();
+                    $nblike=$querynblike->rowCount();
                     if($linelike = $querylike->fetch()){
                         formlike($line['id'],$idPers,"murredirection","boutonlike","suppressionlike",$nblike);
                     }else{
