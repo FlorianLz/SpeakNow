@@ -16,7 +16,6 @@
             <div class="itemmenu"><a href="index.php?action=recherche"><i class="fas fa-search"></i><p>Recherche</p></a></div>
             <div class="itemmenu"><a href="index.php?action=mur"><i class="fas fa-user"></i></i><p>Mon mur</p></a></div>
             <div class="itemmenu"><a href="index.php?action=prives"><i class="fas fa-comment-dots"></i><p>Messenger</p></a></div>
-            <div class="itemmenu"><a href="index.php?action=amis"><i class="fas fa-user-friends"></i><p>Amis</p></a></div>
         </div>
         <div class="partieamis">
         <?php

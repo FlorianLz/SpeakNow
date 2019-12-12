@@ -90,7 +90,19 @@
             $id = $_SESSION["id"];
             $ok = true; // On a le droit d afficher notre mur
             $avatar=$_SESSION['avatar'];
-            //Formulaire permettant de poster sur SON mur
+            $nom=$_SESSION['nom'];
+            $prenom=$_SESSION['prenom'];
+            echo '<div class="monprofilmobile">
+                <a href="index.php?action=mur"><div class="imageprofil" style="background-image:url(\'avatars/'.$avatar.'\');"></div></a>
+                <div class="txtprofilmobile">
+                    <h1>'.$prenom.' '.$nom.'</h1>
+                    <div><a href="index.php?action=profil"><i class="fas fa-user-edit"></i><p>Modifier mon profil</p></a></div>
+                </div>
+                <div class="deconnexion">
+                    <a href="index.php?action=deconnexion"><i class="fas fa-sign-out-alt"></i></a>
+                </div>
+            </div>';
+                    //Formulaire permettant de poster sur SON mur
             formajoutpost($_SESSION['id'],"");
 
             if(isset($_SESSION['alerte'])){
@@ -196,7 +208,14 @@
                             </form></div></div></div>';
                         }else{
                             //Sinon c'est qu'elle nous a demandé en ami
-                            echo '<p> Vous a demandé en ami</p></div></div></div>';
+                            echo '<p> Vous a demandé en ami</p><form method="post" action="index.php?action=ajoutami">
+                            <input type="hidden" name="idAmi" value="'.$_GET['id'].'">
+                            <input type="submit" value="Accepter">
+                            </form>
+                            <form method="post" action="index.php?action=refusami">
+                            <input type="hidden" name="idAmi" value="'.$_GET['id'].'">
+                            <input type="submit" value="Refuser">
+                            </form></div></div></div>';
                         }
                                 
                     }

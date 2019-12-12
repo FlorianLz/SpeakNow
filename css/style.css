@@ -12,6 +12,9 @@
     font-family: 'Roboto';
     color:black;
 }
+.black{
+  color:black!important;
+}
 body{
   max-width:1500px;
   margin:auto;
@@ -45,9 +48,10 @@ header{
 .headergauche, .headercentre, .headerdroite{
   height:100%;
   width:30%;
-  display:flex;
+  display:none;
 }
 .headercentre{
+  display:none;
   font-size: 1.7rem;
   justify-content: space-around;
   align-items: center;
@@ -628,6 +632,9 @@ header .recherche form input[type="submit"]:hover{
   text-align:left;
   word-wrap: break-word;
 }
+.monprofilmobile{
+  display:none;
+}
 
 
 
@@ -649,6 +656,12 @@ header .recherche form input[type="submit"]:hover{
 }
 .listeamismobile{
   padding:70px 25px 0px 25px;
+  height:100vh;
+  background-color:white;
+  color:black;
+}
+.listeamismobile > #mesamis > .ami > a > p,.listeamismobile > #listerecues > .ami > a > p,.listeenvoyees > #mesamis > .ami > a > p{
+  color:black;
 }
 .profil{
   display:flex;
@@ -759,7 +772,7 @@ header .recherche form input[type="submit"]:hover{
 }
 .recues{
   padding-bottom:25px;
-} 
+}
 
 /* Page 404 */
 .page404{
@@ -850,12 +863,11 @@ footer{
 #formMP{
   width:100%;
   margin:auto;
-  padding-top:20px;
   display:flex;
   justify-content: space-evenly;
   align-items: center;
   position:absolute;
-  bottom:15px;
+  bottom:0px;
   background-color:white;
 }
 #formMP input[type="text"]{
@@ -944,7 +956,7 @@ footer{
 }
 
 /* RESPONSIVE MOBILE */
-@media screen and (max-width:500px){
+@media screen and (max-width:825px){
   /* Header */
   .headerconnecte{
     justify-content:center;
@@ -955,6 +967,11 @@ footer{
   }
   .headercentre{
     width:100%;
+    display:flex;
+    height:60px;
+    position:fixed;
+    z-index:100;
+    background-color:var(--principale);
   }
   .headercentre .fa-resp{
     display:block;
@@ -1047,6 +1064,7 @@ footer{
   .formprofil table, .infosprofil form, .photoprofil{
     width:100%;
     padding: 10px;
+    border-left:0;
   }
 
   /* MP */
@@ -1066,6 +1084,42 @@ footer{
     align-items: center;
   }
 
+  .infoscote{
+    display:none!important;
+  }
+  .infoscentre{
+    width:100%!important;
+    right:0px!important;
+    position:relative!important;
+    border-radius:0px!important;
+    height:100%!important;
+    padding-top:60px!important;
+    padding:0px!important;
+    padding-top:70px!important;
+  }
+  .monprofilmobile{
+    display:flex;
+    justify-content:space-around;
+  }
+  .infosmp{
+    padding-left:15px;
+    padding-bottom:10px;
+  }
+  .itemmenu > a > i{
+    color:black!important;
+  }
+  .itemmenu > a > p{
+    color:black!important;
+  }
+  .itemmenu > i{
+    color:black!important;
+  }
+  .itemmenu > p{
+    color:black!important;
+  }
+  .ami > a > i{
+    color:black;
+  }
 
 
 
@@ -1127,6 +1181,9 @@ footer{
 }
 .txtprofil > h1{
   color:white;
+}
+.txtprofilmobile > h1{
+  color:black;
 }
 .txtprofil > div > a{
   display:flex;
