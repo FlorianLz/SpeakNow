@@ -1132,7 +1132,7 @@ footer{
     color:black!important;
   }
   .ami > a > i{
-    color:black;
+    color:black!important;
   }
   .ami > a > p{
     color:black!important;
