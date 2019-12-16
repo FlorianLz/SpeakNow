@@ -1,5 +1,6 @@
 <div class="contenu">
     <div class="infoscote">
+        <img src="img/logosn.png" alt="Logo" class="logomenu" onclick="accueil();">
         <div class="monprofil">
             <a href="index.php?action=mur"><div class="imageprofil" style="background-image:url('avatars/<?php echo $_SESSION['avatar'];?>');"></div></a>
             <div class="txtprofil">
@@ -24,16 +25,16 @@
             $query = $pdo->prepare($sql);
             $query->execute(array($_SESSION['id'],$_SESSION['id']));
             $nbamis=$query->rowCount();
-            if($nbamis == 0){
+            /*if($nbamis == 0){
                 echo '<h2>Vous n\'avez aucun ami</h2>';
-            }else if($nbamis == 1){
+            }else */if($nbamis == 1){
                 echo '<div class="itemmenu"><i class="fas fa-user-friends"></i><p onclick="afficherlisteamis();">Vous avez '.$nbamis.' ami</p></div>';
             }else{
                 echo '<div class="itemmenu"><i class="fas fa-user-friends"></i><p onclick="afficherlisteamis();">Vous avez '.$nbamis.' amis</p></div>';
             }
             echo '<div id="mesamis">';
             while($line = $query->fetch()){
-                echo '<div class="ami"><a href="index.php?action=mur&id='.$line['id'].'"><img class="imgami" src="avatars/'.$line['avatar'].'"></a><a href="index.php?action=mur&id='.$line['id'].'"><p>'.$line['prenom'].' '.$line['nom'].'</p></a><a href="index.php?action=prives&id='.$line['id'].'"><i class="far fa-comment-alt chat"></i></a></div>';
+                echo '<div class="ami"><a href="index.php?action=mur&id='.$line['id'].'"><img class="imgami" src="avatars/'.$line['avatar'].'"></a><a href="index.php?action=mur&id='.$line['id'].'"><p>'.$line['prenom'].' '.$line['nom'].'</p></a><a href="index.php?action=prives&id='.$line['id'].'"><i class="fas fa-comment-dots chat"></i></a></div>';
             }
             echo '</div>';
 
@@ -67,7 +68,7 @@
             }
             echo '<div id="listeenvoyees">';
             while($line = $query->fetch()){
-                demandeenvoyees($line['id'],$line['avatar'],$line['prenom'],$line['nom']);
+                demandeenvoyees($line['id'],$line['avatar'],$line['prenom'],$line['nom'],0);
             }
             echo '</div>';
 

@@ -1,5 +1,6 @@
 <div class="contenu">
     <div class="infoscote">
+        <img src="img/logosn.png" alt="Logo" class="logomenu" onclick="accueil();">
         <div class="monprofil">
             <a href="index.php?action=mur"><div class="imageprofil" style="background-image:url('avatars/<?php echo $_SESSION['avatar'];?>');"></div></a>
             <div class="txtprofil">
@@ -14,8 +15,18 @@
             <p>MENU</p>
             <div class="itemmenu"><a href="index.php?action=fil"><i class="fas fa-home"></i><p>Fil d'actus</p></a></div>
             <div class="itemmenu"><a href="index.php?action=recherche"><i class="fas fa-search"></i><p>Recherche</p></a></div>
-            <div class="itemmenu active"><a href="index.php?action=mur"><i class="fas fa-user"></i></i><p>Mon mur</p></a></div>
-            <div class="itemmenu"><a href="index.php?action=prives"><i class="fas fa-comment-dots"></i><p>Messenger</p></a></div>
+            <?php if (!isset($_GET['id']) || $_GET['id'] == $_SESSION['id']){
+                echo '<div class="itemmenu active"><a href="index.php?action=mur"><i class="fas fa-user"></i></i><p>Mon mur</p></a></div>';
+            }else{
+                $sql="SELECT prenom, nom,id FROM utilisateurs WHERE id=?";
+                $query=$pdo->prepare($sql);
+                $query->execute(array($_GET['id']));
+                $line=$query->fetch();
+                echo '<div class="itemmenu active"><a href="index.php?action=mur&id='.$line['id'].'"><i class="fas fa-user"></i></i><p>Mur de '.$line['prenom'].' '.$line['nom'].'</p></a></div>';
+            }
+            
+            ?>
+            
         </div>
 
         <div class="partieamis">
@@ -24,16 +35,16 @@
             $query = $pdo->prepare($sql);
             $query->execute(array($_SESSION['id'],$_SESSION['id']));
             $nbamis=$query->rowCount();
-            if($nbamis == 0){
+            /*if($nbamis == 0){
                 echo '<h2>Vous n\'avez aucun ami</h2>';
-            }else if($nbamis == 1){
+            }else */if($nbamis == 1){
                 echo '<div class="itemmenu"><i class="fas fa-user-friends"></i><p onclick="afficherlisteamis();">Vous avez '.$nbamis.' ami</p></div>';
             }else{
                 echo '<div class="itemmenu"><i class="fas fa-user-friends"></i><p onclick="afficherlisteamis();">Vous avez '.$nbamis.' amis</p></div>';
             }
             echo '<div id="mesamis">';
             while($line = $query->fetch()){
-                echo '<div class="ami"><a href="index.php?action=mur&id='.$line['id'].'"><img class="imgami" src="avatars/'.$line['avatar'].'"></a><a href="index.php?action=mur&id='.$line['id'].'"><p>'.$line['prenom'].' '.$line['nom'].'</p></a><a href="index.php?action=prives&id='.$line['id'].'"><i class="far fa-comment-alt chat"></i></a></div>';
+                echo '<div class="ami"><a href="index.php?action=mur&id='.$line['id'].'"><img class="imgami" src="avatars/'.$line['avatar'].'"></a><a href="index.php?action=mur&id='.$line['id'].'"><p>'.$line['prenom'].' '.$line['nom'].'</p></a><a href="index.php?action=prives&id='.$line['id'].'"><i class="fas fa-comment-dots chat"></i></a></div>';
             }
             echo '</div>';
 
@@ -67,7 +78,7 @@
             }
             echo '<div id="listeenvoyees">';
             while($line = $query->fetch()){
-                demandeenvoyees($line['id'],$line['avatar'],$line['prenom'],$line['nom']);
+                demandeenvoyees($line['id'],$line['avatar'],$line['prenom'],$line['nom'],0);
             }
             echo '</div>';
 
@@ -239,7 +250,7 @@
             $avatarPers=$line['avatar'];
                 echo '<div class="profil"><div class="imgprofil"><img src=avatars/'.$avatarPers.'></div><div class="infoprofil">';
                 echo '<h2>'.$prenomPers.' '.$nomPers.'</h2>';
-                echo '<a href="index.php?action=prives&id='.$idPers.'"><i class="far fa-comment-alt chat"></i></a>';
+                echo '<a href="index.php?action=prives&id='.$idPers.'"><i class="fas fa-comment-dots chat"></i></a>';
                 echo '<form method="post" action="index.php?action=refusami">
                 <input type="hidden" name="idAmi" value="'.$idPers.'">
                 <input type="submit" value="Supprimer cet ami">

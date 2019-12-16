@@ -1,5 +1,6 @@
 <div class="contenu">
     <div class="infoscote">
+        <img src="img/logosn.png" alt="Logo" class="logomenu" onclick="accueil();">
         <div class="monprofil">
             <a href="index.php?action=mur"><div class="imageprofil" style="background-image:url('avatars/<?php echo $_SESSION['avatar'];?>');"></div></a>
             <div class="txtprofil">
@@ -15,7 +16,6 @@
             <div class="itemmenu active"><a href="index.php?action=fil"><i class="fas fa-home"></i><p>Fil d'actus</p></a></div>
             <div class="itemmenu"><a href="index.php?action=recherche"><i class="fas fa-search"></i><p>Recherche</p></a></div>
             <div class="itemmenu"><a href="index.php?action=mur"><i class="fas fa-user"></i></i><p>Mon mur</p></a></div>
-            <div class="itemmenu"><a href="index.php?action=prives"><i class="fas fa-comment-dots"></i><p>Messenger</p></a></div>
         </div>
         <div class="partieamis">
         <?php
@@ -32,7 +32,7 @@
             }
             echo '<div id="mesamis">';
             while($line = $query->fetch()){
-                echo '<div class="ami"><a href="index.php?action=mur&id='.$line['id'].'"><img class="imgami" src="avatars/'.$line['avatar'].'"></a><a href="index.php?action=mur&id='.$line['id'].'"><p>'.$line['prenom'].' '.$line['nom'].'</p></a><a href="index.php?action=prives&id='.$line['id'].'"><i class="far fa-comment-alt chat"></i></a></div>';
+                echo '<div class="ami"><a href="index.php?action=mur&id='.$line['id'].'"><img class="imgami" src="avatars/'.$line['avatar'].'"></a><a href="index.php?action=mur&id='.$line['id'].'"><p>'.$line['prenom'].' '.$line['nom'].'</p></a><a href="index.php?action=prives&id='.$line['id'].'"><i class="fas fa-comment-dots chat"></i></a></div>';
             }
             echo '</div>';
 
@@ -66,7 +66,7 @@
             }
             echo '<div id="listeenvoyees">';
             while($line = $query->fetch()){
-                demandeenvoyees($line['id'],$line['avatar'],$line['prenom'],$line['nom']);
+                demandeenvoyees($line['id'],$line['avatar'],$line['prenom'],$line['nom'],0);
             }
             echo '</div>';
 

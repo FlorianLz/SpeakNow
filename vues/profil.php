@@ -1,5 +1,6 @@
 <div class="contenu">
     <div class="infoscote">
+        <img src="img/logosn.png" alt="Logo" class="logomenu" onclick="accueil();">
         <div class="monprofil">
             <a href="index.php?action=mur"><div class="imageprofil" style="background-image:url('avatars/<?php echo $_SESSION['avatar'];?>');"></div></a>
             <div class="txtprofil">
@@ -15,7 +16,6 @@
             <div class="itemmenu"><a href="index.php?action=fil"><i class="fas fa-home"></i><p>Fil d'actus</p></a></div>
             <div class="itemmenu"><a href="index.php?action=recherche"><i class="fas fa-search"></i><p>Recherche</p></a></div>
             <div class="itemmenu"><a href="index.php?action=mur"><i class="fas fa-user"></i></i><p>Mon mur</p></a></div>
-            <div class="itemmenu"><a href="index.php?action=prives"><i class="fas fa-comment-dots"></i><p>Messenger</p></a></div>
         </div>
         <div class="partieamis">
         <?php
@@ -23,9 +23,9 @@
             $query = $pdo->prepare($sql);
             $query->execute(array($_SESSION['id'],$_SESSION['id']));
             $nbamis=$query->rowCount();
-            if($nbamis == 0){
+            /*if($nbamis == 0){
                 echo '<h2>Vous n\'avez aucun ami</h2>';
-            }else if($nbamis == 1){
+            }else*/ if($nbamis == 1){
                 echo '<div class="itemmenu"><i class="fas fa-user-friends"></i><p onclick="afficherlisteamis();">Vous avez '.$nbamis.' ami</p></div>';
             }else{
                 echo '<div class="itemmenu"><i class="fas fa-user-friends"></i><p onclick="afficherlisteamis();">Vous avez '.$nbamis.' amis</p></div>';

@@ -320,7 +320,10 @@ header .recherche form input[type="submit"]:hover{
   cursor:pointer;
 }
 .ami > a > i, .ami > a >p{
-  color:white;
+  color:white!important;
+}
+.logoaccueil{
+  width:25%;
 }
 
 
@@ -914,6 +917,7 @@ footer{
 .droite{
   background-color:var(--principale);
   align-self:flex-end;
+  float:right;
   color:white;
 }
 .droite > p{
@@ -933,6 +937,7 @@ footer{
 .msgdroite{
   display:flex;
   align-self:flex-end;
+  justify-content: flex-end;
   align-items: center;
 }
 .msgdroite img{
@@ -999,6 +1004,15 @@ footer{
   }
   .boutonloginresp{
     display:block;
+    margin-top:25px;
+    background-color:white;
+    padding:10px;
+    border-radius:20px;
+  }
+  .boutonloginresp > a{
+    color:var(--principale);
+    text-decoration: none;
+    padding:10px;
   }
   .boutonlogin,.boutoninscription{
     display:none;
@@ -1120,7 +1134,9 @@ footer{
   .ami > a > i{
     color:black;
   }
-
+  .ami > a > p{
+    color:black!important;
+  }
 
 
 
@@ -1249,6 +1265,9 @@ footer{
 }
 
 /* Page recherche */
+.resultatsrecherche{
+  padding:10px;
+}
 #formrecherche{
   padding-top:15px;
   padding-bottom:40px;
@@ -1262,4 +1281,15 @@ footer{
   width:20%;
   background-color:var(--principale);
   color:white;
+}
+.imgprofil{
+  height:auto;
+}
+.logomenu{
+  position: absolute;
+  width: 31px;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor:pointer;
 }

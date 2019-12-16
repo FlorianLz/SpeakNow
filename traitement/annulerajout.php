@@ -15,6 +15,8 @@
         }elseif(isset($_POST['idpage'])){
             $idpage=$_POST['idpage'];
             header('Location: index.php?action=mur&id='.$idpage);
+        }elseif(isset($_POST['a']) && $_POST['a'] == 1){
+            header("Location: index.php?action=amis");
         }else{
             header("Location: index.php?action=mur");
         }
