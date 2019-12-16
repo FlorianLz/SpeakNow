@@ -1203,6 +1203,10 @@ footer{
 }
 .txtprofil > div > a{
   display:flex;
+  text-decoration:none;
+}
+.txtprofil > div > a:hover > i,.txtprofil > div > a:hover > p{
+  color:#f5cb5c;
 }
 .txtprofil > div > a >p{
   padding-left:10px;
@@ -1211,12 +1215,16 @@ footer{
 .txtprofil > div > a >i{
   color:white;
 }
+.ami > a > i:hover{
+  color:#f5cb5c!important;
+}
 .itemmenu{
   padding:12px;
   display:flex;
 }
 .itemmenu > a{
   display:flex;
+  text-decoration:none;
 }
 .itemmenu > a > i{
   color:white;
@@ -1237,6 +1245,9 @@ footer{
   color:#3a407a;
   padding-bottom:10px;
 }
+.chat:hover{
+  color:#f5cb5c;
+}
 .deconnexion{
   font-size:2rem;
 }
@@ -1244,7 +1255,7 @@ footer{
   color:white;
 }
 .deconnexion > a > i:hover{
-  color:#f5cb5c;
+  color:#f5cb5c!important;
 }
 .active >a>p,.active >a> i {
   color:#f5cb5c;
