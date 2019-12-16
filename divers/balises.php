@@ -100,6 +100,7 @@ function formsupprimerpost($id,$titre,$lieuredirection,$idredirection,$contenu,$
                     </form>';
 }
 
+//Ajout post
 function formajoutpost($idpers,$prenompers){
     echo "<div class='poster'><form enctype='multipart/form-data' class='formposter' action='index.php?action=poster' method='post'>";
     if(!empty($prenompers)){
@@ -107,9 +108,19 @@ function formajoutpost($idpers,$prenompers){
     }else{
         echo "<h3>Nouveau speak</h3>";
     }
-    echo "<input type='text' name='titre' placeholder='Titre...'>
+    echo "<input type='text' name='titre' placeholder='Titre...'";
+    if(isset($_SESSION['titre'])){
+        echo "value='".$_SESSION['titre']."'";
+        unset($_SESSION['titre']);
+    } 
+    echo ">
     <input type='hidden' name='idpers' value='$idpers'>
-    <textarea name='message' placeholder='Message...'></textarea>
+    <textarea name='message' placeholder='Message...'>";
+    if(isset($_SESSION['message'])){
+        echo $_SESSION['message'];
+        unset($_SESSION['message']);
+    } 
+    echo "</textarea>
     <div class='uploadimage'>
         <label class='uploadfile' for='image'><i class='fas fa-image'></i></label>
         <div class='cacherbtnfile'>
@@ -121,6 +132,7 @@ function formajoutpost($idpers,$prenompers){
 </form></div>";
 }
 
+//Afficher boutons accepter/refuser pour les demandes recues
 function demandesrecues($idpers,$avatarpers,$prenompers,$nompers){
     echo '<div class="ami"><a href="index.php?action=mur&id='.$idpers.'"><img class="imgami" src="avatars/'.$avatarpers.'"></a><a href="index.php?action=mur&id='.$idpers.'"><p>'.$prenompers.' '.$nompers.'</p></a>';
             echo '<div class="recuesetenv"><form method="post" action="index.php?action=ajoutami">
@@ -133,6 +145,7 @@ function demandesrecues($idpers,$avatarpers,$prenompers,$nompers){
                         </form></div></div>';
 }
 
+//Afficher bouton annuler ajout pour les demandes envoyees
 function demandeenvoyees($idpers,$avatarpers,$prenompers,$nompers){
     echo '<div class="ami"><a href="index.php?action=mur&id='.$idpers.'"><img class="imgami" src="avatars/'.$avatarpers.'"></a><a href="index.php?action=mur&id='.$idpers.'"><p>'.$prenompers.' '.$nompers.'</p></a>';
             echo '<form method="post" action="index.php?action=annulerajout">
@@ -141,6 +154,7 @@ function demandeenvoyees($idpers,$avatarpers,$prenompers,$nompers){
                         </form></div>';
 }
 
+//Afficher un post
 function afficherpost($idpost,$idauteur,$avatarauteur,$prenomauteur,$nomauteur,$dateecrit,$idsession,$titre,$contenu,$image,$date,$idredirection){
     echo '<div class="postmur" id="post'.$idpost.'">
     <div class="auteur"><div><a href="index.php?action=mur&id='.$idauteur.'"><img class="imgpost" src="avatars/'.$avatarauteur.'">
@@ -154,6 +168,21 @@ function afficherpost($idpost,$idauteur,$avatarauteur,$prenomauteur,$nomauteur,$
     <p>'.$contenu.'</p>';
 }
 
+//Afficher les posts écrits par moi ou mes amis sur notre propre mur
+function afficherpostfil($idpost,$idauteur,$avatarauteur,$prenomauteur,$nomauteur,$dateecrit,$idsession,$titre,$contenu,$image,$date,$idredirection){
+    echo '<div class="postmur" id="post'.$idpost.'">
+    <div class="auteur"><div><a href="index.php?action=mur&id='.$idauteur.'"><img class="imgpost" src="avatars/'.$avatarauteur.'">
+    <div><p>'.$prenomauteur.' '.$nomauteur.'</p></a><p>'.$dateecrit.'</p></div></div>
+    <div>';
+    if($idauteur == $idsession){
+        formsupprimerpost($idpost,$titre,"filredirection",$idredirection,$contenu,$image,$date);
+    }
+    echo '</div></div>
+    <p class="titrepost">'.$titre.'</p><br>
+    <p>'.$contenu.'</p>';
+}
+
+//Afficher les posts écrits par une autre personne sur mon mur ou celui de mes amis
 function afficherpostfil2($idpost,$idauteur,$avatarauteur,$prenomauteur,$nomauteur,$dateecrit,$idsession,$titre,$contenu,$image,$date,$idredirection,$iddest,$prenomdest,$nomdest){
     echo '<div class="postmur" id="post'.$idpost.'">
     <div class="auteur"><div><a href="index.php?action=mur&id='.$idauteur.'"><img class="imgpost" src="avatars/'.$avatarauteur.'">
@@ -179,19 +208,7 @@ function afficherpostfil2($idpost,$idauteur,$avatarauteur,$prenomauteur,$nomaute
     <p>'.$contenu.'</p>';
 }
 
-function afficherpostfil($idpost,$idauteur,$avatarauteur,$prenomauteur,$nomauteur,$dateecrit,$idsession,$titre,$contenu,$image,$date,$idredirection){
-    echo '<div class="postmur" id="post'.$idpost.'">
-    <div class="auteur"><div><a href="index.php?action=mur&id='.$idauteur.'"><img class="imgpost" src="avatars/'.$avatarauteur.'">
-    <div><p>'.$prenomauteur.' '.$nomauteur.'</p></a><p>'.$dateecrit.'</p></div></div>
-    <div>';
-    if($idauteur == $idsession){
-        formsupprimerpost($idpost,$titre,"filredirection",$idredirection,$contenu,$image,$date);
-    }
-    echo '</div></div>
-    <p class="titrepost">'.$titre.'</p><br>
-    <p>'.$contenu.'</p>';
-}
-
+//Entrée pour envoyer un MP
 function formMP($idPers){
     echo '<form onsubmit="envoi();return false;" id="formMP">
                 <input type="text" id="messageMP" name="message" placeholder="Votre message...">
@@ -200,6 +217,7 @@ function formMP($idPers){
                 </form>';
 }
 
+//Formulaire de recherche
 function formrecherche(){
     echo "<div class='recherche'>
         <form id='formrecherche' action='index.php' method='GET'>
