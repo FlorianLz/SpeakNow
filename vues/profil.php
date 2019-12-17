@@ -32,7 +32,7 @@
             }
             echo '<div id="mesamis">';
             while($line = $query->fetch()){
-                echo '<div class="ami"><a href="index.php?action=mur&id='.$line['id'].'"><img class="imgami" src="avatars/'.$line['avatar'].'"></a><a href="index.php?action=mur&id='.$line['id'].'"><p>'.$line['prenom'].' '.$line['nom'].'</p></a><a href="index.php?action=prives&id='.$line['id'].'"><i class="far fa-comment-alt chat"></i></a></div>';
+                echo '<div class="ami"><a href="index.php?action=mur&id='.$line['id'].'"><img class="imgami" src="avatars/'.$line['avatar'].'"></a><a href="index.php?action=mur&id='.$line['id'].'"><p>'.$line['prenom'].' '.$line['nom'].'</p></a><a href="index.php?action=prives&id='.$line['id'].'"><i class="fas fa-comment-dots chat"></i></a></div>';
             }
             echo '</div>';
 
@@ -66,7 +66,7 @@
             }
             echo '<div id="listeenvoyees">';
             while($line = $query->fetch()){
-                demandeenvoyees($line['id'],$line['avatar'],$line['prenom'],$line['nom']);
+                demandeenvoyees($line['id'],$line['avatar'],$line['prenom'],$line['nom'],0);
             }
             echo '</div>';
 
@@ -118,3 +118,4 @@
         </div>
     </div>
 </div>
+<script src="./js/script.js"></script>

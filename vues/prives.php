@@ -14,9 +14,9 @@
         <div class="menu">
             <p>MENU</p>
             <div class="itemmenu"><a href="index.php?action=fil"><i class="fas fa-home"></i><p>Fil d'actus</p></a></div>
-            <div class="itemmenu"><a href="index.php?action=fil"><i class="fas fa-search"></i><p>Recherche</p></a></div>
-            <div class="itemmenu"><a href="index.php?action=fil"><i class="fas fa-user"></i></i><p>Mon mur</p></a></div>
-            <div class="itemmenu active"><a href="index.php?action=fil"><i class="fas fa-comment-dots"></i><p>Messenger</p></a></div>
+            <div class="itemmenu"><a href="index.php?action=recherche"><i class="fas fa-search"></i><p>Recherche</p></a></div>
+            <div class="itemmenu"><a href="index.php?action=mur"><i class="fas fa-user"></i></i><p>Mon mur</p></a></div>
+            <div class="itemmenu active"><a href="#"><i class="fas fa-comment-dots"></i><p>Messenger</p></a></div>
         </div>
         
         <div class="partieamis">
