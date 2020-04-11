@@ -46,3 +46,16 @@ var loadFile = function(event) {
 function accueil(){
     document.location.href="index.php?action=mur"; 
 }
+
+//Rafraichissement automatique de la recherche
+$('input[name=texterecherche]').on('keyup', function (event){
+    let texterecherche = $(this).val();
+
+    let formData = { //On créer un tableau avec les données du formulaire
+        'texterecherche': texterecherche
+    };
+
+    $.get("./traitement/recherche.php", formData, function (data) {
+        $('#resultatsrecherche').html(data);
+    });
+});
