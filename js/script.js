@@ -59,3 +59,16 @@ $('input[name=texterecherche]').on('keyup', function (event){
         $('#resultatsrecherche').html(data);
     });
 });
+
+$('.inputlike').on('click', function (event) {
+    event.preventDefault();
+    let idPost= $(this).attr('data-like');
+
+    let formData = { //On créer un tableau avec les données du formulaire
+        'idPost': idPost
+    };
+
+    $.post("./traitement/like.php", formData, function (data) { //On envoi le tout vers la page de traitement
+        $('#labellike'+idPost).html(data); //On affiche l'HTML retourné  par la page PHP dans la div #contenu
+    });
+});

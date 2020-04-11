@@ -112,9 +112,9 @@
                     $querynblike->execute(array($line['id']));
                     $nblike=$querynblike->rowCount();
                     if($linelike = $querylike->fetch()){
-                        formlike($line['id'],$_SESSION['id'],"filredirection","boutonlike","suppressionlike",$nblike);
+                        formlike($line['id'],"boutonlike",$nblike);
                     }else{
-                        formlike($line['id'],$_SESSION['id'],"filredirection","boutonpaslike","ajoutlike",$nblike);
+                        formlike($line['id'],"boutonpaslike",$nblike);
                     }
 
                     //Une image est liée au post ? On l'affiche

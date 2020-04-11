@@ -26,6 +26,4 @@ $listeDesActions = array(
     "demandeami" => "traitement/demandeami.php",
     "ajoutcommentaire" => "traitement/ajoutcommentaire.php",
     "supprimercommentaire" => "traitement/supprimercommentaire.php",
-    "ajoutlike" => "traitement/ajoutlike.php",
-    "suppressionlike" => "traitement/suppressionlike.php",
 );

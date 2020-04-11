@@ -47,12 +47,10 @@ function message($msg) {
 }
 
 //Affichage du bouton like
-function formlike($idpost,$idredirection,$lieuredirection,$typebouton,$action,$nblike){
-    echo "<form action='index.php?action=$action' method='POST'>
-            <input type='hidden' name='idPost' value='$idpost'>
-            <input type='hidden' name='$lieuredirection' value='$idredirection'>
-            <label for='like$idpost'><i class='fas fa-thumbs-up $typebouton'>$nblike</i></label>
-            <input id='like$idpost' type='submit' class='inputlike'>
+function formlike($idpost,$typebouton,$nblike){
+    echo "<form>
+            <label id='labellike$idpost' for='like$idpost'><i class='fas fa-thumbs-up $typebouton'>$nblike</i></label>
+            <input id='like$idpost' type='submit' class='inputlike' data-like='$idpost'>
             </form><br><br>";
 }
 
