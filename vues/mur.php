@@ -159,12 +159,12 @@
                 $query1 = $pdo->prepare($sql1);
                 $query1->execute(array($line['id']));
                 while($line1 = $query1->fetch()){
-                    echo '<div class="comm">
+                    echo '<div class="comm" id="comm'.$line1['id'].'">
                     <div class="auteur"><div><a href="index.php?action=mur&id='.$line1['idAuteur'].'"><img class="imgpost" src="avatars/'.$line1['avatar'].'">
                         <div><p>'.$line1['prenom'].' '.$line1['nom'].'</p></a><p>'.$line1['dateCommentaire'].'</p></div></div>
                         <div>';
                         if($line1['idAuteur']==$_SESSION['id']){
-                            formsupprimercommentaire($line['id'],$line1['id'],$line1['commentaire'],$_SESSION['id'], "murredirection");
+                            formsupprimercommentaire($line['id'],$line1['id']);
                         }
                         echo '</div>
                         </div>
@@ -296,12 +296,12 @@
                     $query1 = $pdo->prepare($sql1);
                     $query1->execute(array($line['id']));
                     while($line1 = $query1->fetch()){
-                        echo '<div class="comm">
+                        echo '<div class="comm" id="comm'.$line1['id'].'">
                         <div class="auteur"><div><a href="index.php?action=mur&id='.$line1['idAuteur'].'"><img class="imgpost" src="avatars/'.$line1['avatar'].'">
                             <div><p>'.$line1['prenom'].' '.$line1['nom'].'</p></a><p>'.$line1['dateCommentaire'].'</p></div></div>
                             <div>';
                             if($line1['idAuteur']==$_SESSION['id']){
-                                formsupprimercommentaire($line['id'],$line1['id'],$line1['commentaire'],$idPers, "murredirection");
+                                formsupprimercommentaire($line['id'],$line1['id']);
                             }
                             echo '</div>
                             </div>

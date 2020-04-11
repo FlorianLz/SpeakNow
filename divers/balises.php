@@ -65,15 +65,11 @@ function formajoutcommentaire($idpost,$idredirection,$lieuredirection){
     </form>';
 }
 //Suppression commentaire
-function formsupprimercommentaire($idpost,$idcomm,$comm,$idredirection,$lieuredirection){
-    echo '<form method="post" action="index.php?action=supprimercommentaire">
-                                <input type="hidden" name="idCommentaire" value="'.$idcomm.'">
-                                <input type="hidden" name="commentaire" value="'.$comm.'">
-                                <input type="hidden" name="idpost" value="'.$idpost.'">
-                                <input type="hidden" name='.$lieuredirection.' value="'.$idredirection.'">
-                                <label for="supprimercomm'.$idcomm.'"><i class="fas fa-times"></i></label>
-                                <input type="submit" value="" id="supprimercomm'.$idcomm.'">                                
-                                </form>';
+function formsupprimercommentaire($idpost,$idcomm){
+    echo '<form>
+        <label for="supprimercomm'.$idcomm.'"><i class="fas fa-times"></i></label>
+        <input type="submit" value="" id="supprimercomm'.$idcomm.'" class="inputsupprimercomm" data-idpost="'.$idpost.'" data-idcomm="'.$idcomm.'">                                
+        </form>';
 }
 //Affichage erreurs liees aux commentaires
 function alertecomm($lineid){
