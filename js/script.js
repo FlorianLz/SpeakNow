@@ -85,7 +85,9 @@ $('.inputsupprimercomm').on('click', function (event) {
 
     $.post("./traitement/supprimercommentaire.php", formData, function (data) { //On envoi le tout vers la page de traitement
         if(data=='ok'){
-            $('#comm'+idComm).remove();
+            $('#comm'+idComm).slideUp(400, function(){
+                $(this).remove();
+            });
         }
     });
 });
