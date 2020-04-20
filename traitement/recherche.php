@@ -1,5 +1,5 @@
 <?php
-if (isset($_GET['texterecherche']) && !empty($_GET['texterecherche'])){
+if (isset($_GET['texterecherche']) && !empty($_GET['texterecherche']) && ($_GET['texterecherche'] != '  ')){
     include('../config/config.php');
     include('../config/bd.php');
     $texterecherche=htmlspecialchars(strtolower($_GET['texterecherche']));

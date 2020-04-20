@@ -50,14 +50,16 @@ function accueil(){
 //Rafraichissement automatique de la recherche
 $('input[name=texterecherche]').on('keyup', function (event){
     let texterecherche = $(this).val();
+    if(texterecherche.trim() == 0){
+    }else{
+        let formData = { //On créer un tableau avec les données du formulaire
+            'texterecherche': texterecherche
+        };
 
-    let formData = { //On créer un tableau avec les données du formulaire
-        'texterecherche': texterecherche
-    };
-
-    $.get("./traitement/recherche.php", formData, function (data) {
-        $('#resultatsrecherche').html(data);
-    });
+        $.get("./traitement/recherche.php", formData, function (data) {
+            $('#resultatsrecherche').html(data);
+        });
+    }
 });
 
 $('.inputlike').on('click', function (event) {
@@ -73,7 +75,7 @@ $('.inputlike').on('click', function (event) {
     });
 });
 
-$('.inputsupprimercomm').on('click', function (event) {
+$('.inputsupprimercomm').on('click',function (event) {
     event.preventDefault();
     let idPost= $(this).attr('data-idpost');
     let idComm= $(this).attr('data-idcomm');
@@ -87,7 +89,31 @@ $('.inputsupprimercomm').on('click', function (event) {
         if(data=='ok'){
             $('#comm'+idComm).slideUp(400, function(){
                 $(this).remove();
+
+                $.post("./traitement/ajoutcommescript.php", formData, function (data) { //On envoi le tout vers la page de traitement
+                    $('#script').html(data);//On affiche l'HTML retourné  par la page PHP dans la div
+                });
             });
         }
+    });
+});
+
+$('.formcomm').on('submit',function (event) {
+    event.preventDefault();
+    let idpost = $(this).attr('data-idpost');
+    let comm = $(this).find("textarea").val();
+
+    let formData = { //On créer un tableau avec les données du formulaire
+        'idpost': idpost,
+        'comm': comm
+    };
+    $.post("./traitement/ajoutcommentaire.php", formData, function (data) { //On envoi le tout vers la page de traitement
+        $('#commentairespost'+idpost).append(data);//On affiche l'HTML retourné  par la page PHP dans la div
+        $('textarea[name=comm]').val('');
+
+    }).done(function () {
+        $.post("./traitement/ajoutcommescript.php", formData, function (data) { //On envoi le tout vers la page de traitement
+            $('#script').html(data);//On affiche l'HTML retourné  par la page PHP dans la div
+        });
     });
 });

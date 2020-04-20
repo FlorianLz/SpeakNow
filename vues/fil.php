@@ -122,9 +122,9 @@
                         echo '<img src="./imagesposts/'.$line['image'].'">';
                     }
                     //On affiche le formulaire permettant de poster un commentaire
-                    echo '<div class="commentairespost">';
-                    formajoutcommentaire($line['id'],$_SESSION['id'],"filredirection");
-                    alertecomm($line['id']);
+                    echo '<div class="commentairespost" id="commentairespost'.$line['id'].'">';
+                    formajoutcommentaire($line['id'],$_SESSION['id']);
+                    //alertecomm($line['id']);
                     //On affiche les commentaires
                     $sql1="SELECT nom, prenom, avatar, commentaires.id, commentaires.commentaire, commentaires.idAuteur, DATE_FORMAT(dateCommentaire, 'Le %d/%m/%Y à %Hh%i') AS dateCommentaire FROM utilisateurs JOIN commentaires ON commentaires.idAuteur=utilisateurs.id WHERE commentaires.idPost=? ORDER BY commentaires.id ASC";
                     $query1 = $pdo->prepare($sql1);
@@ -153,4 +153,5 @@
         ?>
     </div>
 </div>
+<div id="script"></div>
 <script src="./js/script.js"></script>

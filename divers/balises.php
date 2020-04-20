@@ -55,11 +55,10 @@ function formlike($idpost,$typebouton,$nblike){
 }
 
 //Ajout commentaire
-function formajoutcommentaire($idpost,$idredirection,$lieuredirection){
-    echo '<form method="post" action="index.php?action=ajoutcommentaire">
+function formajoutcommentaire($idpost,$idredirection){
+    echo '<form method="post" class="formcomm" data-idpost="'.$idpost.'">
          <img class="imgpost" src="avatars/'.$_SESSION['avatar'].'">
         <textarea name="comm" placeholder="Votre commentaire..." class="autoExpand" rows="1" data-min-rows="1"></textarea>
-        <input type="hidden" name='.$lieuredirection.' value="'.$idredirection.'">
         <input type="hidden" name="idpost" value="'.$idpost.'">
         <input type="submit" value="" name="submit" id="submit'.$idpost.'"><label for="submit'.$idpost.'"><i class="fas fa-paper-plane"></i></label>
     </form>';
