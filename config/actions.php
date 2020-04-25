@@ -11,7 +11,6 @@ $listeDesActions = array(
     "prives" => "vues/prives.php",
     "accueil2" => "vues/accueil2.php",
     "recherche" => "vues/recherche.php",
-    "voirprofil" => "vues/voirprofil.php",
     "connexion" => "traitement/connexion.php",
     "deconnexion" => "traitement/deconnexion.php",
     "inscription" => "vues/inscription.php",

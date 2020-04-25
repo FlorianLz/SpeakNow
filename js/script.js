@@ -44,7 +44,7 @@ var loadFile = function(event) {
   };
 
 function accueil(){
-    document.location.href="index.php?action=mur"; 
+    document.location.href="mur";
 }
 
 //Rafraichissement automatique de la recherche

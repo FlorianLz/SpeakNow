@@ -1,5 +1,5 @@
 <?php if (isset($_SESSION['id'])){
-  header('Location: index.php?action=mur');
+  header('Location: ./mur');
 }
 ?>
 <div class="contenuaccueil">

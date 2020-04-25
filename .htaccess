@@ -1,0 +1,39 @@
+# On suit les liens symboliques
+Options +FollowSymlinks
+# Activation du mod rewrite d'Apache
+RewriteEngine On
+# Réécriture de index.html vers index.php
+RewriteRule ^/$ index.php
+# Réécriture des URL des articles
+# RewriteRule ^/index.php?action=accueil/lire-([0-9]+)-([a-z0-9\-]+)\.html$ /index.php?rub=lireArticle&id=$1 [L]
+RewriteRule ^mur-([0-9]+)$ index.php?action=mur&id=$1
+RewriteRule ^prives-([0-9]+)$ index.php?action=prives&id=$1
+RewriteRule ^fil$ index.php?action=fil
+RewriteRule ^mur$ index.php?action=mur
+RewriteRule ^recherche$ index.php?action=recherche
+RewriteRule ^profil$ index.php?action=profil
+RewriteRule ^amis$ index.php?action=amis
+RewriteRule ^login$ index.php?action=login
+RewriteRule ^inscription$ index.php?action=inscription
+RewriteRule ^erreur$ index.php?action=erreur
+RewriteRule ^accueil$ index.php?action=accueil
+RewriteRule ^connexion$ index.php?action=connexion
+RewriteRule ^deconnexion$ index.php?action=deconnexion
+RewriteRule ^creation$ index.php?action=creation
+RewriteRule ^modification$ index.php?action=modification
+RewriteRule ^ajoutavatar$ index.php?action=ajoutavatar
+RewriteRule ^poster$ index.php?action=poster
+RewriteRule ^supprimerpost$ index.php?action=supprimerpost
+RewriteRule ^ajoutami$ index.php?action=ajoutami
+RewriteRule ^annulerajout$ index.php?action=annulerajout
+RewriteRule ^refusami$ index.php?action=refusami
+RewriteRule ^demandeami$ index.php?action=demandeami
+RewriteRule ^ajoutcommentaire$ index.php?action=ajoutcommentaire
+RewriteRule ^supprimercommentaire$ index.php?action=supprimercommentaire
+
+
+#Gestion page 404
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . erreur [L]
+

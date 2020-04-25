@@ -2,20 +2,20 @@
     <div class="infoscote">
         <img src="img/logosn.png" alt="Logo" class="logomenu" onclick="accueil();">
         <div class="monprofil">
-            <a href="index.php?action=mur"><div class="imageprofil" style="background-image:url('avatars/<?php echo $_SESSION['avatar'];?>');"></div></a>
+            <a href="mur"><div class="imageprofil" style="background-image:url('avatars/<?php echo $_SESSION['avatar'];?>');"></div></a>
             <div class="txtprofil">
                 <h1><?php echo $_SESSION['prenom'].' '.$_SESSION['nom']; ?></h1>
-                <div><a href="index.php?action=profil"><i class="fas fa-user-edit"></i><p>Modifier mon profil</p></a></div>
+                <div><a href="profil"><i class="fas fa-user-edit"></i><p>Modifier mon profil</p></a></div>
             </div>
             <div class="deconnexion">
-                <a href="index.php?action=deconnexion"><i class="fas fa-sign-out-alt"></i></a>
+                <a href="deconnexion"><i class="fas fa-sign-out-alt"></i></a>
             </div>
         </div>
         <div class="menu">
             <p>MENU</p>
-            <div class="itemmenu"><a href="index.php?action=fil"><i class="fas fa-home"></i><p>Fil d'actus</p></a></div>
-            <div class="itemmenu"><a href="index.php?action=recherche"><i class="fas fa-search"></i><p>Recherche</p></a></div>
-            <div class="itemmenu"><a href="index.php?action=mur"><i class="fas fa-user"></i></i><p>Mon mur</p></a></div>
+            <div class="itemmenu"><a href="fil"><i class="fas fa-home"></i><p>Fil d'actus</p></a></div>
+            <div class="itemmenu"><a href="recherche"><i class="fas fa-search"></i><p>Recherche</p></a></div>
+            <div class="itemmenu"><a href="mur"><i class="fas fa-user"></i></i><p>Mon mur</p></a></div>
             <div class="itemmenu active"><a href="#"><i class="fas fa-comment-dots"></i><p>Messenger</p></a></div>
         </div>
         
@@ -34,7 +34,7 @@
             }
             echo '<div id="mesamis">';
             while($line = $query->fetch()){
-                echo '<div class="ami"><a href="index.php?action=mur&id='.$line['id'].'"><img class="imgami" src="avatars/'.$line['avatar'].'"></a><a href="index.php?action=mur&id='.$line['id'].'"><p>'.$line['prenom'].' '.$line['nom'].'</p></a><a href="index.php?action=prives&id='.$line['id'].'"><i class="fas fa-comment-dots chat"></i></a></div>';
+                echo '<div class="ami"><a href="mur-'.$line['id'].'"><img class="imgami" src="avatars/'.$line['avatar'].'"></a><a href="mur-'.$line['id'].'"><p>'.$line['prenom'].' '.$line['nom'].'</p></a><a href="prives-'.$line['id'].'"><i class="fas fa-comment-dots chat"></i></a></div>';
             }
             echo '</div>';
 
@@ -97,10 +97,10 @@
                     formMP($idPers);
                 
                 }else{
-                    header ('Location: index.php?action=mur');
+                    header ('Location: mur');
                 }
             }else{
-                header ('Location: index.php?action=mur');
+                header ('Location: mur');
             }
             ?>
         </div>

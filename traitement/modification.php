@@ -25,7 +25,7 @@ if (!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['password
         $_SESSION['prenom'] = $prenom;
         $_SESSION['date']=$_POST['datenaissance'];
 
-        header('Location: index.php?action=profil');
+        header('Location: profil');
 
       } catch (Exception $e) {
         echo 'Le format de l\'adresse mail est incorrect !';
