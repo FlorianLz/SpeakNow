@@ -34,7 +34,7 @@ echo $_SESSION['id'];
                     $sql = 'UPDATE utilisateurs SET avatar=? WHERE id=?';
                     $query = $pdo->prepare($sql);
                     $query->execute(array($fichier,$_SESSION['id']));
-                    header('Location: =profil');
+                    header('Location: profil');
                   } catch (Exception $e) {
                     echo 'Erreur lors de l\'importaion de l\'avatar ! ';
                     }
