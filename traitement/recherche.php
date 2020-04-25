@@ -1,5 +1,6 @@
 <?php
-if (isset($_GET['texterecherche']) && !empty($_GET['texterecherche']) && ($_GET['texterecherche'] != '  ')){
+session_start();
+if (isset($_GET['texterecherche']) && !empty($_GET['texterecherche'])){
     include('../config/config.php');
     include('../config/bd.php');
     $texterecherche=htmlspecialchars(strtolower($_GET['texterecherche']));
@@ -13,7 +14,7 @@ if (isset($_GET['texterecherche']) && !empty($_GET['texterecherche']) && ($_GET[
         $query->execute(array($separation[0],$separation[0]));
 
         while($line = $query->fetch()){
-            echo '<div class="ami"><div><a href="index.php?action=mur&id='.$line['id'].'"><img class="imgami" src="avatars/'.$line['avatar'].'"></a><a href="index.php?action=mur&id='.$line['id'].'"><p>'.$line['prenom'].' '.$line['nom'].'</p></a></div>';
+            echo '<div id="ami'.$line['id'].'" class="ami"><div><a href="index.php?action=mur&id='.$line['id'].'"><img class="imgami" src="avatars/'.$line['avatar'].'"></a><a href="index.php?action=mur&id='.$line['id'].'"><p>'.$line['prenom'].' '.$line['nom'].'</p></a></div>';
             $sql1='SELECT * FROM lien WHERE (idUtilisateur1=? AND idUtilisateur2=?) OR ((idUtilisateur1=? AND idUtilisateur2=?))';
             $query1 = $pdo->prepare($sql1);
             $query1->execute(array($_SESSION['id'],$line['id'],$line['id'],$_SESSION['id']));
@@ -24,20 +25,10 @@ if (isset($_GET['texterecherche']) && !empty($_GET['texterecherche']) && ($_GET[
                 if ($line1['etat'] == 'attente'){
                     if($line1['idUtilisateur1'] == $_SESSION['id']){
                         echo '<p> Vous avez demandé en ami</p>';
-                        echo '<form method="post" action="index.php?action=annulerajout">
-                                    <input type="hidden" name="idAmi" value="'.$line['id'].'">
-                                    <input type="hidden" name="texterecherche" value="'.$_GET['texterecherche'].'">
-                                    <input type="submit" value="Annuler">
-                                    </form></div>';
+                        echo '<button class="actionami" data-action="annuler" data-idami="'.$line['id'].'" data-page="recherche">Annuler</button></div>';
                     }else{
-                        echo '<div><form method="post" action="index.php?action=ajoutami">
-                                    <input type="hidden" name="idAmi" value="'.$line['id'].'">
-                                    <input type="submit" value="Accepter">
-                                    </form>
-                                    <form method="post" action="index.php?action=refusami">
-                                    <input type="hidden" name="idAmi" value="'.$line['id'].'">
-                                    <input type="submit" value="Refuser">
-                                    </form></div></div>';
+                        echo '<div><button class="actionami" data-action="accepter" data-idami="'.$line['id'].'" data-page="recherche">Accepter</button>
+                                    <button class="actionami" data-action="refuser" data-idami="'.$line['id'].'" data-page="recherche">Refuser</button></div></div>';
                     }
 
                 }
@@ -46,9 +37,13 @@ if (isset($_GET['texterecherche']) && !empty($_GET['texterecherche']) && ($_GET[
                 }
             }else{
                 if($line['id'] != $_SESSION['id']){
-                    echo '<form action="index.php?action=demandeami" method="POST"><input type="hidden" name="idAmi" value="'.$line['id'].'"><input type="hidden" name="texterecherche" value="'.$_GET['texterecherche'].'"><input type="submit" value="Ajouter"></form></div>';
+                    echo '<button class="actionami" data-action="ajouter" data-idami="'.$line['id'].'" data-page="recherche">Ajouter</button>
+                          </div>';
                 }else{
-                    echo '<div class="modifierprofil"><a href="index.php?action=profil"><i class="fas fa-user-edit"></i><p>Modifier mon profil</p></a></div></div>';
+                    echo '<div class="modifierprofil"><a href="index.php?action=profil">
+                            <i class="fas fa-user-edit"></i>
+                            <p>Modifier mon profil</p></a>
+                          </div></div>';
                 }
 
             }
@@ -70,3 +65,59 @@ if (isset($_GET['texterecherche']) && !empty($_GET['texterecherche']) && ($_GET[
 }
 
 ?>
+<div id="script"></div>
+
+<script>
+    /* Partie recherche */
+    $('.actionami').on('click', function (e) {
+        let action=$(this).attr('data-action');
+        let idami=$(this).attr('data-idami');
+        let page=$(this).attr('data-page');
+        let formData={
+            'action' : action,
+            'idami' : idami,
+            'page' : page,
+        };
+
+        if(action === 'ajouter') {
+            $.post("./traitement/demandeami.php", formData, function (data) {
+                $('#ami' + idami).html(data);
+            }).done(function () {
+                $.post("./traitement/recherchescript.php", formData, function (data) { //On envoi le tout vers la page de traitement
+                    $('#script').html(data);//On affiche l'HTML retourné  par la page PHP dans la div
+                });
+            });
+        };
+
+        if(action === 'annuler') {
+            $.post("./traitement/annulerajout.php", formData, function (data) {
+                $('#ami' + idami).html(data);
+            }).done(function () {
+                $.post("./traitement/recherchescript.php", formData, function (data) { //On envoi le tout vers la page de traitement
+                    $('#script').html(data);//On affiche l'HTML retourné  par la page PHP dans la div
+                });
+            });
+        }
+
+        if(action === 'accepter') {
+            $.post("./traitement/ajoutami.php", formData, function (data) {
+                $('#ami' + idami).html(data);
+            }).done(function () {
+                $.post("./traitement/recherchescript.php", formData, function (data) { //On envoi le tout vers la page de traitement
+                    $('#script').html(data);//On affiche l'HTML retourné  par la page PHP dans la div
+                });
+            });
+        }
+
+        if(action === 'refuser') {
+            $.post("./traitement/refusami.php", formData, function (data) {
+                $('#ami' + idami).html(data);
+            }).done(function () {
+                $.post("./traitement/recherchescript.php", formData, function (data) { //On envoi le tout vers la page de traitement
+                    $('#script').html(data);//On affiche l'HTML retourné  par la page PHP dans la div
+                });
+            });
+        }
+
+    })
+</script>

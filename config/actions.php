@@ -15,6 +15,7 @@ $listeDesActions = array(
     "connexion" => "traitement/connexion.php",
     "deconnexion" => "traitement/deconnexion.php",
     "inscription" => "vues/inscription.php",
+    "erreur" => "vues/404.php",
     "creation" => "traitement/creation.php",
     "modification" => "traitement/modification.php",
     "ajoutavatar" => "traitement/ajoutavatar.php",

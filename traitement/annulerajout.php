@@ -1,4 +1,5 @@
 <?php
+session_start();
     if (isset($_POST['idAmi']) && !empty($_POST['idAmi']) && isset($_SESSION['id'])){
         $idAmi=htmlspecialchars($_POST['idAmi']);
         $monid=htmlspecialchars($_SESSION['id']);
@@ -22,7 +23,32 @@
         }
         
     }else{
-        header("Location: index.php?action=mur");
+        include('../config/config.php');
+        include('../config/bd.php');
+        if(isset($_POST['idami']) && isset($_POST['page']) && isset($_POST['action'])){
+            //On update
+            $idAmi=$_POST['idami'];
+            $monid=$_SESSION['id'];
+
+            $sql = "DELETE FROM lien WHERE idUtilisateur1=? AND idUtilisateur2=? AND etat='attente'";
+            $query = $pdo->prepare($sql);
+            $query->execute(array($monid,$idAmi));
+
+            $sql='SELECT nom,prenom,avatar FROM utilisateurs WHERE id=?';
+            $query = $pdo->prepare($sql);
+            $query->execute(array($idAmi));
+
+            $line=$query->fetch();
+
+
+            if($_POST['page'] == 'recherche'){
+                echo '<div><a href="index.php?action=mur&id='.$idAmi.'">
+                        <img class="imgami" src="avatars/'.$line['avatar'].'"></a>
+                        <a href="index.php?action=mur&id='.$idAmi.'"><p>'.$line['prenom'].' '.$line['nom'].'</p></a>
+                       </div>';
+                echo '<button class="actionami" data-action="ajouter" data-idami="'.$idAmi.'" data-page="recherche">Ajouter</button>';
+            }
+        }
     }
 
 
